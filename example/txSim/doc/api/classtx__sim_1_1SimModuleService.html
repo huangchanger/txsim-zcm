@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Class SimModuleService &mdash; txSimSDK 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Class StepHelper" href="classtx__sim_1_1StepHelper.html" />
+    <link rel="prev" title="Class SimModule" href="classtx__sim_1_1SimModule.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> txSimSDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">txSimSDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="library_root.html">Library API</a> &raquo;</li>
+        
+      <li>Class SimModuleService</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/classtx__sim_1_1SimModuleService.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-simmoduleservice">
+<span id="exhale-class-classtx-sim-1-1simmoduleservice"></span><h1>Class SimModuleService<a class="headerlink" href="#class-simmoduleservice" title="永久链接至标题">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_txsim_module_service.h.html#file-src-txsim-module-service-h"><span class="std std-ref">File txsim_module_service.h</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="永久链接至标题">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6tx_sim16SimModuleServiceE">
+<span id="_CPPv3N6tx_sim16SimModuleServiceE"></span><span id="_CPPv2N6tx_sim16SimModuleServiceE"></span><span id="tx_sim::SimModuleService"></span><span class="target" id="classtx__sim_1_1SimModuleService"></span><em class="property">class </em><code class="sig-name descname">SimModuleService</code><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleServiceE" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>如果用户算法需要编译为一个可执行文件，则需要包含此头文件并使用该类初始化当前仿真模块 的服务线程，以此来将当前实现的 <a class="reference internal" href="classtx__sim_1_1SimModule.html#classtx__sim_1_1SimModule"><span class="std std-ref">tx_sim::SimModule</span></a> 接入到仿真系统。如果算法编译为动态库 时则不需要使用此类。 </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6tx_sim16SimModuleService5ServeERKNSt6stringENSt10shared_ptrI9SimModuleEERKNSt6stringE">
+<span id="_CPPv3N6tx_sim16SimModuleService5ServeERKNSt6stringENSt10shared_ptrI9SimModuleEERKNSt6stringE"></span><span id="_CPPv2N6tx_sim16SimModuleService5ServeERKNSt6stringENSt10shared_ptrI9SimModuleEERKNSt6stringE"></span><span id="tx_sim::SimModuleService::Serve__ssCR.std::shared_ptr:SimModule:.ssCR"></span><span class="target" id="classtx__sim_1_1SimModuleService_1a8644cc805daffe4cc3a666d1bf1a1d96"></span>void <code class="sig-name descname">Serve</code><span class="sig-paren">(</span><em class="property">const</em> std::string &amp;<em>name</em>, std::shared_ptr&lt;<a class="reference internal" href="classtx__sim_1_1SimModule.html#_CPPv4N6tx_sim9SimModuleE" title="tx_sim::SimModule">SimModule</a>&gt; <em>module</em>, <em class="property">const</em> std::string &amp;<em>address</em> = &quot;&quot;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleService5ServeERKNSt6stringENSt10shared_ptrI9SimModuleEERKNSt6stringE" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>调用此方法来启动当前仿真模块的服务。只有在调用此方法后该仿真模块才可被仿真系统所识别。 该方法会立即返回。</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">name</span></code>: 该仿真模块的名字，不能为空，且必须和前端模块配置中的名字保持 一致，否则无法被系统识别。 </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">module</span></code>: 继承并实现了仿真接口 <a class="reference internal" href="classtx__sim_1_1SimModule.html#classtx__sim_1_1SimModule"><span class="std std-ref">tx_sim::SimModule</span></a> 的子类。 </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[in]</span> <span class="pre">address</span></code>: 可选，如果传入非空字符串则指定该模块向指定地址进行注册，否则使用 默认的本地仿真服务端口，通常用于启动在远端机器（和仿真系统不在同一台机器）上的模块。 传入的字符串应符合”ip:port”的格式。 </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6tx_sim16SimModuleService4WaitEv">
+<span id="_CPPv3N6tx_sim16SimModuleService4WaitEv"></span><span id="_CPPv2N6tx_sim16SimModuleService4WaitEv"></span><span id="tx_sim::SimModuleService::Wait"></span><span class="target" id="classtx__sim_1_1SimModuleService_1a568e99821caf3ba359201015495b5638"></span>void <code class="sig-name descname">Wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleService4WaitEv" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>阻塞当前线程，等待当前的仿真模块服务停止。只有当仿真服务发生错误或者收到中断 信号，或者其他线程调用了 <a class="reference internal" href="#classtx__sim_1_1SimModuleService_1a3b977a5a186ed60349f3959fdec83408"><span class="std std-ref">Shutdown</span></a> 后才会停止服务。 </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6tx_sim16SimModuleService8ShutdownEv">
+<span id="_CPPv3N6tx_sim16SimModuleService8ShutdownEv"></span><span id="_CPPv2N6tx_sim16SimModuleService8ShutdownEv"></span><span id="tx_sim::SimModuleService::Shutdown"></span><span class="target" id="classtx__sim_1_1SimModuleService_1a3b977a5a186ed60349f3959fdec83408"></span>void <code class="sig-name descname">Shutdown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleService8ShutdownEv" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>通知当前的仿真模块服务停止。该方法只是发送停止信号后即立即返回，当前的仿真模块服务 具体何时停止需要等待 <a class="reference internal" href="#classtx__sim_1_1SimModuleService_1a568e99821caf3ba359201015495b5638"><span class="std std-ref">Wait</span></a> 方法返回。 </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6tx_sim16SimModuleService16SimModuleServiceEv">
+<span id="_CPPv3N6tx_sim16SimModuleService16SimModuleServiceEv"></span><span id="_CPPv2N6tx_sim16SimModuleService16SimModuleServiceEv"></span><span id="tx_sim::SimModuleService::SimModuleService"></span><span class="target" id="classtx__sim_1_1SimModuleService_1af5e6b742f49ec3df755b05dc0301f9d8"></span><code class="sig-name descname">SimModuleService</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleService16SimModuleServiceEv" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>默认构造器。 </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6tx_sim16SimModuleServiceD0Ev">
+<span id="_CPPv3N6tx_sim16SimModuleServiceD0Ev"></span><span id="_CPPv2N6tx_sim16SimModuleServiceD0Ev"></span><span id="tx_sim::SimModuleService::~SimModuleService"></span><span class="target" id="classtx__sim_1_1SimModuleService_1a5f96e4023b8198dc0e973ad5eec8538d"></span><code class="sig-name descname">~SimModuleService</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6tx_sim16SimModuleServiceD0Ev" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>默认析构器。 </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classtx__sim_1_1StepHelper.html" class="btn btn-neutral float-right" title="Class StepHelper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="classtx__sim_1_1SimModule.html" class="btn btn-neutral float-left" title="Class SimModule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tencent Auto-drive Simulator
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

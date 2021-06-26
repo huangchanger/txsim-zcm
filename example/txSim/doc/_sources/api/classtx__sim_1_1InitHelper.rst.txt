@@ -1,0 +1,16 @@
+.. _exhale_class_classtx__sim_1_1InitHelper:
+
+Class InitHelper
+================
+
+- Defined in :ref:`file_src_txsim_messenger.h`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: tx_sim::InitHelper
+   :members:
+   :protected-members:
+   :undoc-members:

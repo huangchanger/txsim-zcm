@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+d2e3cc20eda7c2bfa5e0f16f7a0b8dbc basic.pb.cc
+5cceecb832206498494070ad3fd5ffc6 control.pb.cc
+87c77fb1cf1b9cf7ba0f12410b3d6d3c header.pb.cc
+33c1ef42f27550f1bf9c7574b279faef location.pb.cc
+061df2272dc216314fd406d3e90b7039 traffic.pb.cc
+3b00e4f17cf61f2ffdbf77fb9e35b82b trajectory.pb.cc

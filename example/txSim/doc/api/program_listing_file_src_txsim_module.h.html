@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Program Listing for File txsim_module.h &mdash; txSimSDK 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> txSimSDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="library_root.html">Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">txSimSDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Program Listing for File txsim_module.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/program_listing_file_src_txsim_module.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-txsim-module-h">
+<span id="program-listing-file-src-txsim-module-h"></span><h1>Program Listing for File txsim_module.h<a class="headerlink" href="#program-listing-for-file-txsim-module-h" title="永久链接至标题">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_txsim_module.h.html#file-src-txsim-module-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/txsim_module.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;txsim_messenger.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;visibility.h&quot;</span><span class="cp"></span>
+
+
+<span class="k">namespace</span> <span class="n">tx_sim</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">SimModule</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Init</span><span class="p">(</span><span class="n">InitHelper</span><span class="o">&amp;</span> <span class="n">helper</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Reset</span><span class="p">(</span><span class="n">ResetHelper</span><span class="o">&amp;</span> <span class="n">helper</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Step</span><span class="p">(</span><span class="n">StepHelper</span><span class="o">&amp;</span> <span class="n">helper</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Stop</span><span class="p">(</span><span class="n">StopHelper</span><span class="o">&amp;</span> <span class="n">helper</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">SimModule</span><span class="p">()</span> <span class="p">{};</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace tx_sim</span>
+
+
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span><span class="o">*</span> <span class="n">txsim_new_module</span><span class="p">();</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span> <span class="nf">txsim_delete_module</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span> <span class="nf">txsim_init</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="k">module</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">cbs</span><span class="p">);</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span> <span class="nf">txsim_reset</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="k">module</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">cbs</span><span class="p">);</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span> <span class="nf">txsim_step</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="k">module</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">cbs</span><span class="p">);</span>
+  <span class="n">TXSIM_API</span> <span class="kt">void</span> <span class="nf">txsim_stop</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="k">module</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">void</span><span class="o">**</span> <span class="n">cbs</span><span class="p">);</span>
+  <span class="n">TXSIM_API</span> <span class="kt">uint32_t</span> <span class="nf">txsim_messenger_api_version</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="cp">#define TXSIM_MODULE(cls)                                                      \</span>
+<span class="cp">  extern &quot;C&quot; {                                                                 \</span>
+<span class="cp">    void* txsim_new_module() {                                                 \</span>
+<span class="cp">      return new cls();                                                        \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    void txsim_delete_module(void* p) {                                        \</span>
+<span class="cp">      delete reinterpret_cast&lt;tx_sim::SimModule*&gt;(p);                          \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    void txsim_init(void* module, void* data, void** cbs) {                    \</span>
+<span class="cp">      tx_sim::InitHelper helper(data, cbs);                                    \</span>
+<span class="cp">      tx_sim::impl::TranslateExceptions(data, cbs, [&amp;] {                       \</span>
+<span class="cp">        reinterpret_cast&lt;tx_sim::SimModule*&gt;(module)-&gt;Init(helper);            \</span>
+<span class="cp">      });                                                                      \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    void txsim_reset(void* module, void* data, void** cbs) {                   \</span>
+<span class="cp">      tx_sim::ResetHelper helper(data, cbs);                                   \</span>
+<span class="cp">      tx_sim::impl::TranslateExceptions(data, cbs, [&amp;] {                       \</span>
+<span class="cp">        reinterpret_cast&lt;tx_sim::SimModule*&gt;(module)-&gt;Reset(helper);           \</span>
+<span class="cp">      });                                                                      \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    void txsim_step(void* module, void* data, void** cbs) {                    \</span>
+<span class="cp">      tx_sim::StepHelper helper(data, cbs);                                    \</span>
+<span class="cp">      tx_sim::impl::TranslateExceptions(data, cbs, [&amp;] {                       \</span>
+<span class="cp">        reinterpret_cast&lt;tx_sim::SimModule*&gt;(module)-&gt;Step(helper);            \</span>
+<span class="cp">      });                                                                      \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    void txsim_stop(void* module, void* data, void** cbs) {                    \</span>
+<span class="cp">      tx_sim::StopHelper helper(data, cbs);                                    \</span>
+<span class="cp">      tx_sim::impl::TranslateExceptions(data, cbs, [&amp;] {                       \</span>
+<span class="cp">        reinterpret_cast&lt;tx_sim::SimModule*&gt;(module)-&gt;Stop(helper);            \</span>
+<span class="cp">      });                                                                      \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">    uint32_t txsim_messenger_api_version() {                                   \</span>
+<span class="cp">      return TXSIM_MESSENGER_API_VERSION;                                      \</span>
+<span class="cp">    }                                                                          \</span>
+<span class="cp">  }</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tencent Auto-drive Simulator
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

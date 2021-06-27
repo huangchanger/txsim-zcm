@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Library API &mdash; txSimSDK 1.0.0 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script type="text/javascript" src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Namespace tx_sim" href="namespace_tx_sim.html" />
+    <link rel="prev" title="Welcome to txSimSDK’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> txSimSDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Library API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#full-api">Full API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#namespaces">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespace_tx_sim.html">Namespace tx_sim</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_tx_sim__constant.html">Namespace tx_sim::constant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_tx_sim__topic.html">Namespace tx_sim::topic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structtx__sim_1_1Vector3d.html">Struct Vector3d</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1InitHelper.html">Class InitHelper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1ResetHelper.html">Class ResetHelper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1SimModule.html">Class SimModule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1SimModuleService.html">Class SimModuleService</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1StepHelper.html">Class StepHelper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classtx__sim_1_1StopHelper.html">Class StopHelper</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a4f5cc48b1bc7921cb5d834cae39de2cd.html">Variable tx_sim::constant::kInitKeyModuleExecutePeriod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a972e8f9d5ffc8f79dc16d03c58bdd681.html">Variable tx_sim::constant::kInitKeyModuleLogLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1abe2d07e0b26bac2b8b0803d5553c14b5.html">Variable tx_sim::constant::kInitKeyModuleSharedLibDirectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a85603d67b12025536694febe2051cc37.html">Variable tx_sim::topic::kControl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1ae068e3525fb348ad2353313bae132451.html">Variable tx_sim::topic::kGrading</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a2da1149dee11d170a16457d6a03f76e3.html">Variable tx_sim::topic::kLaneMark</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a6e98022a544d41f9392945b5f25c05b6.html">Variable tx_sim::topic::kLocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1acb0b716c398fce0c7e47b33627bc5aa2.html">Variable tx_sim::topic::kLogLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1ad1512534fca7329c6b01032ef25b4db0.html">Variable tx_sim::topic::kPlanStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a67e2eb340766b25f5c962f6c80d4cee0.html">Variable tx_sim::topic::kTraffic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a92747a7e50160ccde210759c2b2c4adc.html">Variable tx_sim::topic::kTrajectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="variable_txsim__messenger_8h_1a4ccda6c7fb03d52afb79c33784322ce6.html">Variable tx_sim::topic::kVehicleState</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_txsim__module_8h_1a63ebb1fa30d06496c9c595ffd95aa2d6.html">Define TXSIM_MODULE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">txSimSDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Library API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/library_root.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="library-api">
+<h1>Library API<a class="headerlink" href="#library-api" title="永久链接至标题">¶</a></h1>
+<div class="section" id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="永久链接至标题">¶</a></h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Namespace <a href="namespace_tx_sim.html#namespace-tx-sim">tx_sim</a><ul><li>Struct <a href="structtx__sim_1_1Vector3d.html#exhale-struct-structtx-sim-1-1Vector3d">Vector3d</a></li><li>Class <a href="classtx__sim_1_1InitHelper.html#exhale-class-classtx-sim-1-1InitHelper">InitHelper</a></li><li>Class <a href="classtx__sim_1_1ResetHelper.html#exhale-class-classtx-sim-1-1ResetHelper">ResetHelper</a></li><li>Class <a href="classtx__sim_1_1SimModule.html#exhale-class-classtx-sim-1-1SimModule">SimModule</a></li><li>Class <a href="classtx__sim_1_1SimModuleService.html#exhale-class-classtx-sim-1-1SimModuleService">SimModuleService</a></li><li>Class <a href="classtx__sim_1_1StepHelper.html#exhale-class-classtx-sim-1-1StepHelper">StepHelper</a></li><li class="lastChild">Class <a href="classtx__sim_1_1StopHelper.html#exhale-class-classtx-sim-1-1StopHelper">StopHelper</a></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView class-treeView --></div>
+<div class="section" id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="永久链接至标题">¶</a></h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Directory <a href="dir_src.html#dir-src">src</a><ul><li>File <a href="file_src_txsim_messenger.h.html#file-src-txsim-messenger.h">txsim_messenger.h</a></li><li>File <a href="file_src_txsim_module.h.html#file-src-txsim-module.h">txsim_module.h</a></li><li class="lastChild">File <a href="file_src_txsim_module_service.h.html#file-src-txsim-module-service.h">txsim_module_service.h</a></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView file-treeView --></div>
+<div class="section" id="full-api">
+<h2>Full API<a class="headerlink" href="#full-api" title="永久链接至标题">¶</a></h2>
+<div class="section" id="namespaces">
+<h3>Namespaces<a class="headerlink" href="#namespaces" title="永久链接至标题">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_tx_sim.html">Namespace tx_sim</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_tx_sim__constant.html">Namespace tx_sim::constant</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_tx_sim__topic.html">Namespace tx_sim::topic</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="永久链接至标题">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structtx__sim_1_1Vector3d.html">Struct Vector3d</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1InitHelper.html">Class InitHelper</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1ResetHelper.html">Class ResetHelper</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1SimModule.html">Class SimModule</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1SimModuleService.html">Class SimModuleService</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1StepHelper.html">Class StepHelper</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classtx__sim_1_1StopHelper.html">Class StopHelper</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="永久链接至标题">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a4f5cc48b1bc7921cb5d834cae39de2cd.html">Variable tx_sim::constant::kInitKeyModuleExecutePeriod</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a972e8f9d5ffc8f79dc16d03c58bdd681.html">Variable tx_sim::constant::kInitKeyModuleLogLevel</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1abe2d07e0b26bac2b8b0803d5553c14b5.html">Variable tx_sim::constant::kInitKeyModuleSharedLibDirectory</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a85603d67b12025536694febe2051cc37.html">Variable tx_sim::topic::kControl</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1ae068e3525fb348ad2353313bae132451.html">Variable tx_sim::topic::kGrading</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a2da1149dee11d170a16457d6a03f76e3.html">Variable tx_sim::topic::kLaneMark</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a6e98022a544d41f9392945b5f25c05b6.html">Variable tx_sim::topic::kLocation</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1acb0b716c398fce0c7e47b33627bc5aa2.html">Variable tx_sim::topic::kLogLevel</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1ad1512534fca7329c6b01032ef25b4db0.html">Variable tx_sim::topic::kPlanStatus</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a67e2eb340766b25f5c962f6c80d4cee0.html">Variable tx_sim::topic::kTraffic</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a92747a7e50160ccde210759c2b2c4adc.html">Variable tx_sim::topic::kTrajectory</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="variable_txsim__messenger_8h_1a4ccda6c7fb03d52afb79c33784322ce6.html">Variable tx_sim::topic::kVehicleState</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="defines">
+<h3>Defines<a class="headerlink" href="#defines" title="永久链接至标题">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_txsim__module_8h_1a63ebb1fa30d06496c9c595ffd95aa2d6.html">Define TXSIM_MODULE</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="namespace_tx_sim.html" class="btn btn-neutral float-right" title="Namespace tx_sim" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to txSimSDK’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Tencent Auto-drive Simulator
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

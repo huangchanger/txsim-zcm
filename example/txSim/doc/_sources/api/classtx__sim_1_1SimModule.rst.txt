@@ -1,0 +1,16 @@
+.. _exhale_class_classtx__sim_1_1SimModule:
+
+Class SimModule
+===============
+
+- Defined in :ref:`file_src_txsim_module.h`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: tx_sim::SimModule
+   :members:
+   :protected-members:
+   :undoc-members:

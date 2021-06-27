@@ -135,29 +135,33 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   sim_msg::Trajectory traj;
   traj.ParseFromString(payload_);
   std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
-  auto add_pt = traj.add_point();
-  add_pt->set_x(-0.018099349672580932);
-  add_pt->set_y(-0.0002283418344937575);
-  add_pt->set_z(0);
-  add_pt->set_v(10);
+  
+  if(traj.point_size()<5){
+    auto add_pt = traj.add_point();
+    add_pt->set_x(-0.018099349672580932);
+    add_pt->set_y(-0.0002283418344937575);
+    add_pt->set_z(0);
+    add_pt->set_v(10);
 
-  add_pt = traj.add_point();
-  add_pt->set_x(-0.01791382);
-  add_pt->set_y(-0.00023353);
-  add_pt->set_z(0);
-  add_pt->set_v(10);
+    add_pt = traj.add_point();
+    add_pt->set_x(-0.01791382);
+    add_pt->set_y(-0.00023353);
+    add_pt->set_z(0);
+    add_pt->set_v(10);
 
-  add_pt = traj.add_point();
-  add_pt->set_x(-0.01768964);
-  add_pt->set_y(-0.00023353);
-  add_pt->set_z(0);
-  add_pt->set_v(10);
+    add_pt = traj.add_point();
+    add_pt->set_x(-0.01768964);
+    add_pt->set_y(-0.00023353);
+    add_pt->set_z(0);
+    add_pt->set_v(10);
 
-  add_pt = traj.add_point();
-  add_pt->set_x(-0.01754278);
-  add_pt->set_y(-0.00023612);
-  add_pt->set_z(0);
-  add_pt->set_v(10);
+    add_pt = traj.add_point();
+    add_pt->set_x(-0.01754278);
+    add_pt->set_y(-0.00023612);
+    add_pt->set_z(0);
+    add_pt->set_v(10);
+  }
+
 
   for(int i=0; i<traj.point_size(); ++i){
     const sim_msg::TrajectoryPoint &pt = traj.point(i);

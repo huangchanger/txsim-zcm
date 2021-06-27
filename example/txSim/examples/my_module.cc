@@ -8,6 +8,10 @@
 #include "traffic.pb.h"
 #include "location.pb.h"
 #include "control.pb.h"
+#include "planStatus.pb.h"
+#include "localLocation.pb.h"
+#include "trajectory.pb.h"
+#include "laneMarks.pb.h"
 
 
 #ifdef _WIN32
@@ -55,6 +59,8 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
 
     helper.Publish(tx_sim::topic::kControl);
     helper.Subscribe(tx_sim::topic::kControl);
+
+
   } else {
     // by subscribe our interested topics, we expect that the two corresponding messages which defined by
     // traffic.proto and location.proto would received in every Step callback.
@@ -65,6 +71,15 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
 
     helper.Publish(tx_sim::topic::kControl);
     helper.Subscribe(tx_sim::topic::kControl);
+
+    helper.Publish(tx_sim::topic::kPlanStatus);
+    helper.Subscribe(tx_sim::topic::kPlanStatus);    
+
+    helper.Publish(tx_sim::topic::kTrajectory);
+    helper.Subscribe(tx_sim::topic::kTrajectory);   
+
+    helper.Publish(tx_sim::topic::kLaneMark);
+    helper.Subscribe(tx_sim::topic::kLaneMark);   
   }
 };
 
@@ -112,15 +127,59 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   cur_x_ = loc.position().x();
   cur_y_ = loc.position().y();
   std::cout << std::fixed << std::setprecision(12) << "received location: x -> " << cur_x_ << " y -> " << cur_y_ << std::endl;
+  std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<std::endl;
+  std::cout<<"acc: "<<loc.acceleration().x()<<" , "<<loc.acceleration().y()<<std::endl;
 
-  // ***the following line is only for DEBUG
+
+  helper.GetSubscribedMessage(tx_sim::topic::kTrajectory, payload_);
+  sim_msg::Trajectory traj;
+  traj.ParseFromString(payload_);
+  std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
+  auto add_pt = traj.add_point();
+  add_pt->set_x(-0.018099349672580932);
+  add_pt->set_y(-0.0002283418344937575);
+  add_pt->set_z(0);
+  add_pt->set_v(10);
+
+  add_pt = traj.add_point();
+  add_pt->set_x(-0.01791382);
+  add_pt->set_y(-0.00023353);
+  add_pt->set_z(0);
+  add_pt->set_v(10);
+
+  add_pt = traj.add_point();
+  add_pt->set_x(-0.01768964);
+  add_pt->set_y(-0.00023353);
+  add_pt->set_z(0);
+  add_pt->set_v(10);
+
+  add_pt = traj.add_point();
+  add_pt->set_x(-0.01754278);
+  add_pt->set_y(-0.00023612);
+  add_pt->set_z(0);
+  add_pt->set_v(10);
+
+  for(int i=0; i<traj.point_size(); ++i){
+    const sim_msg::TrajectoryPoint &pt = traj.point(i);
+    std::cout<<"( "<<pt.x()<<" , "<<pt.y()<<" , "<<pt.v()<<" ) "<<std::endl;
+  }
+
+  traj.SerializeToString(&payload_);
+  helper.PublishMessage(tx_sim::topic::kTrajectory, payload_);
+
+  helper.GetSubscribedMessage(tx_sim::topic::kLaneMark, payload_);
+  sim_msg::LaneMarks lanemarks;
+  lanemarks.ParseFromString(payload_);
+  std::cout<<"lanemarks_left size: "<< lanemarks.left_size() <<std::endl;
+  std::cout<<"lanemarks_right size: "<< lanemarks.right_size() <<std::endl;
+
   puber_ = 1;
 
   if (true) {
     // 3. here should put the actual user algorithm, do some computing according to the subscribed messages we received.
     // for explanatory simplicity, it only moves a little by a constant velocity, no matter what happens.
     double move_distance = step_velocity_ * (time_stamp - last_timestamp_); // s = v * t
-    std::cout << "ego car moved " << move_distance << std::endl;
+    // std::cout << "ego car moved " << move_distance << std::endl;
     double next_x = cur_x_ + move_distance, next_y = cur_y_ + move_distance;
 
     // 4. put our results into output messages and publish them.
@@ -137,20 +196,39 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
     sim_msg::Control cot_;
     cot_.ParseFromString(payload_);
 
-    double throt = cot_.mutable_pedal_cmd()->throttle();
     //double throt = cot_.PedalControl().throttle();
     // sim_msg::Control_PedalControl *pc = cot_.PedalControl();
-    std::cout<<std::endl<<std::endl;
-    std::cout<<"output throttle"<<throt;
-    std::cout<<std::endl<<std::endl;
+    std::cout<<"output gearmode "<<cot_.gear_cmd()<<std::endl;
+    std::cout<<"output controlmode "<<cot_.control_mode()<<std::endl;
+    std::cout<<"output controltype "<<cot_.contrl_type()<<std::endl;
+    std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->throttle()<<std::endl;
+    std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->brake()<<std::endl;
+    std::cout<<"output acccontrol "<<cot_.mutable_acc_cmd()->acc()<<std::endl;
+    
 
-    cot_.mutable_pedal_cmd()->set_throttle(1);
+    cot_.set_gear_cmd(sim_msg::Control::DRIVE);
+    cot_.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
+    cot_.set_contrl_type(sim_msg::Control::PEDAL_CONTROL);
+    cot_.mutable_pedal_cmd()->set_throttle(100);
+    cot_.mutable_pedal_cmd()->set_brake(0);
+
     cot_.SerializeToString(&payload_);
     helper.PublishMessage(tx_sim::topic::kControl, payload_);
     std::cout<<"kControl published\n";
 
+
+    helper.GetSubscribedMessage(tx_sim::topic::kPlanStatus, payload_);
+    sim_msg::PlanStatus plans_;
+    plans_.ParseFromString(payload_);
+    std::cout<<"output expectacc "<<plans_.mutable_expect_acc()->acc()<<std::endl;
+
+    plans_.mutable_expect_acc()->set_acc(2.5);
+    plans_.SerializeToString(&payload_);
+    helper.PublishMessage(tx_sim::topic::kPlanStatus, payload_);
+    std::cout<<"kPlanStatus published\n";
+
     last_timestamp_ = time_stamp;
-    std::cout << "expected next position: (" << next_x << ", " << next_y << ")" << std::endl;
+    // std::cout << "expected next position: (" << next_x << ", " << next_y << ")" << std::endl;
 
     // we could also send data via shared memory ...
     char* shm_buf = nullptr;

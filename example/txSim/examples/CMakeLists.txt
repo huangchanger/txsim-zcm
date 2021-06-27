@@ -27,7 +27,11 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HDR
   ../msgs/trajectory.proto
   ../msgs/traffic.proto
   ../msgs/control.proto
-  ../msgs/header.proto)
+  ../msgs/header.proto
+  ../msgs/planStatus.proto
+  ../msgs/localLocation.proto
+  ../msgs/trajectory.proto
+  ../msgs/laneMarks.proto)
 
 
  MESSAGE(STATUS "PROTO_SRC: ${PROTO_SRC} ------ ${PROTO_HDR}")
@@ -40,12 +44,12 @@ target_link_libraries(my-module
   ${LIB_PROTOBUF})
 
 # example 2: built into a binary executable.
-link_directories(
-  ../lib)
-add_executable(my-module-main
-  my_module_main.cc
-  my_module.cc
-  ${PROTO_SRC})
-target_compile_definitions(my-module-main PRIVATE TXSIM_NO_EXPORTS)
-target_link_libraries(my-module-main
-  txsim-module-service ${LIB_PROTOBUF} ${LIB_SYS})
+# link_directories(
+#   ../lib)
+# add_executable(my-module-main
+#   my_module_main.cc
+#   my_module.cc
+#   ${PROTO_SRC})
+# target_compile_definitions(my-module-main PRIVATE TXSIM_NO_EXPORTS)
+# target_link_libraries(my-module-main
+#   txsim-module-service ${LIB_PROTOBUF} ${LIB_SYS})

@@ -1,4 +1,4 @@
-# Install script for directory: /home/yxj/Documents/txSimSDK/txSim/examples
+# Install script for directory: /home/yxj/Projects/txsim-zcm/example/txSim/examples
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/yxj/Documents/txSimSDK/txSim/examples/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/yxj/Projects/txsim-zcm/example/txSim/examples/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -37,12 +37,13 @@ namespace txsim
 
                 virtual ~MessageManagerBase();
 
+                // subscribe function
                 void LOCATIONHandler(
                     const zcm::ReceiveBuffer *rbuf,
                     const std::string &channel,
                     const icumsg::structLOCATION *msg);
 
-
+                // publish function
                 void PublishCaninfo() const;
                 void PublishNavinfo() const;
                 void PublishFusionmap() const;

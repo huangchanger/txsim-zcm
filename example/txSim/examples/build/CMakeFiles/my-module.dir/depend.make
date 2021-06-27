@@ -11,6 +11,15 @@ CMakeFiles/my-module.dir/control.pb.cc.o: header.pb.h
 CMakeFiles/my-module.dir/header.pb.cc.o: header.pb.cc
 CMakeFiles/my-module.dir/header.pb.cc.o: header.pb.h
 
+CMakeFiles/my-module.dir/laneMarks.pb.cc.o: basic.pb.h
+CMakeFiles/my-module.dir/laneMarks.pb.cc.o: header.pb.h
+CMakeFiles/my-module.dir/laneMarks.pb.cc.o: laneMarks.pb.cc
+CMakeFiles/my-module.dir/laneMarks.pb.cc.o: laneMarks.pb.h
+
+CMakeFiles/my-module.dir/localLocation.pb.cc.o: header.pb.h
+CMakeFiles/my-module.dir/localLocation.pb.cc.o: localLocation.pb.cc
+CMakeFiles/my-module.dir/localLocation.pb.cc.o: localLocation.pb.h
+
 CMakeFiles/my-module.dir/location.pb.cc.o: basic.pb.h
 CMakeFiles/my-module.dir/location.pb.cc.o: location.pb.cc
 CMakeFiles/my-module.dir/location.pb.cc.o: location.pb.h
@@ -23,9 +32,15 @@ CMakeFiles/my-module.dir/my_module.cc.o: ../my_module.h
 CMakeFiles/my-module.dir/my_module.cc.o: basic.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o: control.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o: header.pb.h
+CMakeFiles/my-module.dir/my_module.cc.o: laneMarks.pb.h
+CMakeFiles/my-module.dir/my_module.cc.o: localLocation.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o: location.pb.h
+CMakeFiles/my-module.dir/my_module.cc.o: planStatus.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o: traffic.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o: trajectory.pb.h
+
+CMakeFiles/my-module.dir/planStatus.pb.cc.o: planStatus.pb.cc
+CMakeFiles/my-module.dir/planStatus.pb.cc.o: planStatus.pb.h
 
 CMakeFiles/my-module.dir/traffic.pb.cc.o: basic.pb.h
 CMakeFiles/my-module.dir/traffic.pb.cc.o: location.pb.h

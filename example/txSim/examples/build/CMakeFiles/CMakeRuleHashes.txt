@@ -1,7 +1,10 @@
 # Hashes of file build rules.
-d2e3cc20eda7c2bfa5e0f16f7a0b8dbc basic.pb.cc
-5cceecb832206498494070ad3fd5ffc6 control.pb.cc
-87c77fb1cf1b9cf7ba0f12410b3d6d3c header.pb.cc
-33c1ef42f27550f1bf9c7574b279faef location.pb.cc
-061df2272dc216314fd406d3e90b7039 traffic.pb.cc
-3b00e4f17cf61f2ffdbf77fb9e35b82b trajectory.pb.cc
+f2c6491b37525fb49b6599307dc6ded4 basic.pb.cc
+09a010f496a0ed6d00ca5819661fd4ed control.pb.cc
+be57f0c63f205acdcdf06baccb27510d header.pb.cc
+146c5ef604dcfedf652af7b1395d20b2 laneMarks.pb.cc
+44eaaea5812cf324d1d0eabe1adc5102 localLocation.pb.cc
+bacbc744d1436af0c0d9fee6afd1e52c location.pb.cc
+c27b6bc26ac7f14495ddec5d5ee74587 planStatus.pb.cc
+eea5a4069e90388b0e88eebf91287983 traffic.pb.cc
+c6334089527306e3974a291601030d0a trajectory.pb.cc

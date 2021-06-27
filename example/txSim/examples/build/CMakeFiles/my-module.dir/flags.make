@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -fPIC
 
 CXX_DEFINES = -Dmy_module_EXPORTS
 
-CXX_INCLUDES = -I/home/yxj/Documents/txSimSDK/txSim/examples/../inc -I/home/yxj/Documents/txSimSDK/txSim/examples/build 
+CXX_INCLUDES = -I/home/yxj/Projects/txsim-zcm/example/txSim/examples/../inc -I/home/yxj/Projects/txsim-zcm/example/txSim/examples/build 
 

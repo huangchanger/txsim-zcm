@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yxj/Documents/txSimSDK/txSim/examples
+CMAKE_SOURCE_DIR = /home/yxj/Projects/txsim-zcm/example/txSim/examples
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yxj/Documents/txSimSDK/txSim/examples/build
+CMAKE_BINARY_DIR = /home/yxj/Projects/txsim-zcm/example/txSim/examples/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxj/Documents/txSimSDK/txSim/examples/build/CMakeFiles /home/yxj/Documents/txSimSDK/txSim/examples/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxj/Documents/txSimSDK/txSim/examples/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,19 +123,6 @@ my-module/fast:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/build
 .PHONY : my-module/fast
 
-#=============================================================================
-# Target rules for targets named my-module-main
-
-# Build rule for target.
-my-module-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 my-module-main
-.PHONY : my-module-main
-
-# fast build rule for target.
-my-module-main/fast:
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/build
-.PHONY : my-module-main/fast
-
 basic.pb.o: basic.pb.cc.o
 
 .PHONY : basic.pb.o
@@ -143,7 +130,6 @@ basic.pb.o: basic.pb.cc.o
 # target to build an object file
 basic.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/basic.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/basic.pb.cc.o
 .PHONY : basic.pb.cc.o
 
 basic.pb.i: basic.pb.cc.i
@@ -153,7 +139,6 @@ basic.pb.i: basic.pb.cc.i
 # target to preprocess a source file
 basic.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/basic.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/basic.pb.cc.i
 .PHONY : basic.pb.cc.i
 
 basic.pb.s: basic.pb.cc.s
@@ -163,7 +148,6 @@ basic.pb.s: basic.pb.cc.s
 # target to generate assembly for a file
 basic.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/basic.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/basic.pb.cc.s
 .PHONY : basic.pb.cc.s
 
 control.pb.o: control.pb.cc.o
@@ -173,7 +157,6 @@ control.pb.o: control.pb.cc.o
 # target to build an object file
 control.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/control.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/control.pb.cc.o
 .PHONY : control.pb.cc.o
 
 control.pb.i: control.pb.cc.i
@@ -183,7 +166,6 @@ control.pb.i: control.pb.cc.i
 # target to preprocess a source file
 control.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/control.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/control.pb.cc.i
 .PHONY : control.pb.cc.i
 
 control.pb.s: control.pb.cc.s
@@ -193,7 +175,6 @@ control.pb.s: control.pb.cc.s
 # target to generate assembly for a file
 control.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/control.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/control.pb.cc.s
 .PHONY : control.pb.cc.s
 
 header.pb.o: header.pb.cc.o
@@ -203,7 +184,6 @@ header.pb.o: header.pb.cc.o
 # target to build an object file
 header.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/header.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/header.pb.cc.o
 .PHONY : header.pb.cc.o
 
 header.pb.i: header.pb.cc.i
@@ -213,7 +193,6 @@ header.pb.i: header.pb.cc.i
 # target to preprocess a source file
 header.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/header.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/header.pb.cc.i
 .PHONY : header.pb.cc.i
 
 header.pb.s: header.pb.cc.s
@@ -223,8 +202,61 @@ header.pb.s: header.pb.cc.s
 # target to generate assembly for a file
 header.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/header.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/header.pb.cc.s
 .PHONY : header.pb.cc.s
+
+laneMarks.pb.o: laneMarks.pb.cc.o
+
+.PHONY : laneMarks.pb.o
+
+# target to build an object file
+laneMarks.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/laneMarks.pb.cc.o
+.PHONY : laneMarks.pb.cc.o
+
+laneMarks.pb.i: laneMarks.pb.cc.i
+
+.PHONY : laneMarks.pb.i
+
+# target to preprocess a source file
+laneMarks.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/laneMarks.pb.cc.i
+.PHONY : laneMarks.pb.cc.i
+
+laneMarks.pb.s: laneMarks.pb.cc.s
+
+.PHONY : laneMarks.pb.s
+
+# target to generate assembly for a file
+laneMarks.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/laneMarks.pb.cc.s
+.PHONY : laneMarks.pb.cc.s
+
+localLocation.pb.o: localLocation.pb.cc.o
+
+.PHONY : localLocation.pb.o
+
+# target to build an object file
+localLocation.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/localLocation.pb.cc.o
+.PHONY : localLocation.pb.cc.o
+
+localLocation.pb.i: localLocation.pb.cc.i
+
+.PHONY : localLocation.pb.i
+
+# target to preprocess a source file
+localLocation.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/localLocation.pb.cc.i
+.PHONY : localLocation.pb.cc.i
+
+localLocation.pb.s: localLocation.pb.cc.s
+
+.PHONY : localLocation.pb.s
+
+# target to generate assembly for a file
+localLocation.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/localLocation.pb.cc.s
+.PHONY : localLocation.pb.cc.s
 
 location.pb.o: location.pb.cc.o
 
@@ -233,7 +265,6 @@ location.pb.o: location.pb.cc.o
 # target to build an object file
 location.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/location.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/location.pb.cc.o
 .PHONY : location.pb.cc.o
 
 location.pb.i: location.pb.cc.i
@@ -243,7 +274,6 @@ location.pb.i: location.pb.cc.i
 # target to preprocess a source file
 location.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/location.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/location.pb.cc.i
 .PHONY : location.pb.cc.i
 
 location.pb.s: location.pb.cc.s
@@ -253,7 +283,6 @@ location.pb.s: location.pb.cc.s
 # target to generate assembly for a file
 location.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/location.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/location.pb.cc.s
 .PHONY : location.pb.cc.s
 
 my_module.o: my_module.cc.o
@@ -263,7 +292,6 @@ my_module.o: my_module.cc.o
 # target to build an object file
 my_module.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/my_module.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module.cc.o
 .PHONY : my_module.cc.o
 
 my_module.i: my_module.cc.i
@@ -273,7 +301,6 @@ my_module.i: my_module.cc.i
 # target to preprocess a source file
 my_module.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/my_module.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module.cc.i
 .PHONY : my_module.cc.i
 
 my_module.s: my_module.cc.s
@@ -283,35 +310,34 @@ my_module.s: my_module.cc.s
 # target to generate assembly for a file
 my_module.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/my_module.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module.cc.s
 .PHONY : my_module.cc.s
 
-my_module_main.o: my_module_main.cc.o
+planStatus.pb.o: planStatus.pb.cc.o
 
-.PHONY : my_module_main.o
+.PHONY : planStatus.pb.o
 
 # target to build an object file
-my_module_main.cc.o:
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module_main.cc.o
-.PHONY : my_module_main.cc.o
+planStatus.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/planStatus.pb.cc.o
+.PHONY : planStatus.pb.cc.o
 
-my_module_main.i: my_module_main.cc.i
+planStatus.pb.i: planStatus.pb.cc.i
 
-.PHONY : my_module_main.i
+.PHONY : planStatus.pb.i
 
 # target to preprocess a source file
-my_module_main.cc.i:
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module_main.cc.i
-.PHONY : my_module_main.cc.i
+planStatus.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/planStatus.pb.cc.i
+.PHONY : planStatus.pb.cc.i
 
-my_module_main.s: my_module_main.cc.s
+planStatus.pb.s: planStatus.pb.cc.s
 
-.PHONY : my_module_main.s
+.PHONY : planStatus.pb.s
 
 # target to generate assembly for a file
-my_module_main.cc.s:
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/my_module_main.cc.s
-.PHONY : my_module_main.cc.s
+planStatus.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/planStatus.pb.cc.s
+.PHONY : planStatus.pb.cc.s
 
 traffic.pb.o: traffic.pb.cc.o
 
@@ -320,7 +346,6 @@ traffic.pb.o: traffic.pb.cc.o
 # target to build an object file
 traffic.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/traffic.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/traffic.pb.cc.o
 .PHONY : traffic.pb.cc.o
 
 traffic.pb.i: traffic.pb.cc.i
@@ -330,7 +355,6 @@ traffic.pb.i: traffic.pb.cc.i
 # target to preprocess a source file
 traffic.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/traffic.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/traffic.pb.cc.i
 .PHONY : traffic.pb.cc.i
 
 traffic.pb.s: traffic.pb.cc.s
@@ -340,7 +364,6 @@ traffic.pb.s: traffic.pb.cc.s
 # target to generate assembly for a file
 traffic.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/traffic.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/traffic.pb.cc.s
 .PHONY : traffic.pb.cc.s
 
 trajectory.pb.o: trajectory.pb.cc.o
@@ -350,7 +373,6 @@ trajectory.pb.o: trajectory.pb.cc.o
 # target to build an object file
 trajectory.pb.cc.o:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/trajectory.pb.cc.o
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/trajectory.pb.cc.o
 .PHONY : trajectory.pb.cc.o
 
 trajectory.pb.i: trajectory.pb.cc.i
@@ -360,7 +382,6 @@ trajectory.pb.i: trajectory.pb.cc.i
 # target to preprocess a source file
 trajectory.pb.cc.i:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/trajectory.pb.cc.i
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/trajectory.pb.cc.i
 .PHONY : trajectory.pb.cc.i
 
 trajectory.pb.s: trajectory.pb.cc.s
@@ -370,7 +391,6 @@ trajectory.pb.s: trajectory.pb.cc.s
 # target to generate assembly for a file
 trajectory.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/trajectory.pb.cc.s
-	$(MAKE) -f CMakeFiles/my-module-main.dir/build.make CMakeFiles/my-module-main.dir/trajectory.pb.cc.s
 .PHONY : trajectory.pb.cc.s
 
 # Help Target
@@ -380,9 +400,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... my-module"
-	@echo "... my-module-main"
+	@echo "... edit_cache"
 	@echo "... basic.pb.o"
 	@echo "... basic.pb.i"
 	@echo "... basic.pb.s"
@@ -392,15 +411,21 @@ help:
 	@echo "... header.pb.o"
 	@echo "... header.pb.i"
 	@echo "... header.pb.s"
+	@echo "... laneMarks.pb.o"
+	@echo "... laneMarks.pb.i"
+	@echo "... laneMarks.pb.s"
+	@echo "... localLocation.pb.o"
+	@echo "... localLocation.pb.i"
+	@echo "... localLocation.pb.s"
 	@echo "... location.pb.o"
 	@echo "... location.pb.i"
 	@echo "... location.pb.s"
 	@echo "... my_module.o"
 	@echo "... my_module.i"
 	@echo "... my_module.s"
-	@echo "... my_module_main.o"
-	@echo "... my_module_main.i"
-	@echo "... my_module_main.s"
+	@echo "... planStatus.pb.o"
+	@echo "... planStatus.pb.i"
+	@echo "... planStatus.pb.s"
 	@echo "... traffic.pb.o"
 	@echo "... traffic.pb.i"
 	@echo "... traffic.pb.s"

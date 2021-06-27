@@ -17,15 +17,13 @@
 #include <string>
 #include <zcm/zcm-cpp.hpp>
 
-#include "icumsg/structLOCATION.hpp"
+#include "zcm_msgs/icumsg/structLOCATION.hpp"
 
 
 namespace txsim
 {
         class MessageManagerBase
         {
-                friend class Recorder;
-
         public:
                 MessageManagerBase(
                     const std::string &url,
@@ -37,13 +35,23 @@ namespace txsim
 
                 virtual ~MessageManagerBase();
 
+<<<<<<< HEAD:include/MessageManager/MessageManagerBase.h
                 // subscribe function
+=======
+                // receive zcm handler
+>>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f:include/MessageManagerBase.h
                 void LOCATIONHandler(
                     const zcm::ReceiveBuffer *rbuf,
                     const std::string &channel,
                     const icumsg::structLOCATION *msg);
+                void SubscribeAll();
 
+<<<<<<< HEAD:include/MessageManager/MessageManagerBase.h
                 // publish function
+=======
+
+                // send zcm
+>>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f:include/MessageManagerBase.h
                 void PublishCaninfo() const;
                 void PublishNavinfo() const;
                 void PublishFusionmap() const;
@@ -62,10 +70,8 @@ namespace txsim
                 void PublishTrafficlightWithLock() const;
                 void PublishCarsimControlWithLock() const;
                 void PublishCarsimRoadContactWithLock() const;
-                void PublishAllAsync();
 
-                void SubscribeAll();
-
+                void PublishAllAsync();         
         private:
                 void PubLoopCaninfo(int freq);
                 void PubLoopNavinfo(int freq);
@@ -91,6 +97,8 @@ namespace txsim
                 volatile bool need_stop_;
 
         private:
+                std::string kChannelLocation;
+
                 std::string kChannelNameCaninfo;
                 std::string kChannelNameNavinfo;
                 std::string kChannelNameFusionmap;
@@ -102,6 +110,8 @@ namespace txsim
                 std::string kChannelNameCarsimState;
                 std::string kChannelNameCarsimQuery;
                 std::string kChannelNameCarsimContact;
+
+                int kFreqLocation;
 
                 int kFreqCaninfo;
                 int kFreqNavinfo;

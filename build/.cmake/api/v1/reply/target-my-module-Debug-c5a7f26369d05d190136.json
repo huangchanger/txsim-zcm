@@ -111,7 +111,7 @@
 				},
 				{
 					"backtrace" : 7,
-					"path" : "/home/chang/Projects/txsim-zcm/3rd/msg/zcm_definition"
+					"path" : "/home/chang/Projects/txsim-zcm/3rd/msg"
 				}
 			],
 			"language" : "CXX",

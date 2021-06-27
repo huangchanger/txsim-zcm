@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/rebuild_cache.dir
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/my-module.dir
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/edit_cache.dir
+=======
+/home/chang/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/rebuild_cache.dir
+/home/chang/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/edit_cache.dir
+/home/chang/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/my-module.dir
+/home/chang/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles/my-module-main.dir
+>>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f

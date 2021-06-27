@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++-5
 CXX_DEFINES = -DUSE_ZCM -Dmy_module_EXPORTS
 
-CXX_INCLUDES = -I/home/chang/Projects/txsim-zcm/src -I/home/chang/Projects/txsim-zcm/3rd -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_cpp -I/home/chang/Projects/txsim-zcm/include -I/home/chang/Projects/txsim-zcm/build -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_definition
+CXX_INCLUDES = -I/home/chang/Projects/txsim-zcm/src -I/home/chang/Projects/txsim-zcm/3rd -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_cpp -I/home/chang/Projects/txsim-zcm/include -I/home/chang/Projects/txsim-zcm/build -I/home/chang/Projects/txsim-zcm/3rd/msg
 
 CXX_FLAGS =  -std=c++11 -g -fPIC
 

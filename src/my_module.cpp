@@ -4,6 +4,9 @@
 #include <iostream>
 
 
+#include "proto_msgs/proto_cpp/control.pb.h"
+#include "proto_msgs/proto_cpp/location.pb.h"
+
 #ifdef _WIN32
 #define MODULE_API __declspec(dllexport)
 #else
@@ -12,6 +15,7 @@
 
 #define SPLIT_LINE "======================================="
 #define SHMEM_TOPIC "MY_SHMEM_TOPIC"
+
 
 
 MyModule::MyModule() {}

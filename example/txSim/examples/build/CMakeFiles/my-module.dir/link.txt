@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 /usr/bin/c++ -fPIC  -std=c++11  -shared -Wl,-soname,libmy-module.so -o lib/libmy-module.so CMakeFiles/my-module.dir/my_module.cc.o CMakeFiles/my-module.dir/basic.pb.cc.o CMakeFiles/my-module.dir/location.pb.cc.o CMakeFiles/my-module.dir/trajectory.pb.cc.o CMakeFiles/my-module.dir/traffic.pb.cc.o CMakeFiles/my-module.dir/control.pb.cc.o CMakeFiles/my-module.dir/header.pb.cc.o CMakeFiles/my-module.dir/planStatus.pb.cc.o CMakeFiles/my-module.dir/localLocation.pb.cc.o CMakeFiles/my-module.dir/laneMarks.pb.cc.o -lprotobuf -lpthread 
+=======
+/usr/bin/c++ -fPIC  -std=c++11 -shared -Wl,-soname,libmy-module.so -o lib/libmy-module.so CMakeFiles/my-module.dir/my_module.cc.o CMakeFiles/my-module.dir/basic.pb.cc.o CMakeFiles/my-module.dir/location.pb.cc.o CMakeFiles/my-module.dir/trajectory.pb.cc.o CMakeFiles/my-module.dir/traffic.pb.cc.o CMakeFiles/my-module.dir/control.pb.cc.o CMakeFiles/my-module.dir/header.pb.cc.o  -lprotobuf -lpthread 
+>>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f

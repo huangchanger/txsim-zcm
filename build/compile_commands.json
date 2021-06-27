@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/chang/Projects/txsim-zcm/build",
-  "command": "/usr/bin/g++-5 -DUSE_ZCM -Dmy_module_EXPORTS -I/home/chang/Projects/txsim-zcm/src -I/home/chang/Projects/txsim-zcm/3rd -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_cpp -I/home/chang/Projects/txsim-zcm/include -I/home/chang/Projects/txsim-zcm/build -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_definition  -std=c++11 -g -fPIC -o CMakeFiles/my-module.dir/src/txsim/my_module.cc.o -c /home/chang/Projects/txsim-zcm/src/txsim/my_module.cc",
+  "command": "/usr/bin/g++-5 -DUSE_ZCM -Dmy_module_EXPORTS -I/home/chang/Projects/txsim-zcm/src -I/home/chang/Projects/txsim-zcm/3rd -I/home/chang/Projects/txsim-zcm/3rd/msg/zcm_cpp -I/home/chang/Projects/txsim-zcm/include -I/home/chang/Projects/txsim-zcm/build -I/home/chang/Projects/txsim-zcm/3rd/msg  -std=c++11 -g -fPIC -o CMakeFiles/my-module.dir/src/txsim/my_module.cc.o -c /home/chang/Projects/txsim-zcm/src/txsim/my_module.cc",
   "file": "/home/chang/Projects/txsim-zcm/src/txsim/my_module.cc"
 }
 ]

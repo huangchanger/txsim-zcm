@@ -17,7 +17,7 @@
 #include <string>
 #include <zcm/zcm-cpp.hpp>
 
-#include "icumsg/structLOCATION.hpp"
+#include "zcm_msgs/icumsg/structLOCATION.hpp"
 
 
 namespace txsim

@@ -24,7 +24,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 include_directories(
   ${CMAKE_SOURCE_DIR}/include
   ${CMAKE_BINARY_DIR}
-  ${THIRD_PARTY}/msg/zcm_definition)
+  ${THIRD_PARTY}/msg)
 
 if(WIN32)
   set(LIB_PROTOBUF libprotobuf zlibstatic)

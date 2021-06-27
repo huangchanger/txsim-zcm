@@ -1,4 +1,4 @@
-#include "MessageManager/MessageManagerBase.h"
+#include "MessageManagerBase.h"
 
 
 using std::string;
@@ -46,7 +46,7 @@ namespace txsim
     void MessageManagerBase::SubscribeAll()
     {
         auto sub1 = tunnel_.subscribe(
-            kChannelNameCancontrol, &MessageManagerBase::LOCATIONHandler, this);
+            kChannelLocation, &MessageManagerBase::LOCATIONHandler, this);
 
         sub_threads_.push_back(sub1);
 
@@ -54,44 +54,36 @@ namespace txsim
     }
 
 
-    void MessageManagerBase::PublishCaninfo() const
+    // publishAllAsync -> PubLoopChannelname -> PublishChannelnameWithLock -> PublishChannelname
+    void MessageManagerBase::PublishLocation() const
     {
-        tunnel_.publish(kChannelNameCaninfo, &location_);
+        tunnel_.publish(kChannelNameLocation, &location_);
     }
 
 
-    void MessageManagerBase::PublishCaninfoWithLock() const
+    void MessageManagerBase::PublishLocationWithLock() const
     {
         std::lock_guard<std::mutex> caninfo_lock(location_mutex_);
-        PublishCaninfo();
+        PublishLocation();
     }
 
-
-    void MessageManagerBase::PublishAll() const
-    {
-        if (kSwitchCaninfo)
-        {
-            PublishCaninfo();
-        }
-    }
-
-    void MessageManagerBase::PubLoopCaninfo(int freq)
+    void MessageManagerBase::PubLoopLocation(int freq)
     {
         while (!need_stop_)
         {
             auto time_point = std::chrono::steady_clock::now() + std::chrono::microseconds(1000000 / freq);
-            PublishCaninfoWithLock();
+            PublishLocationWithLock();
             std::this_thread::sleep_until(time_point);
         }
     }
 
-
+    // publish automatically with a certain frequency
     void MessageManagerBase::PublishAllAsync()
     {
         if (kSwitchCaninfo)
         {
             pub_threads_.push_back(std::thread(
-                &MessageManagerBase::PubLoopCaninfo, this, kFreqCaninfo));
+                &MessageManagerBase::PubLoopLocation, this, kFreqLocation));
         }
 
         for (auto &t : pub_threads_)
@@ -99,4 +91,14 @@ namespace txsim
             t.detach();
         }
     }
+
+    // publish one time
+    void MessageManagerBase::PublishAll() const
+    {
+        if (kSwitchCaninfo)
+        {
+            PublishLocation();
+        }
+    }
+
 } // namespace tievsim

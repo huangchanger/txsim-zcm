@@ -1,6 +1,6 @@
 #pragma once
 
-#include "txsim_module.h"
+#include "txsim/txsim_module.h"
 
 
 class MyModule final : public tx_sim::SimModule {

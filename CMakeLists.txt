@@ -43,7 +43,7 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HDR
 
 # example 1: built into a shared library.
 add_library(my-module SHARED
-  ${SRC}/txsim/my_module.cc
+  ${SRC}/my_module.cpp
   ${CMAKE_SOURCE_DIR})
 target_link_libraries(my-module
   ${LIB_PROTOBUF})

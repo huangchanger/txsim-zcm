@@ -129,29 +129,29 @@ my-module/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/build
 .PHONY : my-module/fast
 
-src/txsim/my_module.o: src/txsim/my_module.cc.o
-.PHONY : src/txsim/my_module.o
+src/my_module.o: src/my_module.cpp.o
+.PHONY : src/my_module.o
 
 # target to build an object file
-src/txsim/my_module.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/txsim/my_module.cc.o
-.PHONY : src/txsim/my_module.cc.o
+src/my_module.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/my_module.cpp.o
+.PHONY : src/my_module.cpp.o
 
-src/txsim/my_module.i: src/txsim/my_module.cc.i
-.PHONY : src/txsim/my_module.i
+src/my_module.i: src/my_module.cpp.i
+.PHONY : src/my_module.i
 
 # target to preprocess a source file
-src/txsim/my_module.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/txsim/my_module.cc.i
-.PHONY : src/txsim/my_module.cc.i
+src/my_module.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/my_module.cpp.i
+.PHONY : src/my_module.cpp.i
 
-src/txsim/my_module.s: src/txsim/my_module.cc.s
-.PHONY : src/txsim/my_module.s
+src/my_module.s: src/my_module.cpp.s
+.PHONY : src/my_module.s
 
 # target to generate assembly for a file
-src/txsim/my_module.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/txsim/my_module.cc.s
-.PHONY : src/txsim/my_module.cc.s
+src/my_module.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/my_module.cpp.s
+.PHONY : src/my_module.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... my-module"
-	@echo "... src/txsim/my_module.o"
-	@echo "... src/txsim/my_module.i"
-	@echo "... src/txsim/my_module.s"
+	@echo "... src/my_module.o"
+	@echo "... src/my_module.i"
+	@echo "... src/my_module.s"
 .PHONY : help
 
 

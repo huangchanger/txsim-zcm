@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/chang/Projects/txsim-zcm/src/txsim/my_module.cc" "CMakeFiles/my-module.dir/src/txsim/my_module.cc.o" "gcc" "CMakeFiles/my-module.dir/src/txsim/my_module.cc.o.d"
+  "/home/chang/Projects/txsim-zcm/src/my_module.cpp" "CMakeFiles/my-module.dir/src/my_module.cpp.o" "gcc" "CMakeFiles/my-module.dir/src/my_module.cpp.o.d"
   )
 
 # Targets to which this target links.

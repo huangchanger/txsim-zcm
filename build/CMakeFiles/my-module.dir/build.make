@@ -69,28 +69,28 @@ include CMakeFiles/my-module.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/my-module.dir/flags.make
 
-CMakeFiles/my-module.dir/src/txsim/my_module.cc.o: CMakeFiles/my-module.dir/flags.make
-CMakeFiles/my-module.dir/src/txsim/my_module.cc.o: ../src/txsim/my_module.cc
-CMakeFiles/my-module.dir/src/txsim/my_module.cc.o: CMakeFiles/my-module.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chang/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/my-module.dir/src/txsim/my_module.cc.o"
-	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/my-module.dir/src/txsim/my_module.cc.o -MF CMakeFiles/my-module.dir/src/txsim/my_module.cc.o.d -o CMakeFiles/my-module.dir/src/txsim/my_module.cc.o -c /home/chang/Projects/txsim-zcm/src/txsim/my_module.cc
+CMakeFiles/my-module.dir/src/my_module.cpp.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/src/my_module.cpp.o: ../src/my_module.cpp
+CMakeFiles/my-module.dir/src/my_module.cpp.o: CMakeFiles/my-module.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chang/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/my-module.dir/src/my_module.cpp.o"
+	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/my-module.dir/src/my_module.cpp.o -MF CMakeFiles/my-module.dir/src/my_module.cpp.o.d -o CMakeFiles/my-module.dir/src/my_module.cpp.o -c /home/chang/Projects/txsim-zcm/src/my_module.cpp
 
-CMakeFiles/my-module.dir/src/txsim/my_module.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/txsim/my_module.cc.i"
-	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chang/Projects/txsim-zcm/src/txsim/my_module.cc > CMakeFiles/my-module.dir/src/txsim/my_module.cc.i
+CMakeFiles/my-module.dir/src/my_module.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/my_module.cpp.i"
+	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chang/Projects/txsim-zcm/src/my_module.cpp > CMakeFiles/my-module.dir/src/my_module.cpp.i
 
-CMakeFiles/my-module.dir/src/txsim/my_module.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/txsim/my_module.cc.s"
-	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chang/Projects/txsim-zcm/src/txsim/my_module.cc -o CMakeFiles/my-module.dir/src/txsim/my_module.cc.s
+CMakeFiles/my-module.dir/src/my_module.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/my_module.cpp.s"
+	/usr/bin/g++-5 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chang/Projects/txsim-zcm/src/my_module.cpp -o CMakeFiles/my-module.dir/src/my_module.cpp.s
 
 # Object files for target my-module
 my__module_OBJECTS = \
-"CMakeFiles/my-module.dir/src/txsim/my_module.cc.o"
+"CMakeFiles/my-module.dir/src/my_module.cpp.o"
 
 # External object files for target my-module
 my__module_EXTERNAL_OBJECTS =
 
-lib/libmy-module.so: CMakeFiles/my-module.dir/src/txsim/my_module.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/src/my_module.cpp.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/build.make
 lib/libmy-module.so: CMakeFiles/my-module.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chang/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library lib/libmy-module.so"

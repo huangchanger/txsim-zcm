@@ -81,17 +81,303 @@ CMakeFiles/my-module.dir/src/my_module.cpp.o.provides: CMakeFiles/my-module.dir/
 CMakeFiles/my-module.dir/src/my_module.cpp.o.provides.build: CMakeFiles/my-module.dir/src/my_module.cpp.o
 
 
+CMakeFiles/my-module.dir/src/MessageManager.cpp.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/src/MessageManager.cpp.o: ../src/MessageManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/my-module.dir/src/MessageManager.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/src/MessageManager.cpp.o -c /home/yxj/Projects/txsim-zcm/src/MessageManager.cpp
+
+CMakeFiles/my-module.dir/src/MessageManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/MessageManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/src/MessageManager.cpp > CMakeFiles/my-module.dir/src/MessageManager.cpp.i
+
+CMakeFiles/my-module.dir/src/MessageManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/MessageManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/src/MessageManager.cpp -o CMakeFiles/my-module.dir/src/MessageManager.cpp.s
+
+CMakeFiles/my-module.dir/src/MessageManager.cpp.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/src/MessageManager.cpp.o.requires
+
+CMakeFiles/my-module.dir/src/MessageManager.cpp.o.provides: CMakeFiles/my-module.dir/src/MessageManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cpp.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/src/MessageManager.cpp.o.provides
+
+CMakeFiles/my-module.dir/src/MessageManager.cpp.o.provides.build: CMakeFiles/my-module.dir/src/MessageManager.cpp.o
+
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o: ../src/MessageManagerBase.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o -c /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cpp
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cpp > CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.i
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cpp -o CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.s
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.requires
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.provides: CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.provides
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.provides.build: CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o: ../include/proto_msgs/basic.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/basic.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/basic.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/basic.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o: ../include/proto_msgs/control.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/control.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/control.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/control.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o: ../include/proto_msgs/grading.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/grading.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/grading.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/grading.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o: ../include/proto_msgs/header.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/header.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/header.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/header.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o: ../include/proto_msgs/laneMarks.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/laneMarks.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/laneMarks.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/laneMarks.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o: ../include/proto_msgs/location.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/location.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/location.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/location.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o: ../include/proto_msgs/planStatus.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/planStatus.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/planStatus.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/planStatus.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o: ../include/proto_msgs/traffic.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/traffic.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/traffic.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/traffic.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o
+
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o: ../include/proto_msgs/trajectory.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o -c /home/yxj/Projects/txsim-zcm/include/proto_msgs/trajectory.pb.cc
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/include/proto_msgs/trajectory.pb.cc > CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.i
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/include/proto_msgs/trajectory.pb.cc -o CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.s
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.requires
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.provides: CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.provides
+
+CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.provides.build: CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o
+
+
 # Object files for target my-module
 my__module_OBJECTS = \
-"CMakeFiles/my-module.dir/src/my_module.cpp.o"
+"CMakeFiles/my-module.dir/src/my_module.cpp.o" \
+"CMakeFiles/my-module.dir/src/MessageManager.cpp.o" \
+"CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o" \
+"CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o"
 
 # External object files for target my-module
 my__module_EXTERNAL_OBJECTS =
 
 lib/libmy-module.so: CMakeFiles/my-module.dir/src/my_module.cpp.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/src/MessageManager.cpp.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/build.make
 lib/libmy-module.so: CMakeFiles/my-module.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library lib/libmy-module.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX shared library lib/libmy-module.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/my-module.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -100,6 +386,17 @@ CMakeFiles/my-module.dir/build: lib/libmy-module.so
 .PHONY : CMakeFiles/my-module.dir/build
 
 CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/my_module.cpp.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/MessageManager.cpp.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o.requires
 
 .PHONY : CMakeFiles/my-module.dir/requires
 

@@ -123,6 +123,303 @@ my-module/fast:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/build
 .PHONY : my-module/fast
 
+include/proto_msgs/basic.pb.o: include/proto_msgs/basic.pb.cc.o
+
+.PHONY : include/proto_msgs/basic.pb.o
+
+# target to build an object file
+include/proto_msgs/basic.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.o
+.PHONY : include/proto_msgs/basic.pb.cc.o
+
+include/proto_msgs/basic.pb.i: include/proto_msgs/basic.pb.cc.i
+
+.PHONY : include/proto_msgs/basic.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/basic.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.i
+.PHONY : include/proto_msgs/basic.pb.cc.i
+
+include/proto_msgs/basic.pb.s: include/proto_msgs/basic.pb.cc.s
+
+.PHONY : include/proto_msgs/basic.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/basic.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/basic.pb.cc.s
+.PHONY : include/proto_msgs/basic.pb.cc.s
+
+include/proto_msgs/control.pb.o: include/proto_msgs/control.pb.cc.o
+
+.PHONY : include/proto_msgs/control.pb.o
+
+# target to build an object file
+include/proto_msgs/control.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.o
+.PHONY : include/proto_msgs/control.pb.cc.o
+
+include/proto_msgs/control.pb.i: include/proto_msgs/control.pb.cc.i
+
+.PHONY : include/proto_msgs/control.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/control.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.i
+.PHONY : include/proto_msgs/control.pb.cc.i
+
+include/proto_msgs/control.pb.s: include/proto_msgs/control.pb.cc.s
+
+.PHONY : include/proto_msgs/control.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/control.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/control.pb.cc.s
+.PHONY : include/proto_msgs/control.pb.cc.s
+
+include/proto_msgs/grading.pb.o: include/proto_msgs/grading.pb.cc.o
+
+.PHONY : include/proto_msgs/grading.pb.o
+
+# target to build an object file
+include/proto_msgs/grading.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.o
+.PHONY : include/proto_msgs/grading.pb.cc.o
+
+include/proto_msgs/grading.pb.i: include/proto_msgs/grading.pb.cc.i
+
+.PHONY : include/proto_msgs/grading.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/grading.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.i
+.PHONY : include/proto_msgs/grading.pb.cc.i
+
+include/proto_msgs/grading.pb.s: include/proto_msgs/grading.pb.cc.s
+
+.PHONY : include/proto_msgs/grading.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/grading.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/grading.pb.cc.s
+.PHONY : include/proto_msgs/grading.pb.cc.s
+
+include/proto_msgs/header.pb.o: include/proto_msgs/header.pb.cc.o
+
+.PHONY : include/proto_msgs/header.pb.o
+
+# target to build an object file
+include/proto_msgs/header.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.o
+.PHONY : include/proto_msgs/header.pb.cc.o
+
+include/proto_msgs/header.pb.i: include/proto_msgs/header.pb.cc.i
+
+.PHONY : include/proto_msgs/header.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/header.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.i
+.PHONY : include/proto_msgs/header.pb.cc.i
+
+include/proto_msgs/header.pb.s: include/proto_msgs/header.pb.cc.s
+
+.PHONY : include/proto_msgs/header.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/header.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/header.pb.cc.s
+.PHONY : include/proto_msgs/header.pb.cc.s
+
+include/proto_msgs/laneMarks.pb.o: include/proto_msgs/laneMarks.pb.cc.o
+
+.PHONY : include/proto_msgs/laneMarks.pb.o
+
+# target to build an object file
+include/proto_msgs/laneMarks.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.o
+.PHONY : include/proto_msgs/laneMarks.pb.cc.o
+
+include/proto_msgs/laneMarks.pb.i: include/proto_msgs/laneMarks.pb.cc.i
+
+.PHONY : include/proto_msgs/laneMarks.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/laneMarks.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.i
+.PHONY : include/proto_msgs/laneMarks.pb.cc.i
+
+include/proto_msgs/laneMarks.pb.s: include/proto_msgs/laneMarks.pb.cc.s
+
+.PHONY : include/proto_msgs/laneMarks.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/laneMarks.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/laneMarks.pb.cc.s
+.PHONY : include/proto_msgs/laneMarks.pb.cc.s
+
+include/proto_msgs/location.pb.o: include/proto_msgs/location.pb.cc.o
+
+.PHONY : include/proto_msgs/location.pb.o
+
+# target to build an object file
+include/proto_msgs/location.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.o
+.PHONY : include/proto_msgs/location.pb.cc.o
+
+include/proto_msgs/location.pb.i: include/proto_msgs/location.pb.cc.i
+
+.PHONY : include/proto_msgs/location.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/location.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.i
+.PHONY : include/proto_msgs/location.pb.cc.i
+
+include/proto_msgs/location.pb.s: include/proto_msgs/location.pb.cc.s
+
+.PHONY : include/proto_msgs/location.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/location.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/location.pb.cc.s
+.PHONY : include/proto_msgs/location.pb.cc.s
+
+include/proto_msgs/planStatus.pb.o: include/proto_msgs/planStatus.pb.cc.o
+
+.PHONY : include/proto_msgs/planStatus.pb.o
+
+# target to build an object file
+include/proto_msgs/planStatus.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.o
+.PHONY : include/proto_msgs/planStatus.pb.cc.o
+
+include/proto_msgs/planStatus.pb.i: include/proto_msgs/planStatus.pb.cc.i
+
+.PHONY : include/proto_msgs/planStatus.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/planStatus.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.i
+.PHONY : include/proto_msgs/planStatus.pb.cc.i
+
+include/proto_msgs/planStatus.pb.s: include/proto_msgs/planStatus.pb.cc.s
+
+.PHONY : include/proto_msgs/planStatus.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/planStatus.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/planStatus.pb.cc.s
+.PHONY : include/proto_msgs/planStatus.pb.cc.s
+
+include/proto_msgs/traffic.pb.o: include/proto_msgs/traffic.pb.cc.o
+
+.PHONY : include/proto_msgs/traffic.pb.o
+
+# target to build an object file
+include/proto_msgs/traffic.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.o
+.PHONY : include/proto_msgs/traffic.pb.cc.o
+
+include/proto_msgs/traffic.pb.i: include/proto_msgs/traffic.pb.cc.i
+
+.PHONY : include/proto_msgs/traffic.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/traffic.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.i
+.PHONY : include/proto_msgs/traffic.pb.cc.i
+
+include/proto_msgs/traffic.pb.s: include/proto_msgs/traffic.pb.cc.s
+
+.PHONY : include/proto_msgs/traffic.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/traffic.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/traffic.pb.cc.s
+.PHONY : include/proto_msgs/traffic.pb.cc.s
+
+include/proto_msgs/trajectory.pb.o: include/proto_msgs/trajectory.pb.cc.o
+
+.PHONY : include/proto_msgs/trajectory.pb.o
+
+# target to build an object file
+include/proto_msgs/trajectory.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.o
+.PHONY : include/proto_msgs/trajectory.pb.cc.o
+
+include/proto_msgs/trajectory.pb.i: include/proto_msgs/trajectory.pb.cc.i
+
+.PHONY : include/proto_msgs/trajectory.pb.i
+
+# target to preprocess a source file
+include/proto_msgs/trajectory.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.i
+.PHONY : include/proto_msgs/trajectory.pb.cc.i
+
+include/proto_msgs/trajectory.pb.s: include/proto_msgs/trajectory.pb.cc.s
+
+.PHONY : include/proto_msgs/trajectory.pb.s
+
+# target to generate assembly for a file
+include/proto_msgs/trajectory.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/include/proto_msgs/trajectory.pb.cc.s
+.PHONY : include/proto_msgs/trajectory.pb.cc.s
+
+src/MessageManager.o: src/MessageManager.cpp.o
+
+.PHONY : src/MessageManager.o
+
+# target to build an object file
+src/MessageManager.cpp.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cpp.o
+.PHONY : src/MessageManager.cpp.o
+
+src/MessageManager.i: src/MessageManager.cpp.i
+
+.PHONY : src/MessageManager.i
+
+# target to preprocess a source file
+src/MessageManager.cpp.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cpp.i
+.PHONY : src/MessageManager.cpp.i
+
+src/MessageManager.s: src/MessageManager.cpp.s
+
+.PHONY : src/MessageManager.s
+
+# target to generate assembly for a file
+src/MessageManager.cpp.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cpp.s
+.PHONY : src/MessageManager.cpp.s
+
+src/MessageManagerBase.o: src/MessageManagerBase.cpp.o
+
+.PHONY : src/MessageManagerBase.o
+
+# target to build an object file
+src/MessageManagerBase.cpp.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.o
+.PHONY : src/MessageManagerBase.cpp.o
+
+src/MessageManagerBase.i: src/MessageManagerBase.cpp.i
+
+.PHONY : src/MessageManagerBase.i
+
+# target to preprocess a source file
+src/MessageManagerBase.cpp.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.i
+.PHONY : src/MessageManagerBase.cpp.i
+
+src/MessageManagerBase.s: src/MessageManagerBase.cpp.s
+
+.PHONY : src/MessageManagerBase.s
+
+# target to generate assembly for a file
+src/MessageManagerBase.cpp.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cpp.s
+.PHONY : src/MessageManagerBase.cpp.s
+
 src/my_module.o: src/my_module.cpp.o
 
 .PHONY : src/my_module.o
@@ -159,6 +456,39 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... my-module"
 	@echo "... edit_cache"
+	@echo "... include/proto_msgs/basic.pb.o"
+	@echo "... include/proto_msgs/basic.pb.i"
+	@echo "... include/proto_msgs/basic.pb.s"
+	@echo "... include/proto_msgs/control.pb.o"
+	@echo "... include/proto_msgs/control.pb.i"
+	@echo "... include/proto_msgs/control.pb.s"
+	@echo "... include/proto_msgs/grading.pb.o"
+	@echo "... include/proto_msgs/grading.pb.i"
+	@echo "... include/proto_msgs/grading.pb.s"
+	@echo "... include/proto_msgs/header.pb.o"
+	@echo "... include/proto_msgs/header.pb.i"
+	@echo "... include/proto_msgs/header.pb.s"
+	@echo "... include/proto_msgs/laneMarks.pb.o"
+	@echo "... include/proto_msgs/laneMarks.pb.i"
+	@echo "... include/proto_msgs/laneMarks.pb.s"
+	@echo "... include/proto_msgs/location.pb.o"
+	@echo "... include/proto_msgs/location.pb.i"
+	@echo "... include/proto_msgs/location.pb.s"
+	@echo "... include/proto_msgs/planStatus.pb.o"
+	@echo "... include/proto_msgs/planStatus.pb.i"
+	@echo "... include/proto_msgs/planStatus.pb.s"
+	@echo "... include/proto_msgs/traffic.pb.o"
+	@echo "... include/proto_msgs/traffic.pb.i"
+	@echo "... include/proto_msgs/traffic.pb.s"
+	@echo "... include/proto_msgs/trajectory.pb.o"
+	@echo "... include/proto_msgs/trajectory.pb.i"
+	@echo "... include/proto_msgs/trajectory.pb.s"
+	@echo "... src/MessageManager.o"
+	@echo "... src/MessageManager.i"
+	@echo "... src/MessageManager.s"
+	@echo "... src/MessageManagerBase.o"
+	@echo "... src/MessageManagerBase.i"
+	@echo "... src/MessageManagerBase.s"
 	@echo "... src/my_module.o"
 	@echo "... src/my_module.i"
 	@echo "... src/my_module.s"

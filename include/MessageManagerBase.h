@@ -9,6 +9,7 @@
  *
  */
 
+#include <iostream>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
@@ -16,18 +17,29 @@
 #include <vector>
 #include <string>
 #include <zcm/zcm-cpp.hpp>
+#include <zcm/zcm.h>
+#include "WGS84UTM.h"
 
-#include "zcm_msgs/icumsg/structLOCATION.hpp"
-
+#include "tievmsg_zcm/MsgAccessoryControlSignal.hpp"
+#include "tievmsg_zcm/MsgAutonomousModeControlSignal.hpp"
+#include "tievmsg_zcm/MsgCanInfoSignal.hpp"
+#include "tievmsg_zcm/MsgChassisCommandSignal.hpp"
+#include "tievmsg_zcm/MsgInteractionControlSignal.hpp"
+#include "tievmsg_zcm/MsgNavInfoSignal.hpp"
+#include "tievmsg_zcm/MsgPlannerEmergencyControlSignal.hpp"
+#include "tievmsg_zcm/MsgRainDetectionSignal.hpp"
+#include "tievmsg_zcm/MsgRemoteEmergencyControlSignal.hpp"
+#include "tievmsg_zcm/MsgTrafficLightSignal.hpp"
+#include "tievmsg_zcm/MsgTrafficSignSignal.hpp"
+// #include "tievmsg_zcm/MsgTrajectorySignal.hpp"
+#include "tievmsg_zcm/MsgWaterhorseSignal.hpp"
 
 namespace txsim
 {
         class MessageManagerBase
         {
         public:
-                MessageManagerBase(
-                    const std::string &url,
-                    const std::string &config_file, const std::string &record_path);
+                MessageManagerBase(const std::string &url);
 
                 MessageManagerBase(MessageManagerBase const &) = delete;
 
@@ -35,60 +47,35 @@ namespace txsim
 
                 virtual ~MessageManagerBase();
 
-<<<<<<< HEAD:include/MessageManager/MessageManagerBase.h
-                // subscribe function
-=======
                 // receive zcm handler
->>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f:include/MessageManagerBase.h
-                void LOCATIONHandler(
+                void ChassisCommandHandler(
                     const zcm::ReceiveBuffer *rbuf,
                     const std::string &channel,
-                    const icumsg::structLOCATION *msg);
+                    const MsgChassisCommandSignal *msg);
                 void SubscribeAll();
 
-<<<<<<< HEAD:include/MessageManager/MessageManagerBase.h
-                // publish function
-=======
 
                 // send zcm
->>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f:include/MessageManagerBase.h
-                void PublishCaninfo() const;
                 void PublishNavinfo() const;
-                void PublishFusionmap() const;
-                void PublishObjectlist() const;
-                void PublishLanes() const;
-                void PublishTrafficlight() const;
-                void PublishCarsimControl() const;
-                void PublishCarsimRoadContact() const;
+
+                void PublishNavinfoWithLock() const;
+
+                void PublishAllAsync();
+
                 void PublishAll() const;
 
-                void PublishCaninfoWithLock() const;
-                void PublishNavinfoWithLock() const;
-                void PublishFusionmapWithLock() const;
-                void PublishObjectlistWithLock() const;
-                void PublishLanesWithLock() const;
-                void PublishTrafficlightWithLock() const;
-                void PublishCarsimControlWithLock() const;
-                void PublishCarsimRoadContactWithLock() const;
-
-                void PublishAllAsync();         
         private:
-                void PubLoopCaninfo(int freq);
                 void PubLoopNavinfo(int freq);
-                void PubLoopFusionmap(int freq);
-                void PubLoopObjectlist(int freq);
-                void PubLoopLanes(int freq);
-                void PubLoopTrafficlight(int freq);
-                void PubLoopCarsimControl(int freq);
-                void PubLoopCarsimRoadContact(int freq);
 
         public:
 
                 mutable zcm::ZCM tunnel_;
 
-                mutable std::mutex location_mutex_;
+                mutable std::mutex chassisCommand_mutex_;
+                mutable std::mutex navinfo_mutex_;
 
-                icumsg::structLOCATION location_;
+                MsgChassisCommandSignal chassisCommand_;
+                MsgNavInfoSignal navinfo_;
 
         private:
                 std::vector<std::thread> pub_threads_;
@@ -97,49 +84,11 @@ namespace txsim
                 volatile bool need_stop_;
 
         private:
-                std::string kChannelLocation;
-
-                std::string kChannelNameCaninfo;
+                std::string kChannelNameChassisCommand;
                 std::string kChannelNameNavinfo;
-                std::string kChannelNameFusionmap;
-                std::string kChannelNameObjectlist;
-                std::string kChannelNameCancontrol;
-                std::string kChannelNameLanes;
-                std::string kChannelNameTrafficlight;
-                std::string kChannelNameCarsimControl;
-                std::string kChannelNameCarsimState;
-                std::string kChannelNameCarsimQuery;
-                std::string kChannelNameCarsimContact;
 
-                int kFreqLocation;
-
-                int kFreqCaninfo;
                 int kFreqNavinfo;
-                int kFreqFusionmap;
-                int kFreqObjectlist;
-                int kFreqLanes;
-                int kFreqTrafficlight;
-                int kFreqCarsimContact;
-                int kFreqCarsimControl;
 
-                bool kSwitchCaninfo;
                 bool kSwitchNavinfo;
-                bool kSwitchFusionmap;
-                bool kSwitchObjectlist;
-                bool kSwitchLanes;
-                bool kSwitchTrafficlight;
-                bool kSwitchCarsimContact;
-                bool kSwitchCarsimControl;
-
-                bool kRecordCaninfo;
-                bool kRecordNavinfo;
-                bool kRecordFusionmap;
-                bool kRecordObjectlist;
-                bool kRecordLanes;
-                bool kRecordTrafficlight;
-                bool kRecordCarsimContact;
-                bool kRecordCarsimControl;
-                bool kRecordCarsimState;
-                bool kRecordCarsimQuery;
         };
 } // namespace tievsim

@@ -1,5 +1,4 @@
 # Hashes of file build rules.
-<<<<<<< HEAD
 f2c6491b37525fb49b6599307dc6ded4 basic.pb.cc
 09a010f496a0ed6d00ca5819661fd4ed control.pb.cc
 be57f0c63f205acdcdf06baccb27510d header.pb.cc
@@ -9,11 +8,3 @@ bacbc744d1436af0c0d9fee6afd1e52c location.pb.cc
 c27b6bc26ac7f14495ddec5d5ee74587 planStatus.pb.cc
 eea5a4069e90388b0e88eebf91287983 traffic.pb.cc
 c6334089527306e3974a291601030d0a trajectory.pb.cc
-=======
-dd36a0b5b37deb8baeec415ae22823cf basic.pb.h
-5beb796b34fe822769c9b91077de6485 control.pb.h
-3be84c20077224ceda4c3c5434e46e50 header.pb.h
-34cc46ae57439b3b2b06122bb11911b3 location.pb.h
-4a8a1551d48875d53366af5f05876da4 traffic.pb.h
-b4b792c4f19dc89631ff09ffb71a58df trajectory.pb.h
->>>>>>> f60bc259c27ebe3548395cea55ec4dae4f9cd54f

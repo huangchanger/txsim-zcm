@@ -2,6 +2,9 @@
 
 #include <iomanip>
 #include <iostream>
+#include <fstream>
+#include <math.h>
+using namespace std;
 
 // since the example would process the two types of message, we need include the two corresponding protobuf headers here.
 // if you need process other type of protobuf message that TADSim defines, include them too.
@@ -12,6 +15,8 @@
 #include "localLocation.pb.h"
 #include "trajectory.pb.h"
 #include "laneMarks.pb.h"
+
+#include "WGS84UTM.h"
 
 
 #ifdef _WIN32
@@ -34,6 +39,7 @@ MyModule::~MyModule() {
 
 void MyModule::Init(tx_sim::InitHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
+  cout<<"start initializing ... \n";
 
   // get user defined initiation parameters.
   // if we defined the parameters in TADSim UI, override the default values here.
@@ -49,7 +55,7 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
   }
 
   puber_ = !helper.GetParameter("pub").empty();
-  if (puber_) {
+  if (0) {
     // publish our topics with messages we produced in Step callback.
     helper.Publish(tx_sim::topic::kLocation);
     // now we could also pub-subs through shared memory!
@@ -72,13 +78,10 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
     helper.Publish(tx_sim::topic::kControl);
     helper.Subscribe(tx_sim::topic::kControl);
 
-    helper.Publish(tx_sim::topic::kPlanStatus);
     helper.Subscribe(tx_sim::topic::kPlanStatus);    
 
-    helper.Publish(tx_sim::topic::kTrajectory);
     helper.Subscribe(tx_sim::topic::kTrajectory);   
 
-    helper.Publish(tx_sim::topic::kLaneMark);
     helper.Subscribe(tx_sim::topic::kLaneMark);   
   }
 };
@@ -86,6 +89,7 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
 
 void MyModule::Reset(tx_sim::ResetHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
+
 
   // first we should reset(clear) any data status before starting a new scenario.
   step_count_ = 0;
@@ -95,6 +99,9 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
   // here we could get some information(e.g. the map which the scenario runs on, suggested local origin coordinate
   // and the destination of the ego car) of the current scenario.
   tx_sim::Vector3d o = helper.map_local_origin(), d = helper.ego_destination();
+  std::vector<tx_sim::Vector3d> path = helper.ego_path();
+  cout<<"path.size: "<<path.size()<<endl;
+
   sim_msg::Location start_location;
   // get start location in reset or in first step. both works.
   start_location.ParseFromString(helper.ego_start_location());
@@ -104,6 +111,42 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
     << "ego car's destination (" << d.x << ", " << d.y << ")" << std::endl;
   // we can also get the speed limit(max) info of the ego car in current scenario.
   double speed_limit = helper.ego_speed_limit();
+
+
+  ofstream outfile;
+  outfile.open("/home/yxj/Projects/txsim-zcm/path.txt");
+  double wgsLat1,wgsLon1,wgsLat2,wgsLon2,heading;
+  UTMCoor utmXY1,utmXY2;
+  outfile << "Id Lon Lat utmX utmY heading curvature mode SpeedMode EventMode OppositeSideMode LangeNum LaneSeq LaneWidth"<<endl;
+  for(int i=0; i<path.size()-1; ++i){
+    wgsLat1 = path[i].y;
+    wgsLon1 = path[i].x;
+    wgsLat2 = path[i+1].y;
+    wgsLon2 = path[i+1].x;
+    LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
+    LatLonToUTMXY(wgsLat2,wgsLon2,utmXY2,30);
+    if(utmXY2.x - utmXY1.x != 0)
+      heading = atan2(utmXY2.y - utmXY1.y, utmXY2.x - utmXY1.x);
+    else{
+      if(utmXY2.y - utmXY1.y > 0) heading = pi/2;
+      if(utmXY2.y - utmXY1.y < 0) heading = -pi/2;
+      if(utmXY2.y - utmXY1.y == 0) heading = 0;
+    }
+
+    outfile<<i<<" ";
+    outfile.precision(14);
+    outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+  }
+  wgsLat1 = path.back().y;
+  wgsLon1 = path.back().x;
+  LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
+  outfile<<path.size()-1<<" ";
+  outfile.precision(14);
+  outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+  
+  outfile.close();
+
+  cout<<"path recorded in txt"<<endl;
 
   // we could throw an exception which must inherited from std::exception type, if there is an error.
   if (helper.map_file_path() == "/some/map/that/we/cannot/load") {
@@ -136,31 +179,31 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   traj.ParseFromString(payload_);
   std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
   
-  if(traj.point_size()<5){
-    auto add_pt = traj.add_point();
-    add_pt->set_x(-0.018099349672580932);
-    add_pt->set_y(-0.0002283418344937575);
-    add_pt->set_z(0);
-    add_pt->set_v(10);
+  // if(traj.point_size()<5){
+  //   auto add_pt = traj.add_point();
+  //   add_pt->set_x(-0.018099349672580932);
+  //   add_pt->set_y(-0.0002283418344937575);
+  //   add_pt->set_z(0);
+  //   add_pt->set_v(10);
 
-    add_pt = traj.add_point();
-    add_pt->set_x(-0.01791382);
-    add_pt->set_y(-0.00023353);
-    add_pt->set_z(0);
-    add_pt->set_v(10);
+  //   add_pt = traj.add_point();
+  //   add_pt->set_x(-0.01791382);
+  //   add_pt->set_y(-0.00023353);
+  //   add_pt->set_z(0);
+  //   add_pt->set_v(10);
 
-    add_pt = traj.add_point();
-    add_pt->set_x(-0.01768964);
-    add_pt->set_y(-0.00023353);
-    add_pt->set_z(0);
-    add_pt->set_v(10);
+  //   add_pt = traj.add_point();
+  //   add_pt->set_x(-0.01768964);
+  //   add_pt->set_y(-0.00023353);
+  //   add_pt->set_z(0);
+  //   add_pt->set_v(10);
 
-    add_pt = traj.add_point();
-    add_pt->set_x(-0.01754278);
-    add_pt->set_y(-0.00023612);
-    add_pt->set_z(0);
-    add_pt->set_v(10);
-  }
+  //   add_pt = traj.add_point();
+  //   add_pt->set_x(-0.01754278);
+  //   add_pt->set_y(-0.00023612);
+  //   add_pt->set_z(0);
+  //   add_pt->set_v(10);
+  // }
 
 
   for(int i=0; i<traj.point_size(); ++i){
@@ -169,7 +212,6 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   }
 
   traj.SerializeToString(&payload_);
-  helper.PublishMessage(tx_sim::topic::kTrajectory, payload_);
 
   helper.GetSubscribedMessage(tx_sim::topic::kLaneMark, payload_);
   sim_msg::LaneMarks lanemarks;
@@ -186,13 +228,18 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
     // std::cout << "ego car moved " << move_distance << std::endl;
     double next_x = cur_x_ + move_distance, next_y = cur_y_ + move_distance;
 
+    std::cout<<"position: "<<loc.position().x()<<" , "<<loc.position().y()<<" , "<<loc.position().z()<<std::endl;
+    std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<" , "<<loc.velocity().z()<<std::endl;
+    std::cout<<"angular: "<<loc.angular().x()<<" , "<<loc.angular().y()<<" , "<<loc.angular().z()<<std::endl;
+    std::cout<<"rpy: "<<loc.rpy().x()<<" , "<<loc.rpy().y()<<" , "<<loc.rpy().z()<<std::endl;
+
+
     // 4. put our results into output messages and publish them.
     loc.mutable_position()->set_x(next_x);
     loc.mutable_position()->set_y(next_y);
     // since the message we want to publish is a protobuf message type and the PublishMessage API only accepts the std::string type,
     // we need serialize it to std::string using google::protobuf::MessageLite::SerializeToString method.
     loc.SerializeToString(&payload_);
-    helper.PublishMessage(tx_sim::topic::kLocation, payload_);
 
 
     // 5. publish control parameters to drive the vehicle
@@ -212,9 +259,12 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
 
     cot_.set_gear_cmd(sim_msg::Control::DRIVE);
     cot_.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
-    cot_.set_contrl_type(sim_msg::Control::PEDAL_CONTROL);
-    cot_.mutable_pedal_cmd()->set_throttle(100);
-    cot_.mutable_pedal_cmd()->set_brake(0);
+    cot_.set_contrl_type(sim_msg::Control::ACC_CONTROL);
+    // cot_.mutable_pedal_cmd()->set_throttle(50);
+    // cot_.mutable_pedal_cmd()->set_brake(0);
+    // cot_.mutable_pedal_cmd()->set_steer(0);
+    cot_.mutable_acc_cmd()->set_acc(2);
+    cot_.mutable_acc_cmd()->set_front_wheel_angle(-5);
 
     cot_.SerializeToString(&payload_);
     helper.PublishMessage(tx_sim::topic::kControl, payload_);
@@ -228,8 +278,7 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
 
     plans_.mutable_expect_acc()->set_acc(2.5);
     plans_.SerializeToString(&payload_);
-    helper.PublishMessage(tx_sim::topic::kPlanStatus, payload_);
-    std::cout<<"kPlanStatus published\n";
+
 
     last_timestamp_ = time_stamp;
     // std::cout << "expected next position: (" << next_x << ", " << next_y << ")" << std::endl;

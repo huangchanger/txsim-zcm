@@ -8,14 +8,14 @@
 #endif
 #include <math.h>
 
-#include "rapidjson/document.h"
-#include "rapidjson/filereadstream.h"
-#include "rapidjson/filewritestream.h"
+// #include "rapidjson/document.h"
+// #include "rapidjson/filereadstream.h"
+// #include "rapidjson/filewritestream.h"
 
 using std::string;
 using std::vector;
 
-namespace tievsim
+namespace txsim
 {
 
     namespace simutils
@@ -58,21 +58,21 @@ namespace tievsim
 
         /*---------------file stream---------------------*/
 
-        inline rapidjson::Document ReadJsonFile(const string &filepath)
-        {
-            rapidjson::Document doc;
-            FILE *fp = fopen(filepath.c_str(), "r");
-            if (fp == 0)
-            {
-                printf("[Error] cannot open %s.\n", filepath.c_str());
-                return doc;
-            }
-            char read_buffer[2048];
-            rapidjson::FileReadStream is(fp, read_buffer, sizeof(read_buffer));
-            doc.ParseStream(is);
-            fclose(fp);
-            return doc;
-        };
+        // inline rapidjson::Document ReadJsonFile(const string &filepath)
+        // {
+        //     rapidjson::Document doc;
+        //     FILE *fp = fopen(filepath.c_str(), "r");
+        //     if (fp == 0)
+        //     {
+        //         printf("[Error] cannot open %s.\n", filepath.c_str());
+        //         return doc;
+        //     }
+        //     char read_buffer[2048];
+        //     rapidjson::FileReadStream is(fp, read_buffer, sizeof(read_buffer));
+        //     doc.ParseStream(is);
+        //     fclose(fp);
+        //     return doc;
+        // };
 
         /*---------------vtd specified-------------------*/
 

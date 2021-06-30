@@ -34,8 +34,6 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HDR
   ../msgs/laneMarks.proto)
 
 
- MESSAGE(STATUS "PROTO_SRC: ${PROTO_SRC} ------ ${PROTO_HDR}")
-
 # example 1: built into a shared library.
 add_library(my-module SHARED
   my_module.cc

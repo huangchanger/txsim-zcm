@@ -7,12 +7,13 @@ using std::vector;
 namespace txsim
 {
 
-    MessageManagerBase::MessageManagerBase(
-        const string &url, const string &config_file,
-        const string &record_path)
-        : tunnel_(url), need_stop_(false),
-          location_()
-    { };
+    MessageManagerBase::MessageManagerBase(const string &url): tunnel_(url), need_stop_(false), chassisCommand_(), navinfo_()
+    {
+        kChannelNameChassisCommand = "ChassisCommand";
+        kChannelNameNavinfo = "Navinfo";
+        kFreqNavinfo = 20;
+        kSwitchNavinfo = 1;
+     };
 
     MessageManagerBase::~MessageManagerBase()
     {
@@ -32,21 +33,26 @@ namespace txsim
 
     }
 
-    void MessageManagerBase::LOCATIONHandler(
+ // receive zcm
+    void MessageManagerBase::ChassisCommandHandler(
         const zcm::ReceiveBuffer *rbuf,
         const std::string &chan,
-        const icumsg::structLOCATION *msg)
+        const MsgChassisCommandSignal *msg)
     {
-        std::lock_guard<std::mutex> lock(location_mutex_);
-        location_.t = msg->t;
+        std::lock_guard<std::mutex> lock(chassisCommand_mutex_);
+        chassisCommand_.timestamp = msg->timestamp;
+        chassisCommand_.longitudinal_acceleration_command = msg->longitudinal_acceleration_command;
+        chassisCommand_.steer_wheel_angle_command = msg->steer_wheel_angle_command;
+        chassisCommand_.autonomous_mode_control_command = msg->autonomous_mode_control_command;
         //printf("msg manager base aimsteer: %d, aimspeed: %d\n", cancontrol_.aimsteer, cancontrol_.aimspeed);
     }
 
 
     void MessageManagerBase::SubscribeAll()
     {
+        std::cout<<"subscribe all "<<std::endl;
         auto sub1 = tunnel_.subscribe(
-            kChannelLocation, &MessageManagerBase::LOCATIONHandler, this);
+            kChannelNameChassisCommand, &MessageManagerBase::ChassisCommandHandler, this);
 
         sub_threads_.push_back(sub1);
 
@@ -55,24 +61,27 @@ namespace txsim
 
 
     // publishAllAsync -> PubLoopChannelname -> PublishChannelnameWithLock -> PublishChannelname
-    void MessageManagerBase::PublishLocation() const
+    void MessageManagerBase::PublishNavinfo() const
     {
-        tunnel_.publish(kChannelNameLocation, &location_);
+        std::cout<<"publish navinfo"<<std::endl;
+        tunnel_.publish(kChannelNameNavinfo, &navinfo_);
+        std::cout<<"navinfo zcm message published ! "<<std::endl;
+        std::cout<<navinfo_.longitude<<" , "<<navinfo_.latitude<<std::endl;
     }
 
 
-    void MessageManagerBase::PublishLocationWithLock() const
+    void MessageManagerBase::PublishNavinfoWithLock() const
     {
-        std::lock_guard<std::mutex> caninfo_lock(location_mutex_);
-        PublishLocation();
+        std::lock_guard<std::mutex> caninfo_lock(navinfo_mutex_);
+        PublishNavinfo();
     }
 
-    void MessageManagerBase::PubLoopLocation(int freq)
+    void MessageManagerBase::PubLoopNavinfo(int freq)
     {
         while (!need_stop_)
         {
             auto time_point = std::chrono::steady_clock::now() + std::chrono::microseconds(1000000 / freq);
-            PublishLocationWithLock();
+            PublishNavinfoWithLock();
             std::this_thread::sleep_until(time_point);
         }
     }
@@ -80,10 +89,10 @@ namespace txsim
     // publish automatically with a certain frequency
     void MessageManagerBase::PublishAllAsync()
     {
-        if (kSwitchCaninfo)
+        if (kSwitchNavinfo)
         {
             pub_threads_.push_back(std::thread(
-                &MessageManagerBase::PubLoopLocation, this, kFreqLocation));
+                &MessageManagerBase::PubLoopNavinfo, this, kFreqNavinfo));
         }
 
         for (auto &t : pub_threads_)
@@ -95,9 +104,9 @@ namespace txsim
     // publish one time
     void MessageManagerBase::PublishAll() const
     {
-        if (kSwitchCaninfo)
+        if (kSwitchNavinfo)
         {
-            PublishLocation();
+            PublishNavinfo();
         }
     }
 

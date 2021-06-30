@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/my-module.dir/src/my_module.cpp.o"
-  "CMakeFiles/my-module.dir/src/my_module.cpp.o.d"
   "lib/libmy-module.pdb"
   "lib/libmy-module.so"
 )

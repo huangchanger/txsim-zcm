@@ -1,7 +1,5 @@
-#pragma once
 
 #include "txsim/txsim_module.h"
-#include "MessageManager.h"
 
 
 class MyModule final : public tx_sim::SimModule {

@@ -2,6 +2,14 @@
 #include "my_module.h"
 #include "simutils.hpp"
 
+#include "basic.pb.h"
+#include "control.pb.h"
+#include "header.pb.h"
+#include "laneMarks.pb.h"
+#include "location.pb.h"
+#include "planStatus.pb.h"
+#include "traffic.pb.h"
+#include "trajectory.pb.h"
 
 using std::list;
 using std::string;
@@ -25,8 +33,8 @@ namespace txsim
 
         UTMCoor utmXY;
         LatLonToUTMXY(loc.position().y(), loc.position().x(),utmXY);
-        std::lock_guard<std::mutex> lk(navinfo_mutex_);
-        navinfo_.timestamp          = helper.timestamp();
+        std::lock_guard<std::mutex> l(navinfo_mutex_);
+        navinfo_.timestamp          = loc.t();
         navinfo_.longitude          = loc.position().x();
         navinfo_.latitude           = loc.position().y();
         navinfo_.altitude           = loc.position().z();
@@ -44,7 +52,7 @@ namespace txsim
         navinfo_.HPOS_accuracy      = 0;
         navinfo_.is_reckoning_vaild = 0;
         navinfo_.gps_num_satellites = 0;
-        navinfo_.acceleration_x     = loc.acceleration().x(); //cheshen
+        navinfo_.acceleration_x     = loc.acceleration().x();
         navinfo_.acceleration_y     = loc.acceleration().y();
         std::cout<<"packNavinfo succeed: "<<navinfo_.longitude<<" , "<<navinfo_.latitude<<std::endl;
     }
@@ -72,10 +80,6 @@ namespace txsim
             obj.length      = static_obj->length();
             
         }
-        
-        
-
-
 
     }
 

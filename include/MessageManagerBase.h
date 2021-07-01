@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2020
  *
  */
+#pragma once
 
 #include <iostream>
 #include <thread>
@@ -33,6 +34,8 @@
 #include "tievmsg_zcm/MsgTrafficSignSignal.hpp"
 // #include "tievmsg_zcm/MsgTrajectorySignal.hpp"
 #include "tievmsg_zcm/MsgWaterhorseSignal.hpp"
+#include "tievmsg_zcm/PredictedObject.hpp"
+#include "tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp"
 
 namespace txsim
 {
@@ -73,9 +76,12 @@ namespace txsim
 
                 mutable std::mutex chassisCommand_mutex_;
                 mutable std::mutex navinfo_mutex_;
+                mutable std::mutex predictedObject_mutex_;
 
                 MsgChassisCommandSignal chassisCommand_;
                 MsgNavInfoSignal navinfo_;
+                MsgPredictedObjectTrajectoryList predictedObject_;
+                
 
         private:
                 std::vector<std::thread> pub_threads_;
@@ -86,9 +92,12 @@ namespace txsim
         private:
                 std::string kChannelNameChassisCommand;
                 std::string kChannelNameNavinfo;
+                std::string kChannelNamePredictedObject;
 
                 int kFreqNavinfo;
+                int kFreqPredictedObject;
 
                 bool kSwitchNavinfo;
+                bool kSwitchPredictedObject;
         };
 } // namespace tievsim

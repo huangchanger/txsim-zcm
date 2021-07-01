@@ -10,15 +10,15 @@ using namespace std;
 // if you need process other type of protobuf message that TADSim defines, include them too.
 
 #include "WGS84UTM.h"
-#include "proto_msgs/basic.pb.h"
-#include "proto_msgs/control.pb.h"
-#include "proto_msgs/grading.pb.h"
-#include "proto_msgs/header.pb.h"
-#include "proto_msgs/laneMarks.pb.h"
-#include "proto_msgs/location.pb.h"
-#include "proto_msgs/planStatus.pb.h"
-#include "proto_msgs/traffic.pb.h"
-#include "proto_msgs/trajectory.pb.h"
+
+#include "basic.pb.h"
+#include "control.pb.h"
+#include "header.pb.h"
+#include "laneMarks.pb.h"
+#include "location.pb.h"
+#include "planStatus.pb.h"
+#include "traffic.pb.h"
+#include "trajectory.pb.h"
 
 #include <zcm/zcm.h>
 #include <zcm/zcm-cpp.hpp>
@@ -47,7 +47,7 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
   cout<<"start initializing ... \n";
 
-  zcm::ZCM tunnel_("ipc");
+  // zcm::ZCM tunnel_("ipc");
   //tunnel_.start();
 
   // txsim::MessageManager msgm("ipc");
@@ -107,38 +107,38 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
   // double speed_limit = helper.ego_speed_limit();
 
 
-  ofstream outfile;
-  outfile.open("/home/yxj/Projects/txsim-zcm/path.txt",ios::out);
-  double wgsLat1,wgsLon1,wgsLat2,wgsLon2,heading;
-  UTMCoor utmXY1,utmXY2;
-  outfile << "Id Lon Lat utmX utmY heading curvature mode SpeedMode EventMode OppositeSideMode LangeNum LaneSeq LaneWidth"<<endl;
-  for(int i=0; i<path.size()-1; ++i){
-    wgsLat1 = path[i].y;
-    wgsLon1 = path[i].x;
-    wgsLat2 = path[i+1].y;
-    wgsLon2 = path[i+1].x;
-    LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
-    LatLonToUTMXY(wgsLat2,wgsLon2,utmXY2,30);
-    if(utmXY2.x - utmXY1.x != 0)
-      heading = atan2(utmXY2.y - utmXY1.y, utmXY2.x - utmXY1.x);
-    else{
-      if(utmXY2.y - utmXY1.y > 0) heading = pi/2;
-      if(utmXY2.y - utmXY1.y < 0) heading = -pi/2;
-      if(utmXY2.y - utmXY1.y == 0) heading = 0;
-    }
+  // ofstream outfile;
+  // outfile.open("/home/yxj/Projects/txsim-zcm/path.txt",ios::out);
+  // double wgsLat1,wgsLon1,wgsLat2,wgsLon2,heading;
+  // UTMCoor utmXY1,utmXY2;
+  // outfile << "Id Lon Lat utmX utmY heading curvature mode SpeedMode EventMode OppositeSideMode LangeNum LaneSeq LaneWidth"<<endl;
+  // for(int i=0; i<path.size()-1; ++i){
+  //   wgsLat1 = path[i].y;
+  //   wgsLon1 = path[i].x;
+  //   wgsLat2 = path[i+1].y;
+  //   wgsLon2 = path[i+1].x;
+  //   LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
+  //   LatLonToUTMXY(wgsLat2,wgsLon2,utmXY2,30);
+  //   if(utmXY2.x - utmXY1.x != 0)
+  //     heading = atan2(utmXY2.y - utmXY1.y, utmXY2.x - utmXY1.x);
+  //   else{
+  //     if(utmXY2.y - utmXY1.y > 0) heading = pi/2;
+  //     if(utmXY2.y - utmXY1.y < 0) heading = -pi/2;
+  //     if(utmXY2.y - utmXY1.y == 0) heading = 0;
+  //   }
 
-    outfile<<i<<" ";
-    outfile.precision(14);
-    outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
-  }
-  wgsLat1 = path.back().y;
-  wgsLon1 = path.back().x;
-  LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
-  outfile<<path.size()-1<<" ";
-  outfile.precision(14);
-  outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+  //   outfile<<i<<" ";
+  //   outfile.precision(14);
+  //   outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+  // }
+  // wgsLat1 = path.back().y;
+  // wgsLon1 = path.back().x;
+  // LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
+  // outfile<<path.size()-1<<" ";
+  // outfile.precision(14);
+  // outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
   
-  outfile.close();
+  // outfile.close();
 
   cout<<"path recorded in txt"<<endl;
 

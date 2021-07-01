@@ -7,20 +7,13 @@ using std::vector;
 namespace txsim
 {
 
-
-    // tunnel_(url) is deleted for a while to test Pack function
-    MessageManagerBase::MessageManagerBase(const string &url): need_stop_(false), chassisCommand_(), navinfo_()
+    // tunnel_(url) is deleted for a while to test
+    MessageManagerBase::MessageManagerBase(const string &url):  need_stop_(false), chassisCommand_(), navinfo_()
     {
         kChannelNameChassisCommand = "ChassisCommand";
-
         kChannelNameNavinfo = "Navinfo";
-        kChannelNamePredictedObject = "PredictedObject";
-
         kFreqNavinfo = 20;
-        kFreqPredictedObject = 20;
-
         kSwitchNavinfo = 1;
-        kSwitchPredictedObject = 1;
      };
 
     MessageManagerBase::~MessageManagerBase()

@@ -145,9 +145,57 @@ CMakeFiles/my-module.dir/src/my_module.cc.o.provides: CMakeFiles/my-module.dir/s
 CMakeFiles/my-module.dir/src/my_module.cc.o.provides.build: CMakeFiles/my-module.dir/src/my_module.cc.o
 
 
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.o: ../src/WGS84UTM.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/my-module.dir/src/WGS84UTM.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/src/WGS84UTM.cc.o -c /home/yxj/Projects/txsim-zcm/src/WGS84UTM.cc
+
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/WGS84UTM.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/src/WGS84UTM.cc > CMakeFiles/my-module.dir/src/WGS84UTM.cc.i
+
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/WGS84UTM.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/src/WGS84UTM.cc -o CMakeFiles/my-module.dir/src/WGS84UTM.cc.s
+
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.requires
+
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.provides: CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.provides
+
+CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.provides.build: CMakeFiles/my-module.dir/src/WGS84UTM.cc.o
+
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: CMakeFiles/my-module.dir/flags.make
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../src/MessageManagerBase.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o -c /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cc
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my-module.dir/src/MessageManagerBase.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cc > CMakeFiles/my-module.dir/src/MessageManagerBase.cc.i
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my-module.dir/src/MessageManagerBase.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yxj/Projects/txsim-zcm/src/MessageManagerBase.cc -o CMakeFiles/my-module.dir/src/MessageManagerBase.cc.s
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.requires:
+
+.PHONY : CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.requires
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.provides: CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.requires
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.provides.build
+.PHONY : CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.provides
+
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.provides.build: CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o
+
+
 CMakeFiles/my-module.dir/basic.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/basic.pb.cc.o: basic.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/my-module.dir/basic.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/my-module.dir/basic.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/basic.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/basic.pb.cc
 
 CMakeFiles/my-module.dir/basic.pb.cc.i: cmake_force
@@ -171,7 +219,7 @@ CMakeFiles/my-module.dir/basic.pb.cc.o.provides.build: CMakeFiles/my-module.dir/
 
 CMakeFiles/my-module.dir/header.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/header.pb.cc.o: header.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/my-module.dir/header.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/my-module.dir/header.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/header.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/header.pb.cc
 
 CMakeFiles/my-module.dir/header.pb.cc.i: cmake_force
@@ -195,7 +243,7 @@ CMakeFiles/my-module.dir/header.pb.cc.o.provides.build: CMakeFiles/my-module.dir
 
 CMakeFiles/my-module.dir/location.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/location.pb.cc.o: location.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/my-module.dir/location.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/my-module.dir/location.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/location.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/location.pb.cc
 
 CMakeFiles/my-module.dir/location.pb.cc.i: cmake_force
@@ -219,7 +267,7 @@ CMakeFiles/my-module.dir/location.pb.cc.o.provides.build: CMakeFiles/my-module.d
 
 CMakeFiles/my-module.dir/trajectory.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/trajectory.pb.cc.o: trajectory.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/my-module.dir/trajectory.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/my-module.dir/trajectory.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/trajectory.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/trajectory.pb.cc
 
 CMakeFiles/my-module.dir/trajectory.pb.cc.i: cmake_force
@@ -243,7 +291,7 @@ CMakeFiles/my-module.dir/trajectory.pb.cc.o.provides.build: CMakeFiles/my-module
 
 CMakeFiles/my-module.dir/planStatus.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/planStatus.pb.cc.o: planStatus.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/my-module.dir/planStatus.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/my-module.dir/planStatus.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/planStatus.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/planStatus.pb.cc
 
 CMakeFiles/my-module.dir/planStatus.pb.cc.i: cmake_force
@@ -267,7 +315,7 @@ CMakeFiles/my-module.dir/planStatus.pb.cc.o.provides.build: CMakeFiles/my-module
 
 CMakeFiles/my-module.dir/laneMarks.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/laneMarks.pb.cc.o: laneMarks.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/my-module.dir/laneMarks.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/my-module.dir/laneMarks.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/laneMarks.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/laneMarks.pb.cc
 
 CMakeFiles/my-module.dir/laneMarks.pb.cc.i: cmake_force
@@ -291,7 +339,7 @@ CMakeFiles/my-module.dir/laneMarks.pb.cc.o.provides.build: CMakeFiles/my-module.
 
 CMakeFiles/my-module.dir/traffic.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/traffic.pb.cc.o: traffic.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/my-module.dir/traffic.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/my-module.dir/traffic.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/traffic.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/traffic.pb.cc
 
 CMakeFiles/my-module.dir/traffic.pb.cc.i: cmake_force
@@ -315,7 +363,7 @@ CMakeFiles/my-module.dir/traffic.pb.cc.o.provides.build: CMakeFiles/my-module.di
 
 CMakeFiles/my-module.dir/control.pb.cc.o: CMakeFiles/my-module.dir/flags.make
 CMakeFiles/my-module.dir/control.pb.cc.o: control.pb.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/my-module.dir/control.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/my-module.dir/control.pb.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/my-module.dir/control.pb.cc.o -c /home/yxj/Projects/txsim-zcm/build/control.pb.cc
 
 CMakeFiles/my-module.dir/control.pb.cc.i: cmake_force
@@ -340,6 +388,8 @@ CMakeFiles/my-module.dir/control.pb.cc.o.provides.build: CMakeFiles/my-module.di
 # Object files for target my-module
 my__module_OBJECTS = \
 "CMakeFiles/my-module.dir/src/my_module.cc.o" \
+"CMakeFiles/my-module.dir/src/WGS84UTM.cc.o" \
+"CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o" \
 "CMakeFiles/my-module.dir/basic.pb.cc.o" \
 "CMakeFiles/my-module.dir/header.pb.cc.o" \
 "CMakeFiles/my-module.dir/location.pb.cc.o" \
@@ -353,6 +403,8 @@ my__module_OBJECTS = \
 my__module_EXTERNAL_OBJECTS =
 
 lib/libmy-module.so: CMakeFiles/my-module.dir/src/my_module.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/src/WGS84UTM.cc.o
+lib/libmy-module.so: CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/basic.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/header.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/location.pb.cc.o
@@ -363,7 +415,7 @@ lib/libmy-module.so: CMakeFiles/my-module.dir/traffic.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/control.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/build.make
 lib/libmy-module.so: CMakeFiles/my-module.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX shared library lib/libmy-module.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yxj/Projects/txsim-zcm/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX shared library lib/libmy-module.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/my-module.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -372,6 +424,8 @@ CMakeFiles/my-module.dir/build: lib/libmy-module.so
 .PHONY : CMakeFiles/my-module.dir/build
 
 CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/my_module.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/WGS84UTM.cc.o.requires
+CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o.requires
 CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/basic.pb.cc.o.requires
 CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/header.pb.cc.o.requires
 CMakeFiles/my-module.dir/requires: CMakeFiles/my-module.dir/location.pb.cc.o.requires

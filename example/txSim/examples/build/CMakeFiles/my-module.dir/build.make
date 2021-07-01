@@ -396,7 +396,6 @@ lib/libmy-module.so: CMakeFiles/my-module.dir/planStatus.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/localLocation.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/laneMarks.pb.cc.o
 lib/libmy-module.so: CMakeFiles/my-module.dir/build.make
-lib/libmy-module.so: /usr/local/lib/libGeographic.so.19.2.0
 lib/libmy-module.so: CMakeFiles/my-module.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yxj/Projects/txsim-zcm/example/txSim/examples/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX shared library lib/libmy-module.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/my-module.dir/link.txt --verbose=$(VERBOSE)

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <mutex>
+#include <zcm/zcm-cpp.hpp>
 using namespace std;
 
 // since the example would process the two types of message, we need include the two corresponding protobuf headers here.
@@ -18,6 +20,11 @@ using namespace std;
 
 #include "WGS84UTM.h"
 
+#include "tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp"
+#include "tievmsg_zcm/MsgNavInfoSignal.hpp"
+
+
+
 
 #ifdef _WIN32
 #define MODULE_API __declspec(dllexport)
@@ -27,6 +34,248 @@ using namespace std;
 
 #define SPLIT_LINE "======================================="
 #define SHMEM_TOPIC "MY_SHMEM_TOPIC"
+
+class Point2d
+{
+public:
+    Point2d();
+    Point2d(double x,double y);
+    Point2d operator+(const Point2d& pt);
+    friend Point2d operator*(const Point2d& pt, const double multiplier);
+    friend Point2d operator*(const double multiplier, const Point2d& pt);
+    double x;
+    double y;
+};
+Point2d::Point2d():x(0),y(0){}
+Point2d::Point2d(double x,double y) : x(x),y(y) {}
+Point2d Point2d::operator+(const Point2d& pt)
+{
+    Point2d pt2;
+    pt2.x = this->x + pt.x;
+    pt2.y = this->y + pt.y;
+    return pt2;
+}
+Point2d operator*(const Point2d& pt, const double multiplier)
+{
+    Point2d pt2;
+    pt2.x = multiplier*pt.x;
+    pt2.y = multiplier*pt.y;
+    return pt2;
+}
+Point2d operator*(const double multiplier, const Point2d& pt)
+{
+    Point2d pt2;
+    pt2.x = multiplier*pt.x;
+    pt2.y = multiplier*pt.y;
+    return pt2;
+}
+
+// frame counterclockwise theta(rad)
+void CoorRotate(Point2d& pt, const double theta)
+{
+    double prex = pt.x, prey = pt.y;
+    pt.x = prex * cos(theta)    + prey * sin(theta);
+    pt.y = prex * (-sin(theta)) + prey * cos(theta);
+
+}
+
+
+mutex navinfo_mutex_;
+MsgNavInfoSignal navinfo_;
+
+mutex predictedObject_mutex_;
+MsgPredictedObjectTrajectoryList predictedObject_;
+
+
+// !!! Attention: PackNavinfo must be called before PackPredictedObject due to the use of navinfo_ in PackPredictedObject
+void PackNavinfo(tx_sim::StepHelper& helper)
+{
+    std::string loc_payload;
+    helper.GetSubscribedMessage(tx_sim::topic::kLocation, loc_payload);
+    sim_msg::Location loc;
+    loc.ParseFromString(loc_payload);
+
+    UTMCoor utmXY;
+    LatLonToUTMXY(loc.position().y(), loc.position().x(),utmXY);
+    std::lock_guard<std::mutex> l(navinfo_mutex_);
+    navinfo_.timestamp          = loc.t();
+    navinfo_.longitude          = loc.position().x();
+    navinfo_.latitude           = loc.position().y();
+    navinfo_.altitude           = loc.position().z();
+    navinfo_.utm_x              = utmXY.x;
+    navinfo_.utm_y              = utmXY.y;
+    navinfo_.angle_head         = loc.rpy().z();
+    navinfo_.angle_pitch        = loc.rpy().y();
+    navinfo_.angle_roll         = loc.rpy().x();
+    navinfo_.angular_vel_z      = loc.angular().z();
+    navinfo_.speed              = sqrt(pow(loc.velocity().x(),2)+pow(loc.velocity().y(),2));
+    navinfo_.velocity_east      = loc.velocity().x();
+    navinfo_.velocity_north     = loc.velocity().y();
+    navinfo_.curvature          = 0;
+    navinfo_.RTK_status         = 0;
+    navinfo_.HPOS_accuracy      = 0;
+    navinfo_.is_reckoning_vaild = 0;
+    navinfo_.gps_num_satellites = 0;
+    navinfo_.acceleration_x     = loc.acceleration().x();
+    navinfo_.acceleration_y     = loc.acceleration().y();
+    std::cout<<"packNavinfo succeed: "<<navinfo_.longitude<<" , "<<navinfo_.latitude<<std::endl;
+}
+
+void PackPredictedObject(tx_sim::StepHelper& helper)
+{
+    std::string traffic_payload;
+    helper.GetSubscribedMessage(tx_sim::topic::kTraffic, traffic_payload);
+    sim_msg::Traffic traffic;
+    traffic.ParseFromString(traffic_payload);
+
+    std::lock_guard<std::mutex> lk(predictedObject_mutex_);
+    predictedObject_.time_stamp         = helper.timestamp();
+    predictedObject_.data_source        = 1;
+    predictedObject_.object_count       = traffic.staticobstacles_size() + traffic.dynamicobstacles_size();
+
+    float timeHorizon = 5;
+    float gap = 0.2;
+    for(int i=0; i<traffic.dynamicobstacles_size(); ++i){
+        PredictedObject obj;
+        auto static_obj = traffic.mutable_dynamicobstacles(i);
+        predictedObject_.time_stamp = static_obj->t();
+        
+        UTMCoor utmXY_obj;
+        LatLonToUTMXY(static_obj->y(), static_obj->x(), utmXY_obj);
+        // calculate relative utm_coordinate
+        utmXY_obj.x -= navinfo_.utm_x;
+        utmXY_obj.y -= navinfo_.utm_y;
+
+        // coordinate rotation
+        double theta = navinfo_.angle_head, obj_x, obj_y;
+        Point2d objxy(utmXY_obj.x, utmXY_obj.y);
+        CoorRotate(objxy, theta);
+
+        obj.id          = static_obj->id();
+        obj.type        = static_obj->type();
+        obj.velocity    = 0;
+        obj.accelerate  = 0;
+        obj.heading     = static_obj->heading() - navinfo_.angle_head;
+        obj.width       = static_obj->width();
+        obj.length      = static_obj->length();
+        Point2d corner_points[4];
+        corner_points[0].x = 0.5 * obj.length;
+        corner_points[0].y = 0.5 * obj.width;
+        corner_points[1].x = -0.5 * obj.length;
+        corner_points[1].y = 0.5 * obj.width;
+        corner_points[2].x = 0.5 * obj.length;
+        corner_points[2].y = -0.5 * obj.width;
+        corner_points[3].x = -0.5 * obj.length;
+        corner_points[3].y = -0.5 * obj.width;
+
+        cout<<"initial corner_points\n";
+        cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
+            <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
+
+
+        for(int i=0;i<4;++i){
+            CoorRotate(corner_points[i], -obj.heading);
+            // corner_points[i] = corner_points[i] + objxy;
+            // obj.bounding_box[0][i] = corner_points[i].x;
+            // obj.bounding_box[1][i] = corner_points[i].y;
+        }
+
+        cout<<"after rotation corner_points\n";
+        cout<<"ego heading: "<<navinfo_.angle_head<<endl;
+        cout<<"obs heading: "<<static_obj->heading()<<endl;
+        cout<<"rotation angle rad: "<<obj.heading<<endl;
+        cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
+            <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
+
+        cout<<"relative coordinate: "<<objxy.x<<" , "<<objxy.y<<endl;
+
+        obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
+        Point2d UnitVec(cos(obj.heading), sin(obj.heading));
+
+
+        for(int i=0;i<obj.trajectory_point_num;++i)
+        {
+            Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
+            vector<float> pt;
+            pt.push_back(changePt.x);
+            pt.push_back(changePt.y);
+            obj.trajectory_point.push_back(pt);
+        }
+
+        predictedObject_.predicted_object.push_back(obj);
+    }
+    
+    // for(int i=0; i<traffic.dynamicobstacles_size(); ++i){
+    //     PredictedObject obj;
+    //     auto obj_proto = traffic.mutable_dynamicobstacles(i);
+    //     predictedObject_.time_stamp = obj_proto->t();
+        
+    //     UTMCoor utmXY_obj;
+    //     LatLonToUTMXY(obj_proto->y(), obj_proto->x(), utmXY_obj);
+    //     // calculate relative utm_coordinate
+    //     utmXY_obj.x -= navinfo_.utm_x;
+    //     utmXY_obj.y -= navinfo_.utm_y;
+
+    //     // coordinate rotation
+    //     double theta = navinfo_.angle_head, obj_x, obj_y;
+    //     Point2d objxy(utmXY_obj.x, utmXY_obj.y);
+    //     CoorRotate(objxy, theta);
+
+    //     // Attention: global frame is east-north, vehicle frame is front-left
+    //     objxy.y = -objxy.y;
+
+    //     obj.id          = obj_proto->id();
+    //     obj.type        = obj_proto->type();
+    //     obj.velocity    = obj_proto->v();
+    //     obj.accelerate  = obj_proto->acc();
+    //     obj.heading     = obj_proto->heading() - navinfo_.angle_head;
+    //     obj.width       = obj_proto->width();
+    //     obj.length      = obj_proto->length();
+    //     Point2d corner_points[4];
+    //     corner_points[0].x = 0.5 * obj.length;
+    //     corner_points[0].y = 0.5 * obj.width;
+    //     corner_points[1].x = -0.5 * obj.length;
+    //     corner_points[1].y = 0.5 * obj.width;
+    //     corner_points[2].x = 0.5 * obj.length;
+    //     corner_points[2].y = -0.5 * obj.width;
+    //     corner_points[3].x = -0.5 * obj.length;
+    //     corner_points[3].y = -0.5 * obj.width;
+
+    //     for(int i=0;i<4;++i){
+    //         CoorRotate(corner_points[i], -obj.heading);
+    //         corner_points[i] = corner_points[i] + objxy;
+    //         obj.bounding_box[0][i] = corner_points[i].x;
+    //         obj.bounding_box[1][i] = corner_points[i].y;
+    //     }
+
+    //     obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
+    //     Point2d UnitVec(cos(obj.heading), sin(obj.heading));
+    //     for(int i=0;i<obj.trajectory_point_num;++i)
+    //     {
+    //         Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
+    //         obj.trajectory_point[0][i] = changePt.x;
+    //         obj.trajectory_point[1][i] = changePt.y;
+    //     }
+    //     predictedObject_.predicted_object.push_back(obj);
+    // }
+
+}
+
+void SendTopicControl(tx_sim::StepHelper& helper)
+    {
+        sim_msg::Control cot;
+        std::string cot_payload;
+        cot.Clear();
+        cot.set_gear_cmd(sim_msg::Control::PARK);
+        cot.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
+        cot.set_contrl_type(sim_msg::Control::ACC_CONTROL);
+        cot.mutable_acc_cmd()->set_acc(0);
+        cot.mutable_acc_cmd()->set_front_wheel_angle(0);
+
+        cot.SerializeToString(&cot_payload);
+        helper.PublishMessage(tx_sim::topic::kControl, cot_payload);
+        std::cout<<"kControl published\n";
+    }
 
 
 MyModule::MyModule() {}
@@ -54,36 +303,13 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
     std::cout << "Init with parameter velocity = " << step_velocity_ << std::endl;
   }
 
-  puber_ = !helper.GetParameter("pub").empty();
-  if (0) {
-    // publish our topics with messages we produced in Step callback.
-    helper.Publish(tx_sim::topic::kLocation);
-    // now we could also pub-subs through shared memory!
-    helper.PublishShmem(SHMEM_TOPIC, 1024);
-    // also subscribe location sent by itself.
-    helper.Subscribe(tx_sim::topic::kLocation);
-
     helper.Publish(tx_sim::topic::kControl);
-    helper.Subscribe(tx_sim::topic::kControl);
-
-
-  } else {
-    // by subscribe our interested topics, we expect that the two corresponding messages which defined by
-    // traffic.proto and location.proto would received in every Step callback.
     helper.Subscribe(tx_sim::topic::kTraffic);
     helper.Subscribe(tx_sim::topic::kLocation);
-    // now we could also pub-subs through shared memory!
-    helper.SubscribeShmem(SHMEM_TOPIC);
-
-    helper.Publish(tx_sim::topic::kControl);
     helper.Subscribe(tx_sim::topic::kControl);
-
     helper.Subscribe(tx_sim::topic::kPlanStatus);    
-
     helper.Subscribe(tx_sim::topic::kTrajectory);   
-
     helper.Subscribe(tx_sim::topic::kLaneMark);   
-  }
 };
 
 
@@ -159,169 +385,33 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 void MyModule::Step(tx_sim::StepHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
 
+
+  PackNavinfo(helper);
+  PackPredictedObject(helper);
+  SendTopicControl(helper);
+
   // 1. get current simulation timestamp.
   double time_stamp = helper.timestamp();
   std::cout << "time stamp: " << time_stamp << "\n";
 
-  // 2. get messages we subscribed.
-  helper.GetSubscribedMessage(tx_sim::topic::kLocation, payload_);
-  sim_msg::Location loc;
-  loc.ParseFromString(payload_);
-  cur_x_ = loc.position().x();
-  cur_y_ = loc.position().y();
-  std::cout << std::fixed << std::setprecision(12) << "received location: x -> " << cur_x_ << " y -> " << cur_y_ << std::endl;
-  std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<std::endl;
-  std::cout<<"acc: "<<loc.acceleration().x()<<" , "<<loc.acceleration().y()<<std::endl;
 
+  helper.GetSubscribedMessage(tx_sim::topic::kControl, payload_);
+  sim_msg::Control cot_;
+  cot_.ParseFromString(payload_);
 
-  helper.GetSubscribedMessage(tx_sim::topic::kTrajectory, payload_);
-  sim_msg::Trajectory traj;
-  traj.ParseFromString(payload_);
-  std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
+  //double throt = cot_.PedalControl().throttle();
+  // sim_msg::Control_PedalControl *pc = cot_.PedalControl();
+  std::cout<<"output gearmode "<<cot_.gear_cmd()<<std::endl;
+  std::cout<<"output controlmode "<<cot_.control_mode()<<std::endl;
+  std::cout<<"output controltype "<<cot_.contrl_type()<<std::endl;
+  std::cout<<"output acc "<<cot_.mutable_acc_cmd()->acc()<<std::endl;
+  std::cout<<"output steering "<<cot_.mutable_acc_cmd()->front_wheel_angle()<<std::endl;
   
-  // if(traj.point_size()<5){
-  //   auto add_pt = traj.add_point();
-  //   add_pt->set_x(-0.018099349672580932);
-  //   add_pt->set_y(-0.0002283418344937575);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01791382);
-  //   add_pt->set_y(-0.00023353);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01768964);
-  //   add_pt->set_y(-0.00023353);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01754278);
-  //   add_pt->set_y(-0.00023612);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-  // }
 
 
-  for(int i=0; i<traj.point_size(); ++i){
-    const sim_msg::TrajectoryPoint &pt = traj.point(i);
-    std::cout<<"( "<<pt.x()<<" , "<<pt.y()<<" , "<<pt.v()<<" ) "<<std::endl;
-  }
 
-  traj.SerializeToString(&payload_);
+  last_timestamp_ = time_stamp;
 
-  helper.GetSubscribedMessage(tx_sim::topic::kLaneMark, payload_);
-  sim_msg::LaneMarks lanemarks;
-  lanemarks.ParseFromString(payload_);
-  std::cout<<"lanemarks_left size: "<< lanemarks.left_size() <<std::endl;
-  std::cout<<"lanemarks_right size: "<< lanemarks.right_size() <<std::endl;
-
-  puber_ = 1;
-
-  if (true) {
-    // 3. here should put the actual user algorithm, do some computing according to the subscribed messages we received.
-    // for explanatory simplicity, it only moves a little by a constant velocity, no matter what happens.
-    double move_distance = step_velocity_ * (time_stamp - last_timestamp_); // s = v * t
-    // std::cout << "ego car moved " << move_distance << std::endl;
-    double next_x = cur_x_ + move_distance, next_y = cur_y_ + move_distance;
-
-    std::cout<<"position: "<<loc.position().x()<<" , "<<loc.position().y()<<" , "<<loc.position().z()<<std::endl;
-    std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<" , "<<loc.velocity().z()<<std::endl;
-    std::cout<<"angular: "<<loc.angular().x()<<" , "<<loc.angular().y()<<" , "<<loc.angular().z()<<std::endl;
-    std::cout<<"rpy: "<<loc.rpy().x()<<" , "<<loc.rpy().y()<<" , "<<loc.rpy().z()<<std::endl;
-
-
-    // 4. put our results into output messages and publish them.
-    loc.mutable_position()->set_x(next_x);
-    loc.mutable_position()->set_y(next_y);
-    // since the message we want to publish is a protobuf message type and the PublishMessage API only accepts the std::string type,
-    // we need serialize it to std::string using google::protobuf::MessageLite::SerializeToString method.
-    loc.SerializeToString(&payload_);
-
-
-    // 5. publish control parameters to drive the vehicle
-    helper.GetSubscribedMessage(tx_sim::topic::kControl, payload_);
-    sim_msg::Control cot_;
-    cot_.ParseFromString(payload_);
-
-    //double throt = cot_.PedalControl().throttle();
-    // sim_msg::Control_PedalControl *pc = cot_.PedalControl();
-    std::cout<<"output gearmode "<<cot_.gear_cmd()<<std::endl;
-    std::cout<<"output controlmode "<<cot_.control_mode()<<std::endl;
-    std::cout<<"output controltype "<<cot_.contrl_type()<<std::endl;
-    std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->throttle()<<std::endl;
-    std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->brake()<<std::endl;
-    std::cout<<"output acccontrol "<<cot_.mutable_acc_cmd()->acc()<<std::endl;
-    
-
-    cot_.set_gear_cmd(sim_msg::Control::DRIVE);
-    cot_.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
-    cot_.set_contrl_type(sim_msg::Control::ACC_CONTROL);
-    // cot_.mutable_pedal_cmd()->set_throttle(50);
-    // cot_.mutable_pedal_cmd()->set_brake(0);
-    // cot_.mutable_pedal_cmd()->set_steer(0);
-    cot_.mutable_acc_cmd()->set_acc(2);
-    cot_.mutable_acc_cmd()->set_front_wheel_angle(-5);
-
-    cot_.SerializeToString(&payload_);
-    helper.PublishMessage(tx_sim::topic::kControl, payload_);
-    std::cout<<"kControl published\n";
-
-
-    helper.GetSubscribedMessage(tx_sim::topic::kPlanStatus, payload_);
-    sim_msg::PlanStatus plans_;
-    plans_.ParseFromString(payload_);
-    std::cout<<"output expectacc "<<plans_.mutable_expect_acc()->acc()<<std::endl;
-
-    plans_.mutable_expect_acc()->set_acc(2.5);
-    plans_.SerializeToString(&payload_);
-
-
-    last_timestamp_ = time_stamp;
-    // std::cout << "expected next position: (" << next_x << ", " << next_y << ")" << std::endl;
-
-    // we could also send data via shared memory ...
-    char* shm_buf = nullptr;
-    uint32_t shm_size = helper.GetPublishedShmemBuffer(SHMEM_TOPIC, &shm_buf);
-    if (shm_buf == nullptr) {
-      std::cerr << "no shm available!" << std::endl;
-    } else {
-      std::string shm_data = "this is a string data on step " + std::to_string(step_count_);
-      size_t str_len = shm_data.size();
-      memcpy(shm_buf, &str_len, sizeof(size_t));
-      memcpy(shm_buf + sizeof(size_t), shm_data.data(), str_len);
-    }
-  } else {
-    helper.GetSubscribedMessage(tx_sim::topic::kTraffic, payload_);
-    // since the traffic and location message is defined by TADSim, the payload string we get here is
-    // in serialized protobuf bytes form, we need deserialize them manually.
-    // using google::protobuf::MessageLite::ParseFromString method to parse from a std::string type.
-    sim_msg::Traffic traffic;
-    traffic.ParseFromString(payload_);
-    std::cout << tx_sim::topic::kTraffic << ": "
-      << traffic.cars_size() << " cars, "
-      << traffic.staticobstacles_size() << " static obstacles, "
-      << traffic.dynamicobstacles_size() << " dynamic obstacles, "
-      << traffic.trafficlights_size() << " traffic lights.\n";
-
-    const char* shm_buf = nullptr;
-    uint32_t shm_size = helper.GetSubscribedShmemData(SHMEM_TOPIC, &shm_buf);
-    if (shm_buf == nullptr) {
-      std::cerr << "no shm available!" << std::endl;
-    } else {
-      std::cout << "shm buf address: " << (void*)shm_buf << std::endl;
-      size_t data_len = 0;
-      memcpy(&data_len, shm_buf, sizeof(size_t));
-      std::cout << "copied length from shm buf: " << data_len << std::endl;
-      std::unique_ptr<char[]> read_data(new char[data_len + 1]);  // don't forget the last '\0'
-      memcpy(read_data.get(), shm_buf + sizeof(size_t), data_len);
-      read_data[data_len] = '\0';
-      std::cout << "read data from shared memory: " << read_data.get() << std::endl;
-    }
-  }
 
   // this is just for simplicity. we should stop the scenario when we reached the destination point
   // which we received in Reset() by helper.ego_destination() method.

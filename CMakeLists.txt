@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project(txsim-zcm)
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 set(SRC ${CMAKE_SOURCE_DIR}/src)
 
@@ -46,6 +46,8 @@ endif(WIN32)
 # example 1: built into a shared library.
 add_library(my-module SHARED
   ${SRC}/my_module.cc
+  ${SRC}/WGS84UTM.cc
+  ${SRC}/MessageManagerBase.cc
   ${PROTO_SRC})
 
 target_link_libraries(my-module

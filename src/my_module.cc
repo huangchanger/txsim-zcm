@@ -20,7 +20,6 @@ using namespace std;
 #include "traffic.pb.h"
 #include "trajectory.pb.h"
 
-#include <zcm/zcm.h>
 #include <zcm/zcm-cpp.hpp>
 
 #ifdef _WIN32
@@ -96,49 +95,7 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
   std::vector<tx_sim::Vector3d> path = helper.ego_path();
   cout<<"path.size: "<<path.size()<<endl;
 
-  // sim_msg::Location start_location;
-  // // get start location in reset or in first step. both works.
-  // start_location.ParseFromString(helper.ego_start_location());
-  // std::cout << "Reset scenario with parameters:\n"
-  //   << "hadmap path: " << helper.map_file_path() << "\n"
-  //   << "the local origin coordinate of the map: (" << o.x << ", " << o.y << ", " << o.z << ")" << "\n"
-  //   << "ego car's destination (" << d.x << ", " << d.y << ")" << std::endl;
-  // // we can also get the speed limit(max) info of the ego car in current scenario.
-  // double speed_limit = helper.ego_speed_limit();
 
-
-  // ofstream outfile;
-  // outfile.open("/home/yxj/Projects/txsim-zcm/path.txt",ios::out);
-  // double wgsLat1,wgsLon1,wgsLat2,wgsLon2,heading;
-  // UTMCoor utmXY1,utmXY2;
-  // outfile << "Id Lon Lat utmX utmY heading curvature mode SpeedMode EventMode OppositeSideMode LangeNum LaneSeq LaneWidth"<<endl;
-  // for(int i=0; i<path.size()-1; ++i){
-  //   wgsLat1 = path[i].y;
-  //   wgsLon1 = path[i].x;
-  //   wgsLat2 = path[i+1].y;
-  //   wgsLon2 = path[i+1].x;
-  //   LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
-  //   LatLonToUTMXY(wgsLat2,wgsLon2,utmXY2,30);
-  //   if(utmXY2.x - utmXY1.x != 0)
-  //     heading = atan2(utmXY2.y - utmXY1.y, utmXY2.x - utmXY1.x);
-  //   else{
-  //     if(utmXY2.y - utmXY1.y > 0) heading = pi/2;
-  //     if(utmXY2.y - utmXY1.y < 0) heading = -pi/2;
-  //     if(utmXY2.y - utmXY1.y == 0) heading = 0;
-  //   }
-
-  //   outfile<<i<<" ";
-  //   outfile.precision(14);
-  //   outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
-  // }
-  // wgsLat1 = path.back().y;
-  // wgsLon1 = path.back().x;
-  // LatLonToUTMXY(wgsLat1,wgsLon1,utmXY1,30);
-  // outfile<<path.size()-1<<" ";
-  // outfile.precision(14);
-  // outfile<<wgsLon1<<" "<<wgsLat1<<" "<<utmXY1.x<<" "<<utmXY2.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
-  
-  // outfile.close();
 
   cout<<"path recorded in txt"<<endl;
 
@@ -173,32 +130,6 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   // traj.ParseFromString(payload_);
   // std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
   
-  // if(traj.point_size()<5){
-  //   auto add_pt = traj.add_point();
-  //   add_pt->set_x(-0.018099349672580932);
-  //   add_pt->set_y(-0.0002283418344937575);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01791382);
-  //   add_pt->set_y(-0.00023353);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01768964);
-  //   add_pt->set_y(-0.00023353);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-
-  //   add_pt = traj.add_point();
-  //   add_pt->set_x(-0.01754278);
-  //   add_pt->set_y(-0.00023612);
-  //   add_pt->set_z(0);
-  //   add_pt->set_v(10);
-  // }
-
 
   // for(int i=0; i<traj.point_size(); ++i){
   //   const sim_msg::TrajectoryPoint &pt = traj.point(i);

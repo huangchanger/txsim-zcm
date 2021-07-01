@@ -1,0 +1,108 @@
+  // 2. get messages we subscribed.
+  // helper.GetSubscribedMessage(tx_sim::topic::kLocation, payload_);
+  // sim_msg::Location loc;
+  // loc.ParseFromString(payload_);
+  // cur_x_ = loc.position().x();
+  // cur_y_ = loc.position().y();
+  // std::cout << std::fixed << std::setprecision(12) << "received location: x -> " << cur_x_ << " y -> " << cur_y_ << std::endl;
+  // std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<std::endl;
+  // std::cout<<"acc: "<<loc.acceleration().x()<<" , "<<loc.acceleration().y()<<std::endl;
+  // std::cout<<"rpy: "<<loc.rpy().x()<<" , "<<loc.rpy().y()<<" , "<<loc.rpy().z()<<std::endl;
+  // std::cout<<"angular v: "<<loc.angular().x()<<" , "<<loc.angular().y()<<" , "<<loc.angular().z()<<std::endl;
+
+
+
+  // helper.GetSubscribedMessage(tx_sim::topic::kTrajectory, payload_);
+  // sim_msg::Trajectory traj;
+  // traj.ParseFromString(payload_);
+  // std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
+  
+
+
+  // for(int i=0; i<traj.point_size(); ++i){
+  //   const sim_msg::TrajectoryPoint &pt = traj.point(i);
+  //   std::cout<<"( "<<pt.x()<<" , "<<pt.y()<<" , "<<pt.v()<<" ) "<<std::endl;
+  // }
+
+  // traj.SerializeToString(&payload_);
+
+  // helper.GetSubscribedMessage(tx_sim::topic::kLaneMark, payload_);
+  // sim_msg::LaneMarks lanemarks;
+  // lanemarks.ParseFromString(payload_);
+  // std::cout<<"lanemarks_left size: "<< lanemarks.left_size() <<std::endl;
+  // std::cout<<"lanemarks_right size: "<< lanemarks.right_size() <<std::endl;
+
+
+    // cot_.set_gear_cmd(sim_msg::Control::DRIVE);
+    // cot_.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
+    // cot_.set_contrl_type(sim_msg::Control::ACC_CONTROL);
+    // // cot_.mutable_pedal_cmd()->set_throttle(50);
+    // // cot_.mutable_pedal_cmd()->set_brake(0);
+    // // cot_.mutable_pedal_cmd()->set_steer(0);
+    // cot_.mutable_acc_cmd()->set_acc(1);
+    // if(step_count_<10)
+    // cot_.mutable_acc_cmd()->set_front_wheel_angle(-0.1);
+    // if(step_count_>=10)
+    // cot_.mutable_acc_cmd()->set_front_wheel_angle(-0.1);
+
+    // cot_.SerializeToString(&payload_);
+    // helper.PublishMessage(tx_sim::topic::kControl, payload_);
+    // std::cout<<"kControl published\n";
+
+    
+    // helper.GetSubscribedMessage(tx_sim::topic::kTraffic, payload_);
+    // sim_msg::Traffic traffic;
+    // traffic.ParseFromString(payload_);
+    // std::cout<<"static dynamic cars size: "<<traffic.staticobstacles_size()<<" , "<<traffic.dynamicobstacles_size()<<" , "<<traffic.cars_size()<<std::endl;
+    
+    // std::cout<<"static object"<<endl;
+    // if(traffic.staticobstacles_size()>0){
+    //   auto obj = traffic.mutable_staticobstacles(0);
+    //   std::cout<<"id "<<obj->id()<<endl;
+    //   std::cout<<"type "<<obj->type()<<endl;
+    //   std::cout<<"t && timestamp: "<<obj->t()<<" , "<<helper.timestamp()<<endl;
+    //   std::cout<<"xyz "<<obj->x()<<" , "<<obj->y()<<" , "<<obj->z()<<std::endl;
+    //   std::cout<<"heading "<<obj->heading()<<std::endl;
+
+    // }
+
+    // cout<<"dynamic object"<<endl;
+    // if(traffic.dynamicobstacles_size()>0){
+    //   auto obj = traffic.mutable_dynamicobstacles(0);
+    //   std::cout<<"id "<<obj->id()<<endl;
+    //   std::cout<<"type "<<obj->type()<<endl;
+    //   std::cout<<"t && timestamp: "<<obj->t()<<" , "<<helper.timestamp()<<endl;
+    //   std::cout<<"xyz "<<obj->x()<<" , "<<obj->y()<<" , "<<obj->z()<<std::endl;
+    //   std::cout<<"heading "<<obj->heading()<<std::endl;
+    //   std::cout<<"v "<<obj->v()<<std::endl;
+    //   std::cout<<"acc "<<obj->acc()<<std::endl;
+    //   std::cout<<"vl "<<obj->vl()<<std::endl;
+
+    // }
+
+    // cout<<"cars"<<endl;
+    // if(traffic.cars_size()>0){
+    //   auto obj = traffic.mutable_cars(0);
+    //   std::cout<<"id "<<obj->id()<<endl;
+    //   std::cout<<"type "<<obj->type()<<endl;
+    //   std::cout<<"t && timestamp: "<<obj->t()<<" , "<<helper.timestamp()<<endl;
+    //   std::cout<<"xyz "<<obj->x()<<" , "<<obj->y()<<" , "<<obj->z()<<std::endl;
+    //   std::cout<<"heading "<<obj->heading()<<std::endl;
+    //   std::cout<<"v "<<obj->v()<<std::endl;
+    //   std::cout<<"acc "<<obj->acc()<<std::endl;
+    //   std::cout<<"vl "<<obj->vl()<<std::endl;
+    //   cout<<"absv "<<obj->show_abs_velocity()<<endl;
+    //   cout<<"absacc "<<obj->show_abs_acc()<<endl;
+
+    // }
+
+    
+
+
+    // helper.GetSubscribedMessage(tx_sim::topic::kPlanStatus, payload_);
+    // sim_msg::PlanStatus plans_;
+    // plans_.ParseFromString(payload_);
+    // std::cout<<"output expectacc "<<plans_.mutable_expect_acc()->acc()<<std::endl;
+
+    // plans_.mutable_expect_acc()->set_acc(2.5);
+    // plans_.SerializeToString(&payload_);

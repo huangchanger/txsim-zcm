@@ -285,6 +285,60 @@ planStatus.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/planStatus.pb.cc.s
 .PHONY : planStatus.pb.cc.s
 
+src/MessageManagerBase.o: src/MessageManagerBase.cc.o
+
+.PHONY : src/MessageManagerBase.o
+
+# target to build an object file
+src/MessageManagerBase.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o
+.PHONY : src/MessageManagerBase.cc.o
+
+src/MessageManagerBase.i: src/MessageManagerBase.cc.i
+
+.PHONY : src/MessageManagerBase.i
+
+# target to preprocess a source file
+src/MessageManagerBase.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cc.i
+.PHONY : src/MessageManagerBase.cc.i
+
+src/MessageManagerBase.s: src/MessageManagerBase.cc.s
+
+.PHONY : src/MessageManagerBase.s
+
+# target to generate assembly for a file
+src/MessageManagerBase.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManagerBase.cc.s
+.PHONY : src/MessageManagerBase.cc.s
+
+src/WGS84UTM.o: src/WGS84UTM.cc.o
+
+.PHONY : src/WGS84UTM.o
+
+# target to build an object file
+src/WGS84UTM.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/WGS84UTM.cc.o
+.PHONY : src/WGS84UTM.cc.o
+
+src/WGS84UTM.i: src/WGS84UTM.cc.i
+
+.PHONY : src/WGS84UTM.i
+
+# target to preprocess a source file
+src/WGS84UTM.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/WGS84UTM.cc.i
+.PHONY : src/WGS84UTM.cc.i
+
+src/WGS84UTM.s: src/WGS84UTM.cc.s
+
+.PHONY : src/WGS84UTM.s
+
+# target to generate assembly for a file
+src/WGS84UTM.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/WGS84UTM.cc.s
+.PHONY : src/WGS84UTM.cc.s
+
 src/my_module.o: src/my_module.cc.o
 
 .PHONY : src/my_module.o
@@ -393,6 +447,12 @@ help:
 	@echo "... planStatus.pb.o"
 	@echo "... planStatus.pb.i"
 	@echo "... planStatus.pb.s"
+	@echo "... src/MessageManagerBase.o"
+	@echo "... src/MessageManagerBase.i"
+	@echo "... src/MessageManagerBase.s"
+	@echo "... src/WGS84UTM.o"
+	@echo "... src/WGS84UTM.i"
+	@echo "... src/WGS84UTM.s"
 	@echo "... src/my_module.o"
 	@echo "... src/my_module.i"
 	@echo "... src/my_module.s"

@@ -1,6 +1,5 @@
 #include "MessageManagerBase.h"
 
-
 using std::string;
 using std::vector;
 

@@ -16,6 +16,8 @@ file(REMOVE_RECURSE
   "control.pb.cc"
   "control.pb.h"
   "CMakeFiles/my-module.dir/src/my_module.cc.o"
+  "CMakeFiles/my-module.dir/src/WGS84UTM.cc.o"
+  "CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o"
   "CMakeFiles/my-module.dir/basic.pb.cc.o"
   "CMakeFiles/my-module.dir/header.pb.cc.o"
   "CMakeFiles/my-module.dir/location.pb.cc.o"

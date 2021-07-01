@@ -18,8 +18,7 @@
 #include <vector>
 #include <string>
 #include <zcm/zcm-cpp.hpp>
-#include <zcm/zcm.h>
-#include "WGS84UTM.h"
+
 
 #include "tievmsg_zcm/MsgAccessoryControlSignal.hpp"
 #include "tievmsg_zcm/MsgAutonomousModeControlSignal.hpp"
@@ -36,6 +35,7 @@
 #include "tievmsg_zcm/MsgWaterhorseSignal.hpp"
 #include "tievmsg_zcm/PredictedObject.hpp"
 #include "tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp"
+
 
 namespace txsim
 {
@@ -67,7 +67,6 @@ namespace txsim
 
                 void PublishAll() const;
 
-        private:
                 void PubLoopNavinfo(int freq);
 
         public:

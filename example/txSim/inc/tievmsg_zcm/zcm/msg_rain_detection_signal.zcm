@@ -1,0 +1,5 @@
+struct	MsgRainDetectionSignal
+{
+   int64_t timestamp;
+   boolean rain_signal;
+}

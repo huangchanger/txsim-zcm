@@ -26,6 +26,7 @@ CMakeFiles/my-module.dir/location.pb.cc.o
  /home/yxj/Projects/txsim-zcm/example/txSim/examples/build/location.pb.h
 CMakeFiles/my-module.dir/my_module.cc.o
  ../../inc/WGS84UTM.h
+ ../../inc/tievmsg_zcm/MsgChassisCommandSignal.hpp
  ../../inc/tievmsg_zcm/MsgNavInfoSignal.hpp
  ../../inc/tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp
  ../../inc/tievmsg_zcm/PredictedObject.hpp

@@ -45,12 +45,9 @@ endif(WIN32)
 
 # example 1: built into a shared library.
 add_library(my-module SHARED
-  ${SRC}/my_module.cc
-  ${SRC}/WGS84UTM.cc
-  ${SRC}/MessageManagerBase.cc
+  ${CPPFILES}
   ${PROTO_SRC})
 
 target_link_libraries(my-module
   ${LIB_PROTOBUF}
-  zcm
-  zmq)
+  zcm)

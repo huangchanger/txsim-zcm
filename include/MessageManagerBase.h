@@ -50,6 +50,8 @@ namespace txsim
 
                 virtual ~MessageManagerBase();
 
+                void stopSubandPub();
+
                 // receive zcm handler
                 void ChassisCommandHandler(
                     const zcm::ReceiveBuffer *rbuf,
@@ -68,6 +70,7 @@ namespace txsim
                 void PublishAll() const;
 
                 void PubLoopNavinfo(int freq);
+                void PubLoopPredictedObject(int freq);
 
         public:
 

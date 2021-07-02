@@ -10,6 +10,10 @@
 cmath
 -
 
+../../inc/tievmsg_zcm/MsgChassisCommandSignal.hpp
+zcm/zcm_coretypes.h
+-
+
 ../../inc/tievmsg_zcm/MsgNavInfoSignal.hpp
 zcm/zcm_coretypes.h
 -
@@ -529,6 +533,8 @@ tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp
 tievmsg_zcm/MsgNavInfoSignal.hpp
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/tievmsg_zcm/MsgNavInfoSignal.hpp
+tievmsg_zcm/MsgChassisCommandSignal.hpp
+/home/yxj/Projects/txsim-zcm/example/txSim/examples/tievmsg_zcm/MsgChassisCommandSignal.hpp
 
 /home/yxj/Projects/txsim-zcm/example/txSim/examples/my_module.h
 txsim_module.h

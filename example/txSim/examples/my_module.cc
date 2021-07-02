@@ -22,6 +22,7 @@ using namespace std;
 
 #include "tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp"
 #include "tievmsg_zcm/MsgNavInfoSignal.hpp"
+#include "tievmsg_zcm/MsgChassisCommandSignal.hpp"
 
 
 
@@ -85,6 +86,9 @@ MsgNavInfoSignal navinfo_;
 
 mutex predictedObject_mutex_;
 MsgPredictedObjectTrajectoryList predictedObject_;
+
+mutex chassisCommand_mutex_;
+MsgChassisCommandSignal chassisCommand_;
 
 
 // !!! Attention: PackNavinfo must be called before PackPredictedObject due to the use of navinfo_ in PackPredictedObject
@@ -175,9 +179,9 @@ void PackPredictedObject(tx_sim::StepHelper& helper)
 
         for(int i=0;i<4;++i){
             CoorRotate(corner_points[i], -obj.heading);
-            // corner_points[i] = corner_points[i] + objxy;
-            // obj.bounding_box[0][i] = corner_points[i].x;
-            // obj.bounding_box[1][i] = corner_points[i].y;
+            corner_points[i] = corner_points[i] + objxy;
+            obj.bounding_box[0][i] = corner_points[i].x;
+            obj.bounding_box[1][i] = corner_points[i].y;
         }
 
         cout<<"after rotation corner_points\n";
@@ -191,8 +195,6 @@ void PackPredictedObject(tx_sim::StepHelper& helper)
 
         obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
         Point2d UnitVec(cos(obj.heading), sin(obj.heading));
-
-
         for(int i=0;i<obj.trajectory_point_num;++i)
         {
             Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
@@ -266,11 +268,20 @@ void SendTopicControl(tx_sim::StepHelper& helper)
         sim_msg::Control cot;
         std::string cot_payload;
         cot.Clear();
-        cot.set_gear_cmd(sim_msg::Control::PARK);
+        if(chassisCommand_.car_gear_command == 0)
+          cot.set_gear_cmd(sim_msg::Control::NO_CONTROL);
+        if(chassisCommand_.car_gear_command == 1)
+          cot.set_gear_cmd(sim_msg::Control::PARK);
+        if(chassisCommand_.car_gear_command == 2)
+          cot.set_gear_cmd(sim_msg::Control::REVERSE);
+        if(chassisCommand_.car_gear_command == 3)
+          cot.set_gear_cmd(sim_msg::Control::NEUTRAL);
+        if(chassisCommand_.car_gear_command == 4)
+          cot.set_gear_cmd(sim_msg::Control::DRIVE);
         cot.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
         cot.set_contrl_type(sim_msg::Control::ACC_CONTROL);
-        cot.mutable_acc_cmd()->set_acc(0);
-        cot.mutable_acc_cmd()->set_front_wheel_angle(0);
+        cot.mutable_acc_cmd()->set_acc(chassisCommand_.longitudinal_acceleration_command);
+        cot.mutable_acc_cmd()->set_front_wheel_angle(chassisCommand_.steer_wheel_angle_command);
 
         cot.SerializeToString(&cot_payload);
         helper.PublishMessage(tx_sim::topic::kControl, cot_payload);
@@ -289,6 +300,8 @@ MyModule::~MyModule() {
 void MyModule::Init(tx_sim::InitHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
   cout<<"start initializing ... \n";
+
+
 
   // get user defined initiation parameters.
   // if we defined the parameters in TADSim UI, override the default values here.
@@ -385,6 +398,8 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 void MyModule::Step(tx_sim::StepHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
 
+  zcm::ZCM tunnel("ipc");
+  cout<<"zcm created !!!"<<endl;
 
   PackNavinfo(helper);
   PackPredictedObject(helper);

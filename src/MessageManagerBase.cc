@@ -7,15 +7,23 @@ namespace txsim
 {
 
     // tunnel_(url) is deleted for a while to test
-    MessageManagerBase::MessageManagerBase(const string &url):  need_stop_(false), chassisCommand_(), navinfo_()
+    MessageManagerBase::MessageManagerBase(const string &url):  tunnel_(url), need_stop_(false), chassisCommand_(), navinfo_()
     {
         kChannelNameChassisCommand = "ChassisCommand";
         kChannelNameNavinfo = "Navinfo";
-        kFreqNavinfo = 20;
+        kChannelNamePredictedObject = "PredictedObject";
+
+        kFreqNavinfo = 50;
         kSwitchNavinfo = 1;
+
+        kFreqPredictedObject = 50;
+        kSwitchPredictedObject = 1;
      };
 
     MessageManagerBase::~MessageManagerBase()
+    { }
+
+    void MessageManagerBase::stopSubandPub()
     {
         need_stop_ = true;
         for (auto &t : pub_threads_)
@@ -30,7 +38,6 @@ namespace txsim
         {
             tunnel_.unsubscribe(t);
         }
-
     }
 
  // receive zcm
@@ -69,10 +76,9 @@ namespace txsim
         std::cout<<navinfo_.longitude<<" , "<<navinfo_.latitude<<std::endl;
     }
 
-
     void MessageManagerBase::PublishNavinfoWithLock() const
     {
-        std::lock_guard<std::mutex> caninfo_lock(navinfo_mutex_);
+        std::lock_guard<std::mutex> lk(navinfo_mutex_);
         PublishNavinfo();
     }
 
@@ -86,14 +92,29 @@ namespace txsim
         }
     }
 
+    void MessageManagerBase::PubLoopPredictedObject(int freq)
+    {
+        while (!need_stop_)
+        {
+            auto time_point = std::chrono::steady_clock::now() + std::chrono::microseconds(1000000 / freq);
+            if(true)
+            {
+                std::lock_guard<std::mutex> lk(predictedObject_mutex_);
+                tunnel_.publish(kChannelNamePredictedObject, &predictedObject_);
+                std::cout<<"predictedObject zcm message published ! "<<std::endl;
+            }
+            std::this_thread::sleep_until(time_point);
+        }
+    }
+    
     // publish automatically with a certain frequency
     void MessageManagerBase::PublishAllAsync()
     {
-        if (kSwitchNavinfo)
-        {
-            pub_threads_.push_back(std::thread(
+        pub_threads_.push_back(std::thread(
                 &MessageManagerBase::PubLoopNavinfo, this, kFreqNavinfo));
-        }
+
+        pub_threads_.push_back(std::thread(
+                &MessageManagerBase::PubLoopPredictedObject, this, kFreqPredictedObject));
 
         for (auto &t : pub_threads_)
         {

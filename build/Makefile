@@ -285,6 +285,33 @@ planStatus.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/planStatus.pb.cc.s
 .PHONY : planStatus.pb.cc.s
 
+src/MessageManager.o: src/MessageManager.cc.o
+
+.PHONY : src/MessageManager.o
+
+# target to build an object file
+src/MessageManager.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cc.o
+.PHONY : src/MessageManager.cc.o
+
+src/MessageManager.i: src/MessageManager.cc.i
+
+.PHONY : src/MessageManager.i
+
+# target to preprocess a source file
+src/MessageManager.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cc.i
+.PHONY : src/MessageManager.cc.i
+
+src/MessageManager.s: src/MessageManager.cc.s
+
+.PHONY : src/MessageManager.s
+
+# target to generate assembly for a file
+src/MessageManager.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/src/MessageManager.cc.s
+.PHONY : src/MessageManager.cc.s
+
 src/MessageManagerBase.o: src/MessageManagerBase.cc.o
 
 .PHONY : src/MessageManagerBase.o
@@ -447,6 +474,9 @@ help:
 	@echo "... planStatus.pb.o"
 	@echo "... planStatus.pb.i"
 	@echo "... planStatus.pb.s"
+	@echo "... src/MessageManager.o"
+	@echo "... src/MessageManager.i"
+	@echo "... src/MessageManager.s"
 	@echo "... src/MessageManagerBase.o"
 	@echo "... src/MessageManagerBase.i"
 	@echo "... src/MessageManagerBase.s"

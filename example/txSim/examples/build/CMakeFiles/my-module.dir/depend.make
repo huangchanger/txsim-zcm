@@ -25,6 +25,7 @@ CMakeFiles/my-module.dir/location.pb.cc.o: location.pb.cc
 CMakeFiles/my-module.dir/location.pb.cc.o: location.pb.h
 
 CMakeFiles/my-module.dir/my_module.cc.o: ../../inc/WGS84UTM.h
+CMakeFiles/my-module.dir/my_module.cc.o: ../../inc/tievmsg_zcm/MsgChassisCommandSignal.hpp
 CMakeFiles/my-module.dir/my_module.cc.o: ../../inc/tievmsg_zcm/MsgNavInfoSignal.hpp
 CMakeFiles/my-module.dir/my_module.cc.o: ../../inc/tievmsg_zcm/MsgPredictedObjectTrajectoryList.hpp
 CMakeFiles/my-module.dir/my_module.cc.o: ../../inc/tievmsg_zcm/PredictedObject.hpp

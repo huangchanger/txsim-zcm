@@ -209,7 +209,7 @@ Protobuf_PROTOC_LIBRARY_DEBUG:FILEPATH=/usr/local/lib/libprotoc.so
 Protobuf_PROTOC_LIBRARY_RELEASE:FILEPATH=/usr/local/lib/libprotoc.so
 
 //Dependencies for the target
-my-module_LIB_DEPENDS:STATIC=general;protobuf;general;pthread;
+my-module_LIB_DEPENDS:STATIC=general;protobuf;general;pthread;general;zcm;
 
 //Value Computed by CMake
 txsim-examples_BINARY_DIR:STATIC=/home/yxj/Projects/txsim-zcm/example/txSim/examples/build

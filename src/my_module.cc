@@ -1,4 +1,5 @@
 #include "my_module.h"
+#include "MessageManager.h"
 
 #include <iomanip>
 #include <iostream>
@@ -39,21 +40,15 @@ MyModule::~MyModule() {
   std::cout << "MyModule destroyed." << std::endl;
 }
 
-
+txsim::MessageManager msgm("ipc");
 
 // ***************************************************************************************
 void MyModule::Init(tx_sim::InitHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
   cout<<"start initializing ... \n";
 
-  // zcm::ZCM tunnel_("ipc");
-  //tunnel_.start();
-
-  // txsim::MessageManager msgm("ipc");
-  cout<<"msgm created"<<endl;
-
-  // msgm.PublishAllAsync();
-  // msgm.SubscribeAll();
+  msgm.PublishAllAsync();
+  msgm.SubscribeAll();
 
   // get user defined initiation parameters.
   // if we defined the parameters in TADSim UI, override the default values here.
@@ -106,8 +101,8 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 void MyModule::Step(tx_sim::StepHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
 
-  // msgm.PackNavinfo(helper);
-  // msgm.SendTopicControl(helper);
+  msgm.PackNavinfo(helper);
+  msgm.SendTopicControl(helper);
 
   // 1. get current simulation timestamp.
   double time_stamp = helper.timestamp();
@@ -219,6 +214,9 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
 void MyModule::Stop(tx_sim::StopHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
   std::cout << name_ << " module stopped." << std::endl;
+
+  msgm.stopSubandPub();
+
   // here we could send out any feedback data we want the TADSim to display on front-end UI.
   helper.set_feedback("stepCounts", std::to_string(step_count_));
 };

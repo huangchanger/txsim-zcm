@@ -34,12 +34,15 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HDR
   ../msgs/laneMarks.proto)
 
 
+
+link_directories(/usr/local/lib)
 # example 1: built into a shared library.
 add_library(my-module SHARED
   my_module.cc
   ${PROTO_SRC})
 target_link_libraries(my-module
-  ${LIB_PROTOBUF})
+  ${LIB_PROTOBUF}
+  zcm)
 
 # example 2: built into a binary executable.
 # link_directories(

@@ -12,6 +12,60 @@ Acknowledgement:http://www.cnblogs.com/wb-DarkHorse/archive/2013/06/26/3156212.h
 #define UTMScaleFactor 0.9996
 
 
+Point2d::Point2d():x(0),y(0){}
+Point2d::Point2d(double x,double y) : x(x),y(y) {}
+Point2d Point2d::operator+(const Point2d& pt)
+{
+    Point2d pt2;
+    pt2.x = this->x + pt.x;
+    pt2.y = this->y + pt.y;
+    return pt2;
+}
+Point2d Point2d::operator-(const Point2d& pt)
+{
+    Point2d pt2;
+    pt2.x = this->x - pt.x;
+    pt2.y = this->y - pt.y;
+    return pt2;
+}
+Point2d Point2d::operator/(const double& div)
+{
+    Point2d pt2;
+    pt2.x = this->x / div;
+    pt2.y = this->y / div;
+    return pt2;
+}
+double Point2d::norm()
+{
+	return sqrt(pow(this->x,2)+pow(this->y,2));
+}
+
+Point2d operator*(const Point2d& pt, const double multiplier)
+{
+    Point2d pt2;
+    pt2.x = multiplier*pt.x;
+    pt2.y = multiplier*pt.y;
+    return pt2;
+}
+Point2d operator*(const double multiplier, const Point2d& pt)
+{
+    Point2d pt2;
+    pt2.x = multiplier*pt.x;
+    pt2.y = multiplier*pt.y;
+    return pt2;
+}
+
+// frame counterclockwise theta(rad)
+void CoorRotate(Point2d& pt, const double theta)
+{
+    double prex = pt.x, prey = pt.y;
+    pt.x = prex * cos(theta)    + prey * sin(theta);
+    pt.y = prex * (-sin(theta)) + prey * cos(theta);
+
+}
+
+
+
 /*
 * DegToRad
 *

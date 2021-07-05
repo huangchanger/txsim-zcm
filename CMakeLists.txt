@@ -14,7 +14,8 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HDR
   ${CMAKE_SOURCE_DIR}/include/proto_msgs/planStatus.proto
   ${CMAKE_SOURCE_DIR}/include/proto_msgs/laneMarks.proto
   ${CMAKE_SOURCE_DIR}/include/proto_msgs/traffic.proto
-  ${CMAKE_SOURCE_DIR}/include/proto_msgs/control.proto)
+  ${CMAKE_SOURCE_DIR}/include/proto_msgs/control.proto
+  ${CMAKE_SOURCE_DIR}/include/proto_msgs/vehState.proto)
 
 # file(GLOB PROTO_SRC ${CMAKE_SOURCE_DIR}/include/proto_msgs/*.cc)
 file(GLOB CPPFILES ${SRC}/*.cc)

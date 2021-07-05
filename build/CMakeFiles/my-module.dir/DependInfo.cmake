@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/yxj/Projects/txsim-zcm/src/my_module.cc" "/home/yxj/Projects/txsim-zcm/build/CMakeFiles/my-module.dir/src/my_module.cc.o"
   "/home/yxj/Projects/txsim-zcm/build/traffic.pb.cc" "/home/yxj/Projects/txsim-zcm/build/CMakeFiles/my-module.dir/traffic.pb.cc.o"
   "/home/yxj/Projects/txsim-zcm/build/trajectory.pb.cc" "/home/yxj/Projects/txsim-zcm/build/CMakeFiles/my-module.dir/trajectory.pb.cc.o"
+  "/home/yxj/Projects/txsim-zcm/build/vehState.pb.cc" "/home/yxj/Projects/txsim-zcm/build/CMakeFiles/my-module.dir/vehState.pb.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -41,6 +42,7 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/yxj/Projects/txsim-zcm/build/planStatus.pb.h" "/home/yxj/Projects/txsim-zcm/build/planStatus.pb.cc"
   "/home/yxj/Projects/txsim-zcm/build/traffic.pb.h" "/home/yxj/Projects/txsim-zcm/build/traffic.pb.cc"
   "/home/yxj/Projects/txsim-zcm/build/trajectory.pb.h" "/home/yxj/Projects/txsim-zcm/build/trajectory.pb.cc"
+  "/home/yxj/Projects/txsim-zcm/build/vehState.pb.h" "/home/yxj/Projects/txsim-zcm/build/vehState.pb.cc"
   )
 
 

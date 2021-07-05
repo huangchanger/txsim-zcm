@@ -21,6 +21,8 @@ using namespace std;
 #include "traffic.pb.h"
 #include "trajectory.pb.h"
 
+#define pi 3.14159265358979
+
 #include <zcm/zcm-cpp.hpp>
 
 #ifdef _WIN32
@@ -46,6 +48,7 @@ txsim::MessageManager msgm("ipc");
 void MyModule::Init(tx_sim::InitHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
   cout<<"start initializing ... \n";
+  cout<<"version 14"<<endl;
 
   msgm.PublishAllAsync();
   msgm.SubscribeAll();
@@ -69,12 +72,8 @@ void MyModule::Init(tx_sim::InitHelper& helper) {
 
   helper.Subscribe(tx_sim::topic::kTraffic);
   helper.Subscribe(tx_sim::topic::kLocation);
-  helper.Subscribe(tx_sim::topic::kControl);
-  helper.Subscribe(tx_sim::topic::kPlanStatus);    
-  helper.Subscribe(tx_sim::topic::kTrajectory);   
-  helper.Subscribe(tx_sim::topic::kLaneMark);   
+  helper.Subscribe(tx_sim::topic::kVehicleState);
 };
-
 
 // *******************************************************************************************
 void MyModule::Reset(tx_sim::ResetHelper& helper) {
@@ -88,11 +87,62 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 
   tx_sim::Vector3d o = helper.map_local_origin(), d = helper.ego_destination();
   std::vector<tx_sim::Vector3d> path = helper.ego_path();
-  cout<<"path.size: "<<path.size()<<endl;
+  tx_sim::Vector3d start_pt = path.front();
+  tx_sim::Vector3d end_pt = path.back();
+  UTMCoor start_utm, end_utm;
+  LatLonToUTMXY(start_pt.y,start_pt.x,start_utm);
+  LatLonToUTMXY(end_pt.y,end_pt.x,end_utm);
+
+  Point2d start_interp(start_utm.x,start_utm.y);
+  Point2d end_interp(end_utm.x, end_utm.y);
+  Point2d end_start = end_interp - start_interp;
+  std::vector<Point2d> path_interp;
+  double gap = 0.2;
+  double path_length = end_start.norm();
+  Point2d path_gap = end_start / path_length * gap;
+
+  for(int i=0;i<(int)(path_length/gap);++i)
+  {
+    path_interp.push_back(start_interp + i*path_gap);
+  }
+  path_interp.push_back(end_interp);
+  
+
+  ofstream outfile;
+  outfile.open("/home/yxj/Projects/txsim-zcm/path.txt");
+  double wgsLat1,wgsLon1,wgsLat2,wgsLon2,heading;
+  Point2d pt1,pt2;
+  outfile << "Id Lon Lat utmX utmY heading curvature mode SpeedMode EventMode OppositeSideMode LangeNum LaneSeq LaneWidth"<<endl;
+
+  for(int i=0;i<path_interp.size()-1;++i)
+  {
+    pt1 = path_interp[i];
+    pt2 = path_interp[i+1];
+    if(pt2.x - pt1.x != 0)
+    heading = atan2(pt2.y - pt1.y, pt2.x - pt1.x);
+    else{
+      if(pt2.y - pt1.y > 0) heading = pi/2;
+      if(pt2.y - pt1.y < 0) heading = -pi/2;
+      if(pt2.y - pt1.y == 0) heading = 0;
+    }
+
+    outfile<<i<<" ";
+    outfile.precision(14);
+    outfile<<pt1.x<<" "<<pt1.y<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+
+  }
+
+  outfile<<path_interp.size()-1<<" ";
+  outfile.precision(14);
+  pt1 = path_interp.back();
+  outfile<<pt1.x<<" "<<pt1.y<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+
+
+  outfile.close();
 
 
 
-  cout<<"path recorded in txt"<<endl;
+  cout<<"path recorded in /home/yxj/Projects/txsim-zcm/path.txt"<<endl;
 
 };
 
@@ -100,114 +150,19 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 // ***************************************************************************************
 void MyModule::Step(tx_sim::StepHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
+  std::cout<<"timestamp: "<<helper.timestamp()<<endl;
 
-  msgm.PackNavinfo(helper);
   msgm.SendTopicControl(helper);
-
-  // 1. get current simulation timestamp.
-  double time_stamp = helper.timestamp();
-  std::cout << "time stamp: " << time_stamp << "\n";
-  std::cout <<"changed"<<std::endl;
-
-  // 2. get messages we subscribed.
-  // helper.GetSubscribedMessage(tx_sim::topic::kLocation, payload_);
-  // sim_msg::Location loc;
-  // loc.ParseFromString(payload_);
-  // cur_x_ = loc.position().x();
-  // cur_y_ = loc.position().y();
-  // std::cout << std::fixed << std::setprecision(12) << "received location: x -> " << cur_x_ << " y -> " << cur_y_ << std::endl;
-  // std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<std::endl;
-  // std::cout<<"acc: "<<loc.acceleration().x()<<" , "<<loc.acceleration().y()<<std::endl;
-
-
-  // helper.GetSubscribedMessage(tx_sim::topic::kTrajectory, payload_);
-  // sim_msg::Trajectory traj;
-  // traj.ParseFromString(payload_);
-  // std::cout<<"trajectory size: "<< traj.point_size() <<std::endl;
+  msgm.PackNavinfo(helper);
+  msgm.PackPredictedObject(helper);
+  msgm.PackCaninfo(helper);
   
-
-  // for(int i=0; i<traj.point_size(); ++i){
-  //   const sim_msg::TrajectoryPoint &pt = traj.point(i);
-  //   std::cout<<"( "<<pt.x()<<" , "<<pt.y()<<" , "<<pt.v()<<" ) "<<std::endl;
-  // }
-
-  // traj.SerializeToString(&payload_);
-
-  // helper.GetSubscribedMessage(tx_sim::topic::kLaneMark, payload_);
-  // sim_msg::LaneMarks lanemarks;
-  // lanemarks.ParseFromString(payload_);
-  // std::cout<<"lanemarks_left size: "<< lanemarks.left_size() <<std::endl;
-  // std::cout<<"lanemarks_right size: "<< lanemarks.right_size() <<std::endl;
-
-  // puber_ = 1;
-
-  // if (true) {
-  //   // 3. here should put the actual user algorithm, do some computing according to the subscribed messages we received.
-  //   // for explanatory simplicity, it only moves a little by a constant velocity, no matter what happens.
-  //   double move_distance = step_velocity_ * (time_stamp - last_timestamp_); // s = v * t
-  //   // std::cout << "ego car moved " << move_distance << std::endl;
-  //   double next_x = cur_x_ + move_distance, next_y = cur_y_ + move_distance;
-
-  //   std::cout<<"position: "<<loc.position().x()<<" , "<<loc.position().y()<<" , "<<loc.position().z()<<std::endl;
-  //   std::cout<<"velocity: "<<loc.velocity().x()<<" , "<<loc.velocity().y()<<" , "<<loc.velocity().z()<<std::endl;
-  //   std::cout<<"angular: "<<loc.angular().x()<<" , "<<loc.angular().y()<<" , "<<loc.angular().z()<<std::endl;
-  //   std::cout<<"rpy: "<<loc.rpy().x()<<" , "<<loc.rpy().y()<<" , "<<loc.rpy().z()<<std::endl;
-
-
-  //   // 4. put our results into output messages and publish them.
-  //   loc.mutable_position()->set_x(next_x);
-  //   loc.mutable_position()->set_y(next_y);
-  //   // since the message we want to publish is a protobuf message type and the PublishMessage API only accepts the std::string type,
-  //   // we need serialize it to std::string using google::protobuf::MessageLite::SerializeToString method.
-  //   loc.SerializeToString(&payload_);
-
-
-  //   // 5. publish control parameters to drive the vehicle
-  //   helper.GetSubscribedMessage(tx_sim::topic::kControl, payload_);
-  //   sim_msg::Control cot_;
-  //   cot_.ParseFromString(payload_);
-
-  //   //double throt = cot_.PedalControl().throttle();
-  //   // sim_msg::Control_PedalControl *pc = cot_.PedalControl();
-  //   std::cout<<"output gearmode "<<cot_.gear_cmd()<<std::endl;
-  //   std::cout<<"output controlmode "<<cot_.control_mode()<<std::endl;
-  //   std::cout<<"output controltype "<<cot_.contrl_type()<<std::endl;
-  //   std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->throttle()<<std::endl;
-  //   std::cout<<"output pedalcontrol "<<cot_.mutable_pedal_cmd()->brake()<<std::endl;
-  //   std::cout<<"output acccontrol "<<cot_.mutable_acc_cmd()->acc()<<std::endl;
-    
-
-  //   cot_.set_gear_cmd(sim_msg::Control::DRIVE);
-  //   cot_.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
-  //   cot_.set_contrl_type(sim_msg::Control::ACC_CONTROL);
-  //   // cot_.mutable_pedal_cmd()->set_throttle(50);
-  //   // cot_.mutable_pedal_cmd()->set_brake(0);
-  //   // cot_.mutable_pedal_cmd()->set_steer(0);
-  //   cot_.mutable_acc_cmd()->set_acc(2);
-  //   cot_.mutable_acc_cmd()->set_front_wheel_angle(-5);
-
-  //   cot_.SerializeToString(&payload_);
-  //   helper.PublishMessage(tx_sim::topic::kControl, payload_);
-  //   std::cout<<"kControl published\n";
-
-
-  //   helper.GetSubscribedMessage(tx_sim::topic::kPlanStatus, payload_);
-  //   sim_msg::PlanStatus plans_;
-  //   plans_.ParseFromString(payload_);
-  //   std::cout<<"output expectacc "<<plans_.mutable_expect_acc()->acc()<<std::endl;
-
-  //   plans_.mutable_expect_acc()->set_acc(2.5);
-  //   plans_.SerializeToString(&payload_);
-
-
-  //   last_timestamp_ = time_stamp;
-
-  // this is just for simplicity. we should stop the scenario when we reached the destination point
-  // which we received in Reset() by helper.ego_destination() method.
+  std::cout<<"step "<<step_count_<<" finished ! "<<std::endl;
+  
   step_count_++;
-  if (step_count_ >= max_step_count_) {
-    helper.StopScenario("we have reached our destination.");
-  }
+  // if (step_count_ >= max_step_count_) {
+  //   helper.StopScenario("we have reached our destination.");
+  // }
 };
 
 

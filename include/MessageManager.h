@@ -24,9 +24,16 @@ namespace txsim
         ~MessageManager() = default;
 
 
+        template<typename T>
+        void pushObject(T obj_proto, string obj_type);
+
+
         // receive protobuf
         void PackNavinfo(tx_sim::StepHelper& helper);
         void PackPredictedObject(tx_sim::StepHelper& helper);
+        void PackTrafficLight(tx_sim::StepHelper& helper);
+        void PackCaninfo(tx_sim::StepHelper& helper);
+
 
         // send protobuf
         void SendTopicControl(tx_sim::StepHelper& helper);

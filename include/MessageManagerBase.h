@@ -61,16 +61,14 @@ namespace txsim
 
 
                 // send zcm
-                void PublishNavinfo() const;
-
-                void PublishNavinfoWithLock() const;
-
                 void PublishAllAsync();
 
                 void PublishAll() const;
 
                 void PubLoopNavinfo(int freq);
                 void PubLoopPredictedObject(int freq);
+                void PubLoopTrafficLight(int freq);
+                void PubLoopCaninfo(int freq);
 
         public:
 
@@ -79,10 +77,14 @@ namespace txsim
                 mutable std::mutex chassisCommand_mutex_;
                 mutable std::mutex navinfo_mutex_;
                 mutable std::mutex predictedObject_mutex_;
+                mutable std::mutex trafficLight_mutex_;
+                mutable std::mutex caninfo_mutex_;
 
                 MsgChassisCommandSignal chassisCommand_;
                 MsgNavInfoSignal navinfo_;
                 MsgPredictedObjectTrajectoryList predictedObject_;
+                MsgTrafficLightSignal trafficLight_;
+                MsgCanInfoSignal caninfo_;
                 
 
         private:
@@ -95,11 +97,17 @@ namespace txsim
                 std::string kChannelNameChassisCommand;
                 std::string kChannelNameNavinfo;
                 std::string kChannelNamePredictedObject;
+                std::string kChannelNameTrafficLight;
+                std::string kChannelNameCaninfo;
 
                 int kFreqNavinfo;
                 int kFreqPredictedObject;
+                int kFreqTrafficLight;
+                int kFreqCaninfo;
 
                 bool kSwitchNavinfo;
                 bool kSwitchPredictedObject;
+                bool kSwitchTrafficLight;
+                bool kSwitchCaninfo;
         };
 } // namespace tievsim

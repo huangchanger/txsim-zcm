@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "traffic.pb.h"
   "control.pb.cc"
   "control.pb.h"
+  "vehState.pb.cc"
+  "vehState.pb.h"
   "CMakeFiles/my-module.dir/src/MessageManager.cc.o"
   "CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o"
   "CMakeFiles/my-module.dir/src/WGS84UTM.cc.o"
@@ -27,6 +29,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/my-module.dir/laneMarks.pb.cc.o"
   "CMakeFiles/my-module.dir/traffic.pb.cc.o"
   "CMakeFiles/my-module.dir/control.pb.cc.o"
+  "CMakeFiles/my-module.dir/vehState.pb.cc.o"
   "lib/libmy-module.pdb"
   "lib/libmy-module.so"
 )

@@ -447,6 +447,33 @@ trajectory.pb.cc.s:
 	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/trajectory.pb.cc.s
 .PHONY : trajectory.pb.cc.s
 
+vehState.pb.o: vehState.pb.cc.o
+
+.PHONY : vehState.pb.o
+
+# target to build an object file
+vehState.pb.cc.o:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/vehState.pb.cc.o
+.PHONY : vehState.pb.cc.o
+
+vehState.pb.i: vehState.pb.cc.i
+
+.PHONY : vehState.pb.i
+
+# target to preprocess a source file
+vehState.pb.cc.i:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/vehState.pb.cc.i
+.PHONY : vehState.pb.cc.i
+
+vehState.pb.s: vehState.pb.cc.s
+
+.PHONY : vehState.pb.s
+
+# target to generate assembly for a file
+vehState.pb.cc.s:
+	$(MAKE) -f CMakeFiles/my-module.dir/build.make CMakeFiles/my-module.dir/vehState.pb.cc.s
+.PHONY : vehState.pb.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -492,6 +519,9 @@ help:
 	@echo "... trajectory.pb.o"
 	@echo "... trajectory.pb.i"
 	@echo "... trajectory.pb.s"
+	@echo "... vehState.pb.o"
+	@echo "... vehState.pb.i"
+	@echo "... vehState.pb.s"
 .PHONY : help
 
 

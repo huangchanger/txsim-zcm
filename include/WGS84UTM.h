@@ -18,6 +18,26 @@ public:
 	double lon;
 };
 
+class Point2d
+{
+public:
+    Point2d();
+    Point2d(double x,double y);
+    Point2d operator+(const Point2d& pt);
+	Point2d operator-(const Point2d& pt);
+	Point2d operator/(const double& div);
+    friend Point2d operator*(const Point2d& pt, const double multiplier);
+    friend Point2d operator*(const double multiplier, const Point2d& pt);
+	friend void CoorRotate(Point2d& pt, const double theta);
+
+	double norm();
+    double x;
+    double y;
+};
+Point2d operator*(const Point2d& pt, const double multiplier);
+Point2d operator*(const double multiplier, const Point2d& pt);
+void CoorRotate(Point2d& pt, const double theta);
+
 /*
 * DegToRad
 *
@@ -193,4 +213,4 @@ void LatLonToUTMXY(double lat, double lon, UTMCoor &xy,  int zone = 30);
 *    The function does not return a value.
 *
 */
-void UTMXYToLatLon(double x, double y,  WGS84Corr &latlon, int zone = 50, bool southhemi = false);
+void UTMXYToLatLon(double x, double y,  WGS84Corr &latlon, int zone = 30, bool southhemi = false);

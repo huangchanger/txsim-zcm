@@ -31,7 +31,21 @@ namespace txsim
      };
 
     MessageManagerBase::~MessageManagerBase()
-    { }
+    { 
+        need_stop_ = true;
+        for (auto &t : pub_threads_)
+        {
+            if (t.joinable())
+                t.join();
+        }
+
+        tunnel_.stop();
+
+        for (auto t : sub_threads_)
+        {
+            tunnel_.unsubscribe(t);
+        }
+    }
 
     void MessageManagerBase::stopSubandPub()
     {

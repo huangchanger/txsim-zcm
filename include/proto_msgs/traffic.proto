@@ -98,6 +98,8 @@ message StaticObstacle {
   int32 type = 9;
   int32 age = 10;
   double z = 11;
+  double v = 12;
+  double acc = 13;
 }
 
 message DynamicObstacle {

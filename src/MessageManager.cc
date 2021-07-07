@@ -1,6 +1,7 @@
 #include "MessageManager.h"
 #include "my_module.h"
 #include "simutils.hpp"
+#include <string>
 
 #include "basic.pb.h"
 #include "control.pb.h"
@@ -67,25 +68,102 @@ void MessageManager::PackNavinfo(tx_sim::StepHelper& helper)
     navinfo_.gps_num_satellites = 0;
     navinfo_.acceleration_x     = loc.acceleration().x();
     navinfo_.acceleration_y     = loc.acceleration().y();
+
+    cout<<"navinfo xy: "<<navinfo_.utm_x << " , "<<navinfo_.utm_y<<endl;
     std::cout<<"packNavinfo succeed: "<<std::endl;
 }
 
 template<typename T>
 void MessageManager::pushObject(T obj_proto, string obj_type)
 {
-    try
+    predictedObject_.time_stamp = obj_proto->t();
+
+    PredictedObject obj;
+    
+    UTMCoor utmXY_obj;
+    LatLonToUTMXY(obj_proto->y(), obj_proto->x(), utmXY_obj);
+
+    //calculate utm_coordinate relative to origin
+    Point2d utmXY_rel2origin(utmXY_obj.x,utmXY_obj.y);
+    utmXY_rel2origin = utmXY_rel2origin - start_pt2d;
+    utmXY_obj.x = utmXY_rel2origin.x;
+    utmXY_obj.y = utmXY_rel2origin.y;
+
+    //calculate utm_coordinate relative to vehicle
+    utmXY_obj.x -= navinfo_.utm_x;
+    utmXY_obj.y -= navinfo_.utm_y;
+
+    // coordinate rotation
+    double theta = navinfo_.angle_head, obj_x, obj_y;
+    Point2d objxy(utmXY_obj.x, utmXY_obj.y);
+    CoorRotate(objxy, theta);
+
+    obj.id          = obj_proto->id();
+    obj.type        = obj_proto->type();
+
+    if(obj_type == "static")
     {
-        double v = obj_proto->v();
-        cout<<"v get"<<endl;
+        obj.velocity    = 0;
+        obj.accelerate  = 0;
     }
-    catch(const std::exception& e)
+    else
     {
-        cout<<"exception occur"<<endl;
-        std::cerr << e.what() << '\n';
+        obj.velocity    = obj_proto->v();
+        obj.accelerate  = obj_proto->acc();
     }
 
-    cout<<"try and catch completed "<<endl;
-    
+
+    obj.heading     = obj_proto->heading() - navinfo_.angle_head;
+    obj.width       = obj_proto->width();
+    obj.length      = obj_proto->length();
+    Point2d corner_points[4];
+    corner_points[0].x = 0.5 * obj.length;
+    corner_points[0].y = 0.5 * obj.width;
+    corner_points[1].x = -0.5 * obj.length;
+    corner_points[1].y = 0.5 * obj.width;
+    corner_points[2].x = 0.5 * obj.length;
+    corner_points[2].y = -0.5 * obj.width;
+    corner_points[3].x = -0.5 * obj.length;
+    corner_points[3].y = -0.5 * obj.width;
+
+    // cout<<"initial corner_points\n";
+    // cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
+    //     <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
+
+
+    for(int i=0;i<4;++i){
+        CoorRotate(corner_points[i], -obj.heading);
+        corner_points[i] = corner_points[i] + objxy;
+        obj.bounding_box[0][i] = corner_points[i].x;
+        obj.bounding_box[1][i] = corner_points[i].y;
+    }
+
+
+    cout<<"after rotation corner_points\n";
+    cout<<"ego heading: "<<navinfo_.angle_head<<endl;
+    cout<<"obs heading: "<<obj.heading<<endl;
+    cout<<"rotation angle rad: "<<obj.heading<<endl;
+    cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
+        <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
+
+    cout<<"relative coordinate: "<<objxy.x<<" , "<<objxy.y<<endl;
+
+    float timeHorizon = 5;
+    float gap = 0.2;
+
+    obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
+    Point2d UnitVec(cos(obj.heading), sin(obj.heading));
+    for(int i=0;i<obj.trajectory_point_num;++i)
+    {
+        Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
+        vector<float> pt;
+        pt.push_back(changePt.x);
+        pt.push_back(changePt.y);
+        obj.trajectory_point.push_back(pt);
+    }
+
+    predictedObject_.predicted_object.push_back(obj);
+
 }
 
 void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
@@ -95,7 +173,9 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
     sim_msg::Traffic traffic;
     traffic.ParseFromString(traffic_payload);
     predictedObject_.predicted_object.clear();//add fzq
-    // std::lock_guard<std::mutex> lk(predictedObject_mutex_);
+
+    std::lock_guard<std::mutex> lk(predictedObject_mutex_);
+
     predictedObject_.time_stamp         = helper.timestamp();
     predictedObject_.data_source        = 1;
 
@@ -103,166 +183,28 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
     cout<<"static dynamic size: "<<traffic.staticobstacles_size()<<" , "<<traffic.dynamicobstacles_size()<<endl;
 
     for(int i=0; i<traffic.staticobstacles_size(); ++i){
-        auto obj_proto = traffic.mutable_staticobstacles(i);
-
-        predictedObject_.time_stamp = obj_proto->t();
-
-        PredictedObject obj;
-        
-        UTMCoor utmXY_obj;
-        LatLonToUTMXY(obj_proto->y(), obj_proto->x(), utmXY_obj);
-        // calculate relative utm_coordinate
-        utmXY_obj.x -= navinfo_.utm_x;
-        utmXY_obj.y -= navinfo_.utm_y;
-
-        // coordinate rotation
-        double theta = navinfo_.angle_head, obj_x, obj_y;
-        Point2d objxy(utmXY_obj.x, utmXY_obj.y);
-        CoorRotate(objxy, theta);
-
-        obj.id          = obj_proto->id();
-        obj.type        = obj_proto->type();
-
-        obj.velocity    = 0;
-        obj.accelerate  = 0;
-
-        obj.heading     = obj_proto->heading() - navinfo_.angle_head;
-        obj.width       = obj_proto->width();
-        obj.length      = obj_proto->length();
-        Point2d corner_points[4];
-        corner_points[0].x = 0.5 * obj.length;
-        corner_points[0].y = 0.5 * obj.width;
-        corner_points[1].x = -0.5 * obj.length;
-        corner_points[1].y = 0.5 * obj.width;
-        corner_points[2].x = 0.5 * obj.length;
-        corner_points[2].y = -0.5 * obj.width;
-        corner_points[3].x = -0.5 * obj.length;
-        corner_points[3].y = -0.5 * obj.width;
-
-        // cout<<"initial corner_points\n";
-        // cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
-        //     <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
-
-
-        for(int i=0;i<4;++i){
-            CoorRotate(corner_points[i], -obj.heading);
-            corner_points[i] = corner_points[i] + objxy;
-            obj.bounding_box[0][i] = corner_points[i].x;
-            obj.bounding_box[1][i] = corner_points[i].y;
-        }
-        // cout<<"after rotation corner_points\n";
-        // cout<<"ego heading: "<<navinfo_.angle_head<<endl;
-        // cout<<"obs heading: "<<static_obj->heading()<<endl;
-        // cout<<"rotation angle rad: "<<obj.heading<<endl;
-        // cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
-        //     <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
-
-        // cout<<"relative coordinate: "<<objxy.x<<" , "<<objxy.y<<endl;
-
-        float timeHorizon = 5;
-        float gap = 0.2;
-
-        obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
-        Point2d UnitVec(cos(obj.heading), sin(obj.heading));
-        for(int i=0;i<obj.trajectory_point_num;++i)
-        {
-            Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
-            vector<float> pt;
-            pt.push_back(changePt.x);
-            pt.push_back(changePt.y);
-            obj.trajectory_point.push_back(pt);
-        }
-
-        predictedObject_.predicted_object.push_back(obj);
+        pushObject(traffic.mutable_staticobstacles(i), "static");
     }
     
     for(int i=0; i<traffic.dynamicobstacles_size(); ++i){
-        auto obj_proto = traffic.mutable_dynamicobstacles(i);
-        predictedObject_.time_stamp = obj_proto->t();
-
-        PredictedObject obj;
-        
-        UTMCoor utmXY_obj;
-        LatLonToUTMXY(obj_proto->y(), obj_proto->x(), utmXY_obj);
-
-        //calculate utm_coordinate relative to origin
-        Point2d utmXY_rel2origin(utmXY_obj.x,utmXY_obj.y);
-        utmXY_rel2origin = utmXY_rel2origin - start_pt2d;
-        utmXY_obj.x = utmXY_rel2origin.x;
-        utmXY_obj.y = utmXY_rel2origin.y;
-
-        //calculate utm_coordinate relative to vehicle
-        utmXY_obj.x -= navinfo_.utm_x;
-        utmXY_obj.y -= navinfo_.utm_y;
-
-        // coordinate rotation
-        double theta = navinfo_.angle_head, obj_x, obj_y;
-        Point2d objxy(utmXY_obj.x, utmXY_obj.y);
-        CoorRotate(objxy, theta);
-
-        obj.id          = obj_proto->id();
-        obj.type        = obj_proto->type();
-
-        obj.velocity    = obj_proto->v();
-        obj.accelerate  = obj_proto->acc();
-
-        obj.heading     = obj_proto->heading() - navinfo_.angle_head;
-        obj.width       = obj_proto->width();
-        obj.length      = obj_proto->length();
-        Point2d corner_points[4];
-        corner_points[0].x = 0.5 * obj.length;
-        corner_points[0].y = 0.5 * obj.width;
-        corner_points[1].x = -0.5 * obj.length;
-        corner_points[1].y = 0.5 * obj.width;
-        corner_points[2].x = 0.5 * obj.length;
-        corner_points[2].y = -0.5 * obj.width;
-        corner_points[3].x = -0.5 * obj.length;
-        corner_points[3].y = -0.5 * obj.width;
-
-        // cout<<"initial corner_points\n";
-        // cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
-        //     <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
-
-
-        for(int i=0;i<4;++i){
-            CoorRotate(corner_points[i], -obj.heading);
-            corner_points[i] = corner_points[i] + objxy;
-            obj.bounding_box[0][i] = corner_points[i].x;
-            obj.bounding_box[1][i] = corner_points[i].y;
-        }
-
-
-        // cout<<"after rotation corner_points\n";
-        // cout<<"ego heading: "<<navinfo_.angle_head<<endl;
-        // cout<<"obs heading: "<<static_obj->heading()<<endl;
-        // cout<<"rotation angle rad: "<<obj.heading<<endl;
-        // cout<<"corner_points: \n"<<corner_points[0].x<<" , "<<corner_points[0].y<<" | "<<corner_points[1].x<<" , "<<corner_points[1].y<<" | "
-        //     <<corner_points[2].x<<" , "<<corner_points[2].y<<" | "<<corner_points[3].x<<" , "<<corner_points[3].y<<" | "<<endl;
-
-        // cout<<"relative coordinate: "<<objxy.x<<" , "<<objxy.y<<endl;
-
-        float timeHorizon = 5;
-        float gap = 0.2;
-
-        obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
-        Point2d UnitVec(cos(obj.heading), sin(obj.heading));
-        for(int i=0;i<obj.trajectory_point_num;++i)
-        {
-            Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
-            vector<float> pt;
-            pt.push_back(changePt.x);
-            pt.push_back(changePt.y);
-            obj.trajectory_point.push_back(pt);
-        }
-
-        predictedObject_.predicted_object.push_back(obj);
+        pushObject(traffic.mutable_dynamicobstacles(i), "dynamic");
     }
 
     // predictedObject_.object_count = predictedObject_.predicted_object.size();
 
+    cout<<"predicted_object size: "<<predictedObject_.predicted_object.size()<<endl;
+    for(int i=0;i<predictedObject_.predicted_object.size();++i)
+    {
+        auto obj = predictedObject_.predicted_object[i];
+        cout<<"obj "<<i<<" detected "<<endl;
+        for(int j=0;j<obj.trajectory_point.size();++j)
+        {
+            cout<<obj.trajectory_point[i][j]<<" , "<<obj.trajectory_point[i][j]<<endl;
+        }
+
+    }
+
     predictedObject_.object_count = 0;
-
-
     cout<<"packPredictedObject succeed: "<<endl;
 }
 

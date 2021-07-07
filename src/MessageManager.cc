@@ -74,7 +74,7 @@ void MessageManager::PackNavinfo(tx_sim::StepHelper& helper)
 }
 
 template<typename T>
-void MessageManager::pushObject(T obj_proto, string obj_type)
+void MessageManager::pushObject(T obj_proto, string obj_type, int id)
 {
     predictedObject_.time_stamp = obj_proto->t();
 
@@ -162,7 +162,7 @@ void MessageManager::pushObject(T obj_proto, string obj_type)
         obj.trajectory_point.push_back(pt);
     }
 
-    predictedObject_.predicted_object.push_back(obj);
+    predictedObject_.predicted_object[id] = obj;
 
 }
 
@@ -172,22 +172,24 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
     helper.GetSubscribedMessage(tx_sim::topic::kTraffic, traffic_payload);
     sim_msg::Traffic traffic;
     traffic.ParseFromString(traffic_payload);
-    predictedObject_.predicted_object.clear();//add fzq
 
     std::lock_guard<std::mutex> lk(predictedObject_mutex_);
 
     predictedObject_.time_stamp         = helper.timestamp();
     predictedObject_.data_source        = 1;
-
+    predictedObject_.object_count       = traffic.staticobstacles_size() + traffic.dynamicobstacles_size();
+    
+    predictedObject_.predicted_object.clear();
+    predictedObject_.predicted_object.resize(predictedObject_.object_count);
     // double obj_count = traffic.staticobstacles_size() + traffic.dynamicobstacles_size();
     cout<<"static dynamic size: "<<traffic.staticobstacles_size()<<" , "<<traffic.dynamicobstacles_size()<<endl;
 
     for(int i=0; i<traffic.staticobstacles_size(); ++i){
-        pushObject(traffic.mutable_staticobstacles(i), "static");
+        pushObject(traffic.mutable_staticobstacles(i), "static", i);
     }
     
     for(int i=0; i<traffic.dynamicobstacles_size(); ++i){
-        pushObject(traffic.mutable_dynamicobstacles(i), "dynamic");
+        pushObject(traffic.mutable_dynamicobstacles(i), "dynamic", traffic.staticobstacles_size()+i);
     }
 
     // predictedObject_.object_count = predictedObject_.predicted_object.size();
@@ -199,12 +201,12 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
         cout<<"obj "<<i<<" detected "<<endl;
         for(int j=0;j<obj.trajectory_point.size();++j)
         {
-            cout<<obj.trajectory_point[i][j]<<" , "<<obj.trajectory_point[i][j]<<endl;
+            cout<<obj.trajectory_point[j][0]<<" , "<<obj.trajectory_point[j][1]<<endl;
         }
 
     }
+    
 
-    predictedObject_.object_count = 0;
     cout<<"packPredictedObject succeed: "<<endl;
 }
 

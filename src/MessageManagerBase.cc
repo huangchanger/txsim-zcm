@@ -1,4 +1,5 @@
 #include "MessageManagerBase.h"
+using namespace std;
 
 using std::string;
 using std::vector;
@@ -126,6 +127,8 @@ namespace txsim
             if(true)
             {
                 std::lock_guard<std::mutex> lk(predictedObject_mutex_);
+                cout<<"before publish predictedObject"<<endl;
+                cout<<predictedObject_.predicted_object.size()<<endl;
                 tunnel_.publish(kChannelNamePredictedObject, &predictedObject_);
             }
             std::this_thread::sleep_until(time_point);

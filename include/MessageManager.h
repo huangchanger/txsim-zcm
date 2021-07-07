@@ -25,7 +25,7 @@ namespace txsim
 
 
         template<typename T>
-        void pushObject(T obj_proto, string obj_type);
+        void pushObject(T obj_proto, string obj_type, int id);
 
 
         // receive protobuf

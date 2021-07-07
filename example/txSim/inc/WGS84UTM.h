@@ -374,6 +374,11 @@ void LatLonToUTMXY(double lat, double lon, UTMCoor &xy,  int zone = 30)
     lat = DegToRad(lat);
     lon = DegToRad(lon);
 
+	if(lon < 0)
+		zone = 30;
+	else
+		zone = int(lon/6) + 31;
+
 	MapLatLonToXY(lat, lon, UTMCentralMeridian(zone), xy);
 
 	/* Adjust easting and northing for UTM system. */

@@ -93,6 +93,9 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
   LatLonToUTMXY(start_pt.y,start_pt.x,start_utm);
   LatLonToUTMXY(end_pt.y,end_pt.x,end_utm);
 
+  msgm.start_pt2d.x = start_utm.x;
+  msgm.start_pt2d.y = start_utm.y;
+
   Point2d start_interp(start_utm.x,start_utm.y);
   Point2d end_interp(end_utm.x, end_utm.y);
   Point2d end_start = end_interp - start_interp;
@@ -106,6 +109,11 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
     path_interp.push_back(start_interp + i*path_gap);
   }
   path_interp.push_back(end_interp);
+
+  for(int i=0;i<path_interp.size();++i)
+  {
+    path_interp[i] = path_interp[i] - msgm.start_pt2d;
+  }
   
 
   ofstream outfile;
@@ -128,14 +136,14 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
 
     outfile<<i<<" ";
     outfile.precision(14);
-    outfile<<pt1.x<<" "<<pt1.y<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+    outfile<<0<<" "<<0<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
 
   }
 
   outfile<<path_interp.size()-1<<" ";
   outfile.precision(14);
   pt1 = path_interp.back();
-  outfile<<pt1.x<<" "<<pt1.y<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
+  outfile<<0<<" "<<0<<" "<<pt1.x<<" "<<pt1.y<<" "<<heading<<" "<<"0.00000000000000 0 0 0 0 0 0 0.00000000000000"<<endl;
 
 
   outfile.close();

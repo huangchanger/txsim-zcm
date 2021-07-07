@@ -42,13 +42,17 @@ void MessageManager::PackNavinfo(tx_sim::StepHelper& helper)
 
     UTMCoor utmXY;
     LatLonToUTMXY(loc.position().y(), loc.position().x(),utmXY);
+    
+    Point2d pt(utmXY.x,utmXY.y);
+    pt = pt - start_pt2d;
+
     std::lock_guard<std::mutex> l(navinfo_mutex_);
     navinfo_.timestamp          = loc.t();
     navinfo_.longitude          = loc.position().x();
     navinfo_.latitude           = loc.position().y();
     navinfo_.altitude           = loc.position().z();
-    navinfo_.utm_x              = utmXY.x;
-    navinfo_.utm_y              = utmXY.y;
+    navinfo_.utm_x              = pt.x;
+    navinfo_.utm_y              = pt.y;
     navinfo_.angle_head         = loc.rpy().z();
     navinfo_.angle_pitch        = loc.rpy().y();
     navinfo_.angle_roll         = loc.rpy().x();
@@ -90,7 +94,7 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
     helper.GetSubscribedMessage(tx_sim::topic::kTraffic, traffic_payload);
     sim_msg::Traffic traffic;
     traffic.ParseFromString(traffic_payload);
-
+    predictedObject_.predicted_object.clear();//add fzq
     // std::lock_guard<std::mutex> lk(predictedObject_mutex_);
     predictedObject_.time_stamp         = helper.timestamp();
     predictedObject_.data_source        = 1;
@@ -180,7 +184,14 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
         
         UTMCoor utmXY_obj;
         LatLonToUTMXY(obj_proto->y(), obj_proto->x(), utmXY_obj);
-        // calculate relative utm_coordinate
+
+        //calculate utm_coordinate relative to origin
+        Point2d utmXY_rel2origin(utmXY_obj.x,utmXY_obj.y);
+        utmXY_rel2origin = utmXY_rel2origin - start_pt2d;
+        utmXY_obj.x = utmXY_rel2origin.x;
+        utmXY_obj.y = utmXY_rel2origin.y;
+
+        //calculate utm_coordinate relative to vehicle
         utmXY_obj.x -= navinfo_.utm_x;
         utmXY_obj.y -= navinfo_.utm_y;
 
@@ -247,9 +258,10 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
         predictedObject_.predicted_object.push_back(obj);
     }
 
-    predictedObject_.object_count = predictedObject_.predicted_object.size();
+    // predictedObject_.object_count = predictedObject_.predicted_object.size();
 
-    
+    predictedObject_.object_count = 0;
+
 
     cout<<"packPredictedObject succeed: "<<endl;
 }
@@ -262,18 +274,18 @@ void MessageManager::SendTopicControl(tx_sim::StepHelper& helper)
         std::string cot_payload;
         // helper.GetSubscribedMessage(tx_sim::topic::kControl, cot_payload);
         // cot.ParseFromString(cot_payload);
-        // if(chassisCommand_.car_gear_command == 0)
-        //   cot.set_gear_cmd(sim_msg::Control::NO_CONTROL);
-        // if(chassisCommand_.car_gear_command == 1)
-        //   cot.set_gear_cmd(sim_msg::Control::PARK);
-        // if(chassisCommand_.car_gear_command == 2)
-        //   cot.set_gear_cmd(sim_msg::Control::REVERSE);
-        // if(chassisCommand_.car_gear_command == 3)
-        //   cot.set_gear_cmd(sim_msg::Control::NEUTRAL);
-        // if(chassisCommand_.car_gear_command == 4)
-        //   cot.set_gear_cmd(sim_msg::Control::DRIVE);
+        if(chassisCommand_.car_gear_command == 0)
+          cot.set_gear_cmd(sim_msg::Control::NO_CONTROL);
+        if(chassisCommand_.car_gear_command == 1)
+          cot.set_gear_cmd(sim_msg::Control::PARK);
+        if(chassisCommand_.car_gear_command == 2)
+          cot.set_gear_cmd(sim_msg::Control::REVERSE);
+        if(chassisCommand_.car_gear_command == 3)
+          cot.set_gear_cmd(sim_msg::Control::NEUTRAL);
+        if(chassisCommand_.car_gear_command == 4)
+          cot.set_gear_cmd(sim_msg::Control::DRIVE);
 
-        cot.set_gear_cmd(sim_msg::Control::PARK);
+        // cot.set_gear_cmd(sim_msg::Control::PARK);
         cot.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
         cot.set_contrl_type(sim_msg::Control::ACC_CONTROL);
         cot.mutable_acc_cmd()->set_acc(chassisCommand_.longitudinal_acceleration_command);

@@ -407,6 +407,7 @@ CMakeFiles/my-module.dir/src/MessageManager.cc.o: trajectory.pb.h
 CMakeFiles/my-module.dir/src/MessageManager.cc.o: vehState.pb.h
 
 CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../include/MessageManagerBase.h
+CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../include/WGS84UTM.h
 CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../include/tievmsg_zcm/MsgAccessoryControlSignal.hpp
 CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../include/tievmsg_zcm/MsgAutonomousModeControlSignal.hpp
 CMakeFiles/my-module.dir/src/MessageManagerBase.cc.o: ../include/tievmsg_zcm/MsgCanInfoSignal.hpp

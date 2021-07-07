@@ -18,7 +18,7 @@
 #include <vector>
 #include <string>
 #include <zcm/zcm-cpp.hpp>
-
+#include "WGS84UTM.h"
 
 #include "tievmsg_zcm/MsgAccessoryControlSignal.hpp"
 #include "tievmsg_zcm/MsgAutonomousModeControlSignal.hpp"
@@ -85,6 +85,8 @@ namespace txsim
                 MsgPredictedObjectTrajectoryList predictedObject_;
                 MsgTrafficLightSignal trafficLight_;
                 MsgCanInfoSignal caninfo_;
+
+                Point2d start_pt2d;
                 
 
         private:

@@ -8,7 +8,7 @@ namespace txsim
 
     // tunnel_(url) is deleted for a while to test
     MessageManagerBase::MessageManagerBase(const string &url):  tunnel_(url), need_stop_(false), 
-        chassisCommand_(), navinfo_(), predictedObject_(), trafficLight_(), caninfo_()
+        chassisCommand_(), navinfo_(), predictedObject_(), trafficLight_(), caninfo_(),start_pt2d()
     {
         kChannelNameChassisCommand = "MsgChassisCommandSignal";
         kChannelNameNavinfo = "MsgNavInfoSignal";
@@ -58,7 +58,7 @@ namespace txsim
         chassisCommand_.longitudinal_acceleration_command = msg->longitudinal_acceleration_command;
         chassisCommand_.steer_wheel_angle_command = msg->steer_wheel_angle_command;
         chassisCommand_.autonomous_mode_control_command = msg->autonomous_mode_control_command;
-        //printf("msg manager base aimsteer: %d, aimspeed: %d\n", cancontrol_.aimsteer, cancontrol_.aimspeed);
+        chassisCommand_.car_gear_command = msg->car_gear_command;
     }
 
 

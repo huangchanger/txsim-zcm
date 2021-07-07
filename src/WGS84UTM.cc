@@ -412,7 +412,7 @@ void MapXYToLatLon(double x, double y, double lambda0, WGS84Corr &philambda)
 */
 void LatLonToUTMXY(double lat, double lon, UTMCoor &xy,  int zone)
 {
-	if(lon < 0) zone=30;
+	if(lon < 0) zone=int((lon+180)/6) + 1;
 	else zone = int(lon/6) + 31;
 
     lat = DegToRad(lat);

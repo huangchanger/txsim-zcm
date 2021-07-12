@@ -31,8 +31,8 @@ public:
 	friend void CoorRotate(Point2d& pt, const double theta);
 
 	double norm();
-    double x;
-    double y;
+    float x;
+    float y;
 };
 Point2d operator*(const Point2d& pt, const double multiplier);
 Point2d operator*(const double multiplier, const Point2d& pt);

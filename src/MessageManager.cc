@@ -90,13 +90,13 @@ void MessageManager::pushObject(T obj_proto, string obj_type, int id)
     utmXY_obj.y = utmXY_rel2origin.y;
 
     //calculate utm_coordinate relative to vehicle
-    utmXY_obj.x -= navinfo_.utm_x;
-    utmXY_obj.y -= navinfo_.utm_y;
+    // utmXY_obj.x -= navinfo_.utm_x;
+    // utmXY_obj.y -= navinfo_.utm_y;
 
     // coordinate rotation
     double theta = navinfo_.angle_head, obj_x, obj_y;
     Point2d objxy(utmXY_obj.x, utmXY_obj.y);
-    CoorRotate(objxy, theta);
+    // CoorRotate(objxy, theta); //rotation for vehicle frame
 
     obj.id          = obj_proto->id();
     obj.type        = obj_proto->type();
@@ -112,8 +112,8 @@ void MessageManager::pushObject(T obj_proto, string obj_type, int id)
         obj.accelerate  = obj_proto->acc();
     }
 
-
-    obj.heading     = obj_proto->heading() - navinfo_.angle_head;
+    obj.heading     = obj_proto->heading();
+    // obj.heading     = obj_proto->heading() - navinfo_.angle_head;
     obj.width       = obj_proto->width();
     obj.length      = obj_proto->length();
     Point2d corner_points[4];
@@ -151,19 +151,30 @@ void MessageManager::pushObject(T obj_proto, string obj_type, int id)
     float timeHorizon = 5;
     float gap = 0.2;
 
-    obj.trajectory_point_num = 1 + timeHorizon/gap;  // predict 5s with a gap of 0.2s. 1 refers to current position
+    obj.trajectory_point_num = int(1 + timeHorizon/gap);  // predict 5s with a gap of 0.2s. 1 refers to current position
     Point2d UnitVec(cos(obj.heading), sin(obj.heading));
+
+    obj.trajectory_point.resize(2);
+    obj.trajectory_point[0].resize(obj.trajectory_point_num);
+    obj.trajectory_point[1].resize(obj.trajectory_point_num);
     for(int i=0;i<obj.trajectory_point_num;++i)
     {
         Point2d changePt = objxy +  UnitVec * obj.velocity * i*gap;
-        vector<float> pt;
-        pt.push_back(changePt.x);
-        pt.push_back(changePt.y);
-        obj.trajectory_point.push_back(pt);
+        // obj.trajectory_point[i].resize(2);
+        // obj.trajectory_point[i][0] = changePt.x;
+        // obj.trajectory_point[i][1] = changePt.y;
+
+        obj.trajectory_point[0][i] = changePt.x;
+        obj.trajectory_point[1][i] = changePt.y;
+        // vector<float> pt;
+        // pt.resize(2);
+        // pt[0] = changePt.x;
+        // pt[1] = changePt.y;
+        // obj.trajectory_point[i] = pt;
     }
 
+    // predictedObject_.predicted_object.push_back(obj);
     predictedObject_.predicted_object[id] = obj;
-
 }
 
 void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
@@ -177,12 +188,15 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
 
     predictedObject_.time_stamp         = helper.timestamp();
     predictedObject_.data_source        = 1;
-    predictedObject_.object_count       = traffic.staticobstacles_size() + traffic.dynamicobstacles_size();
+    predictedObject_.object_count       = 
+        traffic.staticobstacles_size() + traffic.dynamicobstacles_size() + traffic.cars_size();
     
     predictedObject_.predicted_object.clear();
     predictedObject_.predicted_object.resize(predictedObject_.object_count);
     // double obj_count = traffic.staticobstacles_size() + traffic.dynamicobstacles_size();
-    cout<<"static dynamic size: "<<traffic.staticobstacles_size()<<" , "<<traffic.dynamicobstacles_size()<<endl;
+    cout<<"static dynamic cars size: "<<traffic.staticobstacles_size()
+        <<" , "<<traffic.dynamicobstacles_size()
+        <<" , "<<traffic.cars_size() <<endl;
 
     for(int i=0; i<traffic.staticobstacles_size(); ++i){
         pushObject(traffic.mutable_staticobstacles(i), "static", i);
@@ -192,6 +206,10 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
         pushObject(traffic.mutable_dynamicobstacles(i), "dynamic", traffic.staticobstacles_size()+i);
     }
 
+    for(int i=0; i<traffic.cars_size(); ++i){
+        pushObject(traffic.mutable_cars(i), "dynamic", traffic.dynamicobstacles_size()+traffic.staticobstacles_size()+i);
+    }
+
     // predictedObject_.object_count = predictedObject_.predicted_object.size();
 
     cout<<"predicted_object size: "<<predictedObject_.predicted_object.size()<<endl;
@@ -199,9 +217,9 @@ void MessageManager::PackPredictedObject(tx_sim::StepHelper& helper)
     {
         auto obj = predictedObject_.predicted_object[i];
         cout<<"obj "<<i<<" detected "<<endl;
-        for(int j=0;j<obj.trajectory_point.size();++j)
+        for(int j=0;j<obj.trajectory_point_num;++j)
         {
-            cout<<obj.trajectory_point[j][0]<<" , "<<obj.trajectory_point[j][1]<<endl;
+            cout<<obj.trajectory_point[0][j]<<" , "<<obj.trajectory_point[1][j]<<endl;
         }
 
     }
@@ -229,11 +247,18 @@ void MessageManager::SendTopicControl(tx_sim::StepHelper& helper)
         if(chassisCommand_.car_gear_command == 4)
           cot.set_gear_cmd(sim_msg::Control::DRIVE);
 
-        // cot.set_gear_cmd(sim_msg::Control::PARK);
         cot.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
         cot.set_contrl_type(sim_msg::Control::ACC_CONTROL);
         cot.mutable_acc_cmd()->set_acc(chassisCommand_.longitudinal_acceleration_command);
         cot.mutable_acc_cmd()->set_front_wheel_angle(chassisCommand_.steer_wheel_angle_command);
+
+
+        // test
+        // cot.set_gear_cmd(sim_msg::Control::DRIVE);
+        // cot.set_control_mode(sim_msg::Control::CM_AUTO_DRIVE);
+        // cot.set_contrl_type(sim_msg::Control::ACC_CONTROL);
+        // cot.mutable_acc_cmd()->set_acc(1);
+        // cot.mutable_acc_cmd()->set_front_wheel_angle(0);
 
         cot.SerializeToString(&cot_payload);
         helper.PublishMessage(tx_sim::topic::kControl, cot_payload);
@@ -247,14 +272,16 @@ void MessageManager::PackTrafficLight(tx_sim::StepHelper& helper)
     sim_msg::Traffic traffic;
     traffic.ParseFromString(traffic_payload);
 
-    cout<<"cars size: "<<traffic.cars_size()<<endl;
-    if(traffic.cars_size()>0)
+    cout<<"traffic light size: "<<traffic.trafficlights_size()<<endl;
+    if(traffic.trafficlights_size()>0)
     {
-        auto car = traffic.mutable_cars(0);
-        cout<<car->x()<<" , "<<car->y()<<endl;
-        cout<<navinfo_.longitude<<" , "<<navinfo_.latitude<<endl;
+        auto light = traffic.mutable_trafficlights(0);
+        cout<<"id: "<<light->id()<<endl;
+        cout<<"coordinate: "<<light->x()<<" , "<<light->y()<<" , "<<light->z()<<endl;
+        cout<<"heading: "<<light->heading()<<endl;
+        cout<<"color: "<<light->color()<<endl;
     }
-    
+
     std::cout<<"packTrafficLight succeed: "<<std::endl;
 }
 

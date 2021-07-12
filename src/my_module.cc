@@ -80,6 +80,7 @@ void MyModule::Reset(tx_sim::ResetHelper& helper) {
   std::cout << SPLIT_LINE << std::endl;
 
 
+
   // first we should reset(clear) any data status before starting a new scenario.
   step_count_ = 0;
   last_timestamp_ = 0;
@@ -164,6 +165,7 @@ void MyModule::Step(tx_sim::StepHelper& helper) {
   msgm.PackNavinfo(helper);
   msgm.PackPredictedObject(helper);
   msgm.PackCaninfo(helper);
+  msgm.PackTrafficLight(helper);
   
   std::cout<<"step "<<step_count_<<" finished ! "<<std::endl;
   
